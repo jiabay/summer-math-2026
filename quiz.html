@@ -4,9 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>刷题练习 · 思数培优</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<!-- KaTeX: 多CDN容灾，确保国内可访问 -->
+<script>
+(function(){
+  var CDNS = [
+    'https://unpkg.com/katex@0.16.9/dist',
+    'https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9',
+    'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/KaTeX/0.16.9'
+  ];
+  var cssEl = document.createElement('link');
+  cssEl.rel = 'stylesheet';
+  document.head.appendChild(cssEl);
+
+  function tryCDN(idx) {
+    if (idx >= CDNS.length) { console.warn('KaTeX: 所有CDN加载失败，公式无法渲染'); return; }
+    var base = CDNS[idx];
+    cssEl.href = base + '/katex.min.css';
+    var script = document.createElement('script');
+    script.src = base + '/katex.min.js';
+    script.onload = function() {
+      var auto = document.createElement('script');
+      auto.src = base + '/contrib/auto-render.min.js';
+      auto.onerror = function() { tryCDN(idx + 1); };
+      document.head.appendChild(auto);
+    };
+    script.onerror = function() { tryCDN(idx + 1); };
+    document.head.appendChild(script);
+  }
+  tryCDN(0);
+})();
+</script>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121; line-height:1.7; background:#fafafa; }
@@ -669,13 +696,14 @@ function renderHistory() {
 // ==================== KATEX ====================
 function renderKaTeXIn(el) {
   if (typeof renderMathInElement !== 'undefined') {
-    renderMathInElement(el, {
-      delimiters: [
-        {left: '\\\\(', right: '\\\\)', display: false},
-        {left: '\\\\[', right: '\\\\]', display: true}
-      ],
-      throwOnError: false
-    });
+    renderMathInElement(el, { throwOnError: false });
+  } else {
+    // CDN加载失败时，稍后重试
+    setTimeout(function() {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(el, { throwOnError: false });
+      }
+    }, 2000);
   }
 }
 
