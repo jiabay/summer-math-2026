@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>刷题练习 · 思数培优</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121; line-height:1.7; background:#fafafa; }
+
+/* ===== Nav ===== */
+.nav { background:#1a237e; padding:12px 0; position:sticky; top:0; z-index:99; box-shadow:0 2px 8px rgba(0,0,0,.15); }
+.nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav .logo { color:#fff; font-weight:900; font-size:18px; text-decoration:none; }
+.nav .logo span { color:#ffd54f; }
+.nav a { color:#bbdefb; text-decoration:none; font-size:14px; margin-left:20px; transition:color .2s; }
+.nav a:hover { color:#ffd54f; }
+.nav a.active { color:#ffd54f; font-weight:700; }
+
+/* ===== Layout ===== */
+.container { max-width:900px; margin:0 auto; padding:0 16px; }
+
+/* ===== Quiz Header ===== */
+.quiz-header { background:linear-gradient(135deg, #1a237e, #283593); color:#fff; padding:36px 0 30px; text-align:center; }
+.quiz-header h1 { font-size:28px; font-weight:900; margin-bottom:6px; }
+.quiz-header .sub { font-size:14px; color:#90caf9; }
+
+/* ===== Controls ===== */
+.controls { background:#fff; border-radius:12px; padding:20px 24px; margin:20px 0; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.controls .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+.controls .row:last-child { margin-bottom:0; }
+.controls label { font-size:13px; font-weight:700; color:#1a237e; white-space:nowrap; }
+.controls select, .controls input[type=number] { padding:6px 10px; border:1.5px solid #e0e0e0; border-radius:8px; font-size:13px; font-family:inherit; background:#fff; }
+.controls select:focus, .controls input:focus { outline:none; border-color:#1a237e; }
+
+/* ===== Topic Tags ===== */
+.topic-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.topic-tag { padding:5px 14px; border-radius:16px; font-size:12px; cursor:pointer; border:1.5px solid #e0e0e0; background:#fff; color:#757575; transition:all .2s; user-select:none; }
+.topic-tag:hover { border-color:#90caf9; }
+.topic-tag.selected { background:#1a237e; color:#fff; border-color:#1a237e; }
+
+/* ===== Stats Bar ===== */
+.stats-bar { display:flex; flex-wrap:wrap; gap:12px; margin:16px 0; }
+.stat-card { flex:1; min-width:80px; background:#fff; border-radius:10px; padding:14px 12px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+.stat-card .num { font-size:24px; font-weight:900; color:#1a237e; }
+.stat-card .label { font-size:11px; color:#9e9e9e; margin-top:2px; }
+.stat-card.accent .num { color:#e65100; }
+
+/* ===== Action Buttons ===== */
+.btn { padding:10px 24px; border-radius:22px; font-size:14px; font-weight:700; cursor:pointer; border:none; transition:all .2s; font-family:inherit; display:inline-flex; align-items:center; gap:6px; }
+.btn-primary { background:#1a237e; color:#fff; }
+.btn-primary:hover { background:#283593; transform:translateY(-1px); box-shadow:0 4px 12px rgba(26,35,126,.3); }
+.btn-outline { background:#fff; color:#1a237e; border:2px solid #1a237e; }
+.btn-outline:hover { background:#e8eaf6; }
+.btn-gold { background:#ffd54f; color:#1a237e; }
+.btn-gold:hover { background:#ffc107; }
+.btn:disabled { opacity:.5; cursor:not-allowed; pointer-events:none; }
+.btn-sm { padding:6px 16px; font-size:12px; }
+
+/* ===== Question Card ===== */
+.question-area { margin:20px 0; }
+.q-card { background:#fff; border-radius:14px; padding:28px 24px; box-shadow:0 2px 12px rgba(0,0,0,.06); margin-bottom:16px; display:none; }
+.q-card.active { display:block; animation:fadeIn .3s; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.q-card .q-meta { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.q-card .q-num { font-size:13px; color:#9e9e9e; }
+.q-card .q-topic { font-size:11px; padding:3px 10px; border-radius:10px; font-weight:700; }
+.q-card .q-topic.easy { background:#e8f5e9; color:#2e7d32; }
+.q-card .q-topic.medium { background:#fff3e0; color:#e65100; }
+.q-card .q-topic.hard { background:#fce4ec; color:#c62828; }
+.q-card .q-text { font-size:17px; line-height:2; margin-bottom:24px; }
+.q-card .q-text .katex { font-size:1.15em; }
+
+/* Options */
+.options { display:flex; flex-direction:column; gap:10px; }
+.option { padding:14px 18px; border:2px solid #e0e0e0; border-radius:10px; cursor:pointer; transition:all .2s; font-size:15px; display:flex; align-items:center; gap:12px; }
+.option:hover { border-color:#90caf9; background:#f5f8ff; }
+.option.selected { border-color:#1a237e; background:#e8eaf6; }
+.option.correct { border-color:#4caf50; background:#e8f5e9; }
+.option.wrong { border-color:#f44336; background:#ffebee; }
+.option .opt-letter { width:32px; height:32px; border-radius:50%; background:#f5f5f5; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:#757575; flex-shrink:0; }
+.option.selected .opt-letter { background:#1a237e; color:#fff; }
+.option.correct .opt-letter { background:#4caf50; color:#fff; }
+.option.wrong .opt-letter { background:#f44336; color:#fff; }
+.option.locked { pointer-events:none; }
+.option .opt-text .katex { font-size:1.1em; }
+
+/* ===== Explanation ===== */
+.explanation { margin-top:16px; padding:16px 20px; border-radius:10px; background:#fff8e1; border-left:4px solid #ffd54f; display:none; }
+.explanation.show { display:block; }
+.explanation h4 { font-size:14px; color:#e65100; margin-bottom:6px; }
+.explanation p { font-size:13px; color:#555; line-height:1.8; }
+
+/* ===== Result ===== */
+.result-area { text-align:center; padding:40px 20px; display:none; }
+.result-area.show { display:block; }
+.result-area .score-circle { width:120px; height:120px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:900; }
+.result-area .score-circle.great { background:#e8f5e9; color:#2e7d32; border:4px solid #4caf50; }
+.result-area .score-circle.good { background:#fff3e0; color:#e65100; border:4px solid #ff9800; }
+.result-area .score-circle.ok { background:#fce4ec; color:#c62828; border:4px solid #f44336; }
+.result-area h3 { font-size:22px; margin-bottom:10px; }
+.result-area .detail-table { width:100%; max-width:500px; margin:20px auto; border-collapse:collapse; }
+.result-area .detail-table th, .result-area .detail-table td { padding:8px 12px; font-size:13px; border-bottom:1px solid #f0f0f0; }
+.result-area .detail-table th { color:#757575; text-align:right; width:50%; }
+.result-area .detail-table td { text-align:left; font-weight:700; }
+
+/* ===== Review ===== */
+.review-section { margin-top:20px; }
+.review-section h3 { font-size:18px; margin-bottom:16px; color:#1a237e; }
+.review-item { background:#fff; border-radius:10px; padding:16px 20px; margin-bottom:10px; box-shadow:0 1px 6px rgba(0,0,0,.04); font-size:13px; }
+.review-item .ri-status { display:inline-block; padding:2px 10px; border-radius:8px; font-size:11px; font-weight:700; margin-right:8px; }
+.review-item .ri-status.correct { background:#e8f5e9; color:#2e7d32; }
+.review-item .ri-status.wrong { background:#ffebee; color:#c62828; }
+
+/* ===== History ===== */
+.history-section { margin-top:24px; }
+.history-section h3 { font-size:16px; margin-bottom:12px; color:#1a237e; }
+.history-item { background:#fff; border-radius:8px; padding:12px 16px; margin-bottom:8px; font-size:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,.04); }
+.history-item .hi-score { font-weight:900; font-size:16px; }
+.history-empty { text-align:center; color:#bdbdbd; padding:20px; font-size:13px; }
+
+/* ===== Footer ===== */
+.footer { background:#1a237e; color:#fff; text-align:center; padding:28px 16px; margin-top:40px; }
+.footer p { font-size:12px; color:#90caf9; }
+.footer a { color:#ffd54f; text-decoration:none; }
+
+@media (max-width:640px) {
+  .q-card { padding:18px 14px; }
+  .q-card .q-text { font-size:15px; }
+  .option { padding:10px 12px; font-size:13px; }
+  .controls .row { flex-direction:column; align-items:stretch; }
+  .stat-card { min-width:60px; padding:10px 8px; }
+  .stat-card .num { font-size:18px; }
+  .nav .container { flex-wrap:wrap; gap:8px; }
+  .nav a { margin-left:10px; font-size:12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo">思<span>数</span>培优</a>
+    <div>
+      <a href="index.html">🏠 首页</a>
+      <a href="quiz.html" class="active">📝 刷题练习</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<section class="quiz-header">
+  <div class="container">
+    <h1>📐 初升高数学 · 刷题练习</h1>
+    <div class="sub">题库基于《2026版初升高衔接培优》课程内容 · 支持按专题筛选</div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- Controls -->
+<div class="controls" id="controls">
+  <div class="row">
+    <label>📂 按专题：</label>
+    <div class="topic-tags" id="topicTags"></div>
+  </div>
+  <div class="row" style="justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <label>🔢 题目数量：</label>
+      <select id="countSelect">
+        <option value="10">10题</option>
+        <option value="20" selected>20题</option>
+        <option value="30">30题</option>
+        <option value="50">50题</option>
+        <option value="0">全部</option>
+      </select>
+      <label>📏 难度：</label>
+      <select id="diffSelect">
+        <option value="all" selected>全部</option>
+        <option value="1">⭐ 基础</option>
+        <option value="2">⭐⭐ 进阶</option>
+        <option value="3">⭐⭐⭐ 挑战</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="startQuiz()" id="btnStart">🚀 开始刷题</button>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar" id="statsBar" style="display:none;">
+  <div class="stat-card"><div class="num" id="statProgress">0/0</div><div class="label">当前进度</div></div>
+  <div class="stat-card accent"><div class="num" id="statScore">0</div><div class="label">当前得分</div></div>
+  <div class="stat-card"><div class="num" id="statTimer">0s</div><div class="label">用时</div></div>
+  <div class="stat-card"><div class="num" id="statAccuracy">--</div><div class="label">正确率</div></div>
+</div>
+
+<!-- Question Area -->
+<div class="question-area" id="questionArea"></div>
+
+<!-- Result Area -->
+<div class="result-area" id="resultArea"></div>
+
+<!-- History -->
+<div class="history-section" id="historySection">
+  <h3>📋 历史记录</h3>
+  <div id="historyList"></div>
+  <div id="clearHistoryWrap" style="display:none;text-align:center;margin-top:12px;">
+    <button class="btn btn-sm btn-outline" onclick="clearHistory()">🗑️ 清除历史</button>
+  </div>
+</div>
+
+</div><!-- .container -->
+
+<!-- Footer -->
+<section class="footer">
+  <p>© 2026 思数培优 · <a href="index.html">返回首页</a></p>
+</section>
+
+<script>
+// ==================== QUESTION BANK ====================
+const QUESTION_BANK = [
+  // ========== 因式分解 ==========
+  { id:1, topic:'因式分解', diff:1, q:'分解因式：\\(x^2 + 5x + 6\\)', opts:['\\((x+2)(x+3)\\)','\\((x+1)(x+6)\\)','\\((x-2)(x-3)\\)','\\((x+2)(x-3)\\)'], ans:0, exp:'\\(x^2+5x+6 = (x+2)(x+3)\\)，因为 \\(2+3=5\\)，\\(2 \\times 3=6\\)。' },
+  { id:2, topic:'因式分解', diff:1, q:'分解因式：\\(x^2 - 9\\)', opts:['\\((x-3)^2\\)','\\((x+3)(x-3)\\)','\\((x+9)(x-1)\\)','\\((x-9)(x+1)\\)'], ans:1, exp:'平方差公式：\\(a^2-b^2=(a+b)(a-b)\\)，所以 \\(x^2-9=(x+3)(x-3)\\)。' },
+  { id:3, topic:'因式分解', diff:1, q:'分解因式：\\(x^2 - 4x + 4\\)', opts:['\\((x-2)^2\\)','\\((x+2)^2\\)','\\((x-4)(x-1)\\)','\\((x-2)(x+2)\\)'], ans:0, exp:'完全平方公式：\\(x^2-4x+4=(x-2)^2\\)。' },
+  { id:4, topic:'因式分解', diff:2, q:'分解因式：\\(2x^2 + 7x + 3\\)', opts:['\\((2x+3)(x+1)\\)','\\((2x+1)(x+3)\\)','\\((x+3)(2x+1)\\)','\\((2x+3)(x+1)\\)'], ans:1, exp:'十字相乘法：\\(2x^2+7x+3=(2x+1)(x+3)\\)，检验：\\(2x \\cdot x=2x^2\\)，\\(2x \\cdot 3 + 1 \\cdot x = 7x\\)，\\(1 \\cdot 3=3\\)。' },
+  { id:5, topic:'因式分解', diff:2, q:'分解因式：\\(x^3 - x\\)', opts:['\\(x(x-1)^2\\)','\\(x(x+1)^2\\)','\\(x(x-1)(x+1)\\)','\\((x^2+1)(x-1)\\)'], ans:2, exp:'先提公因式：\\(x^3-x=x(x^2-1)=x(x-1)(x+1)\\)。' },
+  { id:6, topic:'因式分解', diff:2, q:'分解因式：\\(x^2 + 2xy + y^2 - 1\\)', opts:['\\((x+y+1)(x+y-1)\\)','\\((x+y-1)^2\\)','\\((x-y+1)(x-y-1)\\)','\\((x+y+1)^2\\)'], ans:0, exp:'先配方再平方差：\\(x^2+2xy+y^2-1=(x+y)^2-1=(x+y+1)(x+y-1)\\)。' },
+  { id:7, topic:'因式分解', diff:3, q:'分解因式：\\(x^4 + x^2 + 1\\)', opts:['\\((x^2+x+1)^2\\)','\\((x^2+x+1)(x^2-x+1)\\)','\\((x^2+1)^2 + x^2\\)','\\((x^2+1)(x^2+x-1)\\)'], ans:1, exp:'添项法：\\(x^4+x^2+1 = x^4+2x^2+1 - x^2 = (x^2+1)^2 - x^2 = (x^2+x+1)(x^2-x+1)\\)。' },
+
+  // ========== 一元二次方程 / 韦达定理 ==========
+  { id:8, topic:'一元二次方程', diff:1, q:'方程 \\(x^2 - 5x + 6 = 0\\) 的两个根是？', opts:['\\(x_1=2, x_2=3\\)','\\(x_1=-2, x_2=-3\\)','\\(x_1=1, x_2=6\\)','\\(x_1=-1, x_2=-6\\)'], ans:0, exp:'\\(x^2-5x+6=(x-2)(x-3)=0\\)，所以 \\(x_1=2, x_2=3\\)。' },
+  { id:9, topic:'一元二次方程', diff:1, q:'方程 \\(x^2 + 6x + 9 = 0\\) 的根的情况是？', opts:['有两个不等实根','有两个相等实根','无实根','无法判断'], ans:1, exp:'\\(\\Delta = 36-36=0\\)，且 \\(x^2+6x+9=(x+3)^2=0\\)，\\(x=-3\\)（重根）。' },
+  { id:10, topic:'一元二次方程', diff:2, q:'若 \\(x_1, x_2\\) 是方程 \\(x^2 - 3x + 1 = 0\\) 的两根，则 \\(x_1 + x_2\\) 的值为？', opts:['\\(-3\\)','\\(1\\)','\\(3\\)','\\(-1\\)'], ans:2, exp:'韦达定理：\\(x_1+x_2 = -\\frac{b}{a} = -\\frac{-3}{1} = 3\\)。' },
+  { id:11, topic:'一元二次方程', diff:2, q:'若 \\(x_1, x_2\\) 是方程 \\(2x^2 - 5x + 1 = 0\\) 的两根，则 \\(x_1 x_2\\) 的值为？', opts:['\\(\\frac{5}{2}\\)','\\(\\frac{1}{2}\\)','\\(-\\frac{1}{2}\\)','\\(\\frac{5}{2}\\)'], ans:1, exp:'韦达定理：\\(x_1x_2 = \\frac{c}{a} = \\frac{1}{2}\\)。' },
+  { id:12, topic:'一元二次方程', diff:2, q:'已知 \\(x_1, x_2\\) 是方程 \\(x^2 - 2x - 3 = 0\\) 的两根，求 \\(x_1^2 + x_2^2\\) 的值。', opts:['\\(4\\)','\\(10\\)','\\(13\\)','\\(7\\)'], ans:1, exp:'\\(x_1+x_2=2\\)，\\(x_1x_2=-3\\)。\\(x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=4-2(-3)=10\\)。' },
+  { id:13, topic:'一元二次方程', diff:3, q:'方程 \\(x^2 - (k+1)x + k = 0\\) 有两个不等实根，则 \\(k\\) 的取值范围是？', opts:['\\(k \\neq 1\\)','\\(k > 1\\)','\\(k < 1\\)','\\(k \\neq -1\\)'], ans:0, exp:'\\(\\Delta = (k+1)^2 - 4k = k^2+2k+1-4k = k^2-2k+1 = (k-1)^2 > 0\\)，所以 \\(k \\neq 1\\)。' },
+
+  // ========== 二次函数 ==========
+  { id:14, topic:'二次函数', diff:1, q:'二次函数 \\(y = x^2 - 4x + 3\\) 的顶点坐标是？', opts:['\\((2, -1)\\)','\\(( -2, 15)\\)','\\((2, 3)\\)','\\((1, 0)\\)'], ans:0, exp:'配方：\\(y=(x-2)^2-1\\)，顶点为 \\((2,-1)\\)。或用公式 \\(x=-\\frac{b}{2a}=2\\)，\\(y=f(2)=-1\\)。' },
+  { id:15, topic:'二次函数', diff:1, q:'\\(y = -x^2 + 2x + 3\\) 的开口方向和对称轴是？', opts:['开口向上，\\(x=1\\)','开口向下，\\(x=1\\)','开口向上，\\(x=-1\\)','开口向下，\\(x=-1\\)'], ans:1, exp:'\\(a=-1<0\\)，开口向下；对称轴 \\(x = -\\frac{2}{2(-1)} = 1\\)。' },
+  { id:16, topic:'二次函数', diff:2, q:'函数 \\(y = x^2 - 2x + 3\\) 在区间 \\([0, 3]\\) 上的最小值是？', opts:['\\(2\\)','\\(3\\)','\\(6\\)','\\(1\\)'], ans:0, exp:'配方：\\(y=(x-1)^2+2\\)，开口向上，对称轴 \\(x=1\\) 在区间 \\([0,3]\\) 内，最小值在 \\(x=1\\) 处：\\(y=2\\)。' },
+  { id:17, topic:'二次函数', diff:2, q:'函数 \\(y = x^2 - 2x + 3\\) 在区间 \\([2, 4]\\) 上的最大值是？', opts:['\\(3\\)','\\(7\\)','\\(11\\)','\\(8\\)'], ans:2, exp:'配方：\\(y=(x-1)^2+2\\)。对称轴 \\(x=1\\) 在区间左侧，函数在 \\([2,4]\\) 上单调递增，最大值在 \\(x=4\\) 处：\\(y=(4-1)^2+2=11\\)。' },
+  { id:18, topic:'二次函数', diff:3, q:'若二次函数 \\(y = ax^2 + bx + c\\) 的图像过点 \\((0,1)\\)，\\((1,3)\\)，\\((2,7)\\)，则 \\(a+b+c\\) 的值为？', opts:['\\(3\\)','\\(4\\)','\\(5\\)','\\(7\\)'], ans:0, exp:'\\((0,1)\\) 代入得 \\(c=1\\)。\\((1,3)\\)：\\(a+b+1=3\\) → \\(a+b=2\\)。\\((2,7)\\)：\\(4a+2b+1=7\\) → \\(2a+b=3\\)。解得 \\(a=1, b=1, c=1\\)。故 \\(a+b+c=3\\)。' },
+
+  // ========== 不等式 ==========
+  { id:19, topic:'不等式', diff:1, q:'不等式 \\(x^2 - 5x + 6 > 0\\) 的解集是？', opts:['\\(x < 2\\) 或 \\(x > 3\\)','\\(2 < x < 3\\)','\\(x < -3\\) 或 \\(x > -2\\)','\\(-3 < x < -2\\)'], ans:0, exp:'\\(x^2-5x+6=(x-2)(x-3)>0\\)，图像开口向上，两个根为 \\(x=2,3\\)，大于0取两边：\\(x<2\\) 或 \\(x>3\\)。' },
+  { id:20, topic:'不等式', diff:1, q:'不等式 \\(x^2 + 2x - 3 \\leq 0\\) 的解集是？', opts:['\\([-3, 1]\\)','\\([-1, 3]\\)','\\((-\\infty, -3] \\cup [1, +\\infty)\\)','\\((-\\infty, -1] \\cup [3, +\\infty)\\)'], ans:0, exp:'\\(x^2+2x-3=(x+3)(x-1) \\leq 0\\)，开口向上，取两零点之间：\\(-3 \\leq x \\leq 1\\)。' },
+  { id:21, topic:'不等式', diff:2, q:'不等式 \\(\\frac{x-1}{x+2} > 0\\) 的解集是？', opts:['\\(x < -2\\) 或 \\(x > 1\\)','\\(-2 < x < 1\\)','\\(x > 1\\)','\\(x < -2\\)'], ans:0, exp:'穿根法：分子零点 \\(x=1\\)，分母零点 \\(x=-2\\)（分母不能为0）。当 \\(x<-2\\) 时分子分母均负，商为正；当 \\(-2<x<1\\) 时商为负；当 \\(x>1\\) 时商为正。故解集为 \\(x<-2\\) 或 \\(x>1\\)。' },
+  { id:22, topic:'不等式', diff:2, q:'不等式 \\(|x-2| < 3\\) 的解集是？', opts:['\\((-1, 5)\\)','\\((-5, 1)\\)','\\((-\\infty, -1) \\cup (5, +\\infty)\\)','\\((2, 5)\\)'], ans:0, exp:'绝对值不等式：\\(|x-2|<3\\) 等价于 \\(-3 < x-2 < 3\\)，即 \\(-1 < x < 5\\)。' },
+  { id:23, topic:'不等式', diff:3, q:'不等式 \\(\\frac{x^2-3x+2}{x-1} \\geq 0\\) 的解集是？', opts:['\\([1, 2]\\)','\\((1, 2] \\cup (2, +\\infty)\\)','\\([2, +\\infty)\\)','\\((1, 2]\\)'], ans:2, exp:'分子 \\(x^2-3x+2=(x-1)(x-2)\\)，所以 \\(\\frac{(x-1)(x-2)}{x-1} \\geq 0\\)。注意 \\(x \\neq 1\\)，约分后得 \\(x-2 \\geq 0\\)，即 \\(x \\geq 2\\)。故解集为 \\([2, +\\infty)\\)。' },
+
+  // ========== 集合 ==========
+  { id:24, topic:'集合', diff:1, q:'设 \\(A = \\{1, 2, 3\\}\\)，\\(B = \\{2, 3, 4\\}\\)，则 \\(A \\cap B\\) 等于？', opts:['\\(\\{1, 2, 3, 4\\}\\)','\\(\\{2, 3\\}\\)','\\(\\{1\\}\\)','\\(\\{4\\}\\)'], ans:1, exp:'交集是同时属于两个集合的元素：\\(A \\cap B = \\{2, 3\\}\\)。' },
+  { id:25, topic:'集合', diff:1, q:'设全集 \\(U = \\{1, 2, 3, 4, 5\\}\\)，\\(A = \\{1, 2, 3\\}\\)，则 \\(\\complement_U A\\) 等于？', opts:['\\(\\{1, 2\\}\\)','\\(\\{4, 5\\}\\)','\\(\\{1, 2, 3, 4, 5\\}\\)','\\(\\emptyset\\)'], ans:1, exp:'补集是全集中去掉A的元素：\\(\\complement_U A = \\{4, 5\\}\\)。' },
+  { id:26, topic:'集合', diff:1, q:'集合 \\(\\{x \\mid x^2 = 1\\}\\) 用列举法表示为？', opts:['\\(\\{1\\}\\)','\\(\\{-1, 1\\}\\)','\\(\\{-1\\}\\)','\\(\\emptyset\\)'], ans:1, exp:'\\(x^2=1\\) 解得 \\(x=1\\) 或 \\(x=-1\\)，所以集合为 \\(\\{-1, 1\\}\\)。' },
+  { id:27, topic:'集合', diff:2, q:'设 \\(A = \\{x \\mid -1 < x < 3\\}\\)，\\(B = \\{x \\mid x \\geq 1\\}\\)，则 \\(A \\cup B\\) 等于？', opts:['\\(\\{x \\mid x > -1\\}\\)','\\(\\{x \\mid 1 \\leq x < 3\\}\\)','\\(\\{x \\mid x \\geq 1\\}\\)','\\(\\{x \\mid x < 3\\}\\)'], ans:0, exp:'\\(A=(-1,3)\\)，\\(B=[1,+\\infty)\\)，并集覆盖从 \\(-1\\)（不含）到 \\(+\\infty\\)，即 \\(\\{x \\mid x > -1\\}\\)。' },
+  { id:28, topic:'集合', diff:2, q:'集合 \\(\\{1, 2\\}\\) 的子集个数是？', opts:['2个','3个','4个','1个'], ans:2, exp:'\\(n\\) 个元素的集合有 \\(2^n\\) 个子集。\\(\\{1,2\\}\\) 有2个元素，子集为：\\(\\emptyset, \\{1\\}, \\{2\\}, \\{1,2\\}\\)，共4个。' },
+  { id:29, topic:'集合', diff:3, q:'已知 \\(A = \\{x \\mid x^2 - 3x + 2 = 0\\}\\)，\\(B = \\{x \\mid ax - 1 = 0\\}\\)，若 \\(B \\subseteq A\\)，则 \\(a\\) 所有可能取值的集合是？', opts:['\\(\\{1, \\frac{1}{2}\\}\\)','\\(\\{0, 1, \\frac{1}{2}\\}\\)','\\(\\{1, \\frac{1}{2}, 0\\}\\)','\\(\\{0, 1, \\frac{1}{2}\\}\\)'], ans:3, exp:'\\(A=\\{1,2\\}\\)。\\(B \\subseteq A\\) 分三种情况：①\\(B=\\emptyset\\)（\\(a=0\\)）；②\\(B=\\{1\\}\\)（\\(a=1\\)）；③\\(B=\\{2\\}\\)（\\(a=\\frac{1}{2}\\)）。故 \\(a \\in \\{0, 1, \\frac{1}{2}\\}\\)。' },
+
+  // ========== 函数概念 / 定义域 / 值域 ==========
+  { id:30, topic:'函数概念', diff:1, q:'函数 \\(f(x) = \\sqrt{x-1}\\) 的定义域是？', opts:['\\([1, +\\infty)\\)','\\((1, +\\infty)\\)','\\([0, +\\infty)\\)','\\((-\\infty, 1]\\)'], ans:0, exp:'根号下不能为负：\\(x-1 \\geq 0\\) → \\(x \\geq 1\\)，即 \\([1, +\\infty)\\)。' },
+  { id:31, topic:'函数概念', diff:1, q:'函数 \\(f(x) = \\frac{1}{x-2}\\) 的定义域是？', opts:['\\(\\{x \\mid x \\neq 2\\}\\)','\\(\\{x \\mid x > 2\\}\\)','\\(\\{x \\mid x \\neq -2\\}\\)','\\(\\mathbb{R}\\)'], ans:0, exp:'分母不能为零：\\(x-2 \\neq 0\\) → \\(x \\neq 2\\)。' },
+  { id:32, topic:'函数概念', diff:2, q:'函数 \\(f(x) = \\frac{\\sqrt{x+1}}{x-1}\\) 的定义域是？', opts:['\\([-1, +\\infty)\\)','\\([-1, 1) \\cup (1, +\\infty)\\)','\\((-1, 1) \\cup (1, +\\infty)\\)','\\([0, 1) \\cup (1, +\\infty)\\)'], ans:1, exp:'分子：\\(x+1 \\geq 0\\) → \\(x \\geq -1\\)；分母：\\(x-1 \\neq 0\\) → \\(x \\neq 1\\)。取交集：\\([-1, 1) \\cup (1, +\\infty)\\)。' },
+  { id:33, topic:'函数概念', diff:2, q:'若 \\(f(x-1) = x^2 + 2x\\)，则 \\(f(x)\\) 的表达式为？', opts:['\\(x^2 + 4x + 3\\)','\\(x^2 + 2x + 1\\)','\\(x^2 + 2x + 3\\)','\\(x^2 - 2x + 3\\)'], ans:0, exp:'令 \\(t = x-1\\)，则 \\(x = t+1\\)，\\(f(t) = (t+1)^2 + 2(t+1) = t^2+2t+1+2t+2 = t^2+4t+3\\)，故 \\(f(x)=x^2+4x+3\\)。' },
+  { id:34, topic:'函数概念', diff:2, q:'函数 \\(y = x^2 + 2x + 3\\)（\\(x \\in \\mathbb{R}\\)）的值域是？', opts:['\\([2, +\\infty)\\)','\\([3, +\\infty)\\)','\\((2, +\\infty)\\)','\\([1, +\\infty)\\)'], ans:0, exp:'配方：\\(y=(x+1)^2+2\\)，\\((x+1)^2 \\geq 0\\)，所以 \\(y \\geq 2\\)，值域为 \\([2, +\\infty)\\)。' },
+  { id:35, topic:'函数概念', diff:3, q:'函数 \\(y = \\frac{1}{x^2+1}\\) 的值域是？', opts:['\\((0, 1]\\)','\\([0, 1)\\)','\\((0, +\\infty)\\)','\\([0, 1]\\)'], ans:0, exp:'\\(x^2+1 \\geq 1\\)，所以 \\(0 < \\frac{1}{x^2+1} \\leq 1\\)，值域为 \\((0, 1]\\)。' },
+
+  // ========== 单调性 ==========
+  { id:36, topic:'单调性', diff:1, q:'函数 \\(f(x) = x^2\\) 在区间 \\((-\\infty, 0]\\) 上的单调性是？', opts:['单调递增','单调递减','先增后减','不单调'], ans:1, exp:'二次函数 \\(y=x^2\\) 开口向上，对称轴 \\(x=0\\)，在 \\((-\\infty, 0]\\) 上单调递减。' },
+  { id:37, topic:'单调性', diff:1, q:'函数 \\(f(x) = 2x - 1\\) 在 \\(\\mathbb{R}\\) 上的单调性是？', opts:['单调递增','单调递减','常数函数','先减后增'], ans:0, exp:'一次函数斜率 \\(k=2>0\\)，在 \\(\\mathbb{R}\\) 上单调递增。' },
+  { id:38, topic:'单调性', diff:2, q:'用定义证明 \\(f(x) = x^2 + 1\\) 在 \\((0, +\\infty)\\) 上是增函数。取 \\(x_1 < x_2\\)，则 \\(f(x_1)-f(x_2)\\) 的符号为？', opts:['恒为正','恒为负','无法判断','可能正可能负'], ans:1, exp:'\\(f(x_1)-f(x_2)=x_1^2-x_2^2=(x_1-x_2)(x_1+x_2)\\)。\\(x_1<x_2\\) 且均为正数，所以 \\(x_1-x_2<0\\)，\\(x_1+x_2>0\\)，乘积为负，即 \\(f(x_1)<f(x_2)\\)，所以是增函数。' },
+  { id:39, topic:'单调性', diff:2, q:'函数 \\(f(x) = \\frac{1}{x}\\) 的单调递减区间是？', opts:['\\((0, +\\infty)\\)','\\((-\\infty, 0)\\) 和 \\((0, +\\infty)\\)','\\(\\mathbb{R} \\setminus \\{0\\}\\)','\\((0, +\\infty)\\) 上递增'], ans:1, exp:'反比例函数 \\(y=\\frac{1}{x}\\) 在 \\((-\\infty, 0)\\) 和 \\((0, +\\infty)\\) 上分别单调递减，但整体不能说在 \\(\\mathbb{R} \\setminus \\{0\\}\\) 上单调递减。' },
+
+  // ========== 奇偶性 ==========
+  { id:40, topic:'奇偶性', diff:1, q:'函数 \\(f(x) = x^2\\) 的奇偶性是？', opts:['奇函数','偶函数','既是奇函数又是偶函数','非奇非偶'], ans:1, exp:'\\(f(-x)=(-x)^2=x^2=f(x)\\)，定义域 \\(\\mathbb{R}\\) 关于原点对称，所以是偶函数。' },
+  { id:41, topic:'奇偶性', diff:1, q:'函数 \\(f(x) = x^3\\) 的奇偶性是？', opts:['奇函数','偶函数','既是奇函数又是偶函数','非奇非偶'], ans:0, exp:'\\(f(-x)=(-x)^3=-x^3=-f(x)\\)，所以是奇函数。' },
+  { id:42, topic:'奇偶性', diff:2, q:'函数 \\(f(x) = x^2 + x\\) 的奇偶性是？', opts:['奇函数','偶函数','既是奇函数又是偶函数','非奇非偶'], ans:3, exp:'\\(f(-x)=(-x)^2+(-x)=x^2-x\\)，既不等于 \\(f(x)\\) 也不等于 \\(-f(x)\\)，所以非奇非偶。' },
+  { id:43, topic:'奇偶性', diff:2, q:'若 \\(f(x)\\) 是定义在 \\(\\mathbb{R}\\) 上的奇函数，且 \\(f(2) = 3\\)，则 \\(f(-2)\\) 等于？', opts:['\\(3\\)','\\(-3\\)','\\(0\\)','无法确定'], ans:1, exp:'奇函数满足 \\(f(-x) = -f(x)\\)，所以 \\(f(-2) = -f(2) = -3\\)。' },
+  { id:44, topic:'奇偶性', diff:3, q:'若 \\(f(x)\\) 是定义在 \\(\\mathbb{R}\\) 上的奇函数，且在 \\([0, +\\infty)\\) 上单调递增，\\(f(1)=0\\)，则不等式 \\(f(x) < 0\\) 的解集是？', opts:['\\((-\\infty, 1)\\)','\\((-\\infty, -1) \\cup (0, 1)\\)','\\((-1, 0) \\cup (1, +\\infty)\\)','\\((0, 1)\\)'], ans:1, exp:'奇函数过原点，\\(f(0)=0\\)。在 \\([0,+\\infty)\\) 上递增且 \\(f(1)=0\\) → \\(0 \\leq x<1\\) 时 \\(f(x)<0\\)。由奇函数对称性，\\(x<-1\\) 时 \\(f(x)<0\\)。故解集为 \\((-\\infty, -1) \\cup (0, 1)\\)。' },
+
+  // ========== 幂函数 ==========
+  { id:45, topic:'幂函数', diff:1, q:'幂函数 \\(y = x^{-1}\\) 的图像不经过哪个象限？', opts:['第一象限','第二象限','第三象限','既不经过第二也不经过第四象限'], ans:3, exp:'\\(y=x^{-1}=\\frac{1}{x}\\)，图像为双曲线，经过第一、三象限，不经过第二、四象限。' },
+  { id:46, topic:'幂函数', diff:1, q:'下列函数中，是幂函数的是？', opts:['\\(y = 2x^3\\)','\\(y = x^3 + 1\\)','\\(y = x^{\\frac{1}{2}}\\)','\\(y = 3^x\\)'], ans:2, exp:'幂函数的形式为 \\(y=x^\\alpha\\)，只有C符合。A是幂函数的常数倍，B多了常数项，D是指数函数。' },
+  { id:47, topic:'幂函数', diff:2, q:'幂函数 \\(y = x^{\\frac{2}{3}}\\) 的定义域是？', opts:['\\([0, +\\infty)\\)','\\(\\mathbb{R}\\)','\\((0, +\\infty)\\)','\\((-\\infty, 0] \\cup [0, +\\infty)\\)'], ans:1, exp:'\\(y=x^{\\frac{2}{3}} = \\sqrt[3]{x^2}\\)，三次根号下可以是任意实数（奇次方根），所以定义域为 \\(\\mathbb{R}\\)。' },
+  { id:48, topic:'幂函数', diff:2, q:'比较大小：\\(1.2^{\\frac{1}{2}}\\) 与 \\(1.3^{\\frac{1}{2}}\\)', opts:['\\(1.2^{1/2} < 1.3^{1/2}\\)','\\(1.2^{1/2} > 1.3^{1/2}\\)','相等','无法比较'], ans:0, exp:'幂函数 \\(y=x^{1/2}\\) 在 \\((0,+\\infty)\\) 上单调递增，\\(1.2<1.3\\)，所以 \\(1.2^{1/2} < 1.3^{1/2}\\)。' },
+
+  // ========== 指数函数 ==========
+  { id:49, topic:'指数函数', diff:1, q:'计算：\\(2^3 \\times 2^4\\) 等于？', opts:['\\(2^7\\)','\\(2^{12}\\)','\\(4^7\\)','\\(2^1\\)'], ans:0, exp:'\\(2^3 \\times 2^4 = 2^{3+4} = 2^7 = 128\\)。' },
+  { id:50, topic:'指数函数', diff:1, q:'\\(a^{\\frac{2}{3}}\\)（其中 \\(a>0\\)）等于？', opts:['\\(\\sqrt[3]{a^2}\\)','\\(\\sqrt{a^3}\\)','\\(\\frac{1}{\\sqrt[3]{a^2}}\\)','\\(\\sqrt[3]{a}\\)'], ans:0, exp:'\\(a^{\\frac{m}{n}} = \\sqrt[n]{a^m}\\)，所以 \\(a^{\\frac{2}{3}} = \\sqrt[3]{a^2}\\)。' },
+  { id:51, topic:'指数函数', diff:2, q:'函数 \\(y = 2^x\\) 与 \\(y = (\\frac{1}{2})^x\\) 的图像关于什么对称？', opts:['\\(x\\) 轴','\\(y\\) 轴','原点','直线 \\(y=x\\)'], ans:1, exp:'\\((\\frac{1}{2})^x = 2^{-x}\\)，\\(y=2^x\\) 与 \\(y=2^{-x}\\) 的图像关于 \\(y\\) 轴对称。' },
+  { id:52, topic:'指数函数', diff:2, q:'化简：\\(\\sqrt[3]{a} \\cdot \\sqrt{a}\\)（\\(a>0\\)）', opts:['\\(a^{\\frac{5}{6}}\\)','\\(a^{\\frac{2}{5}}\\)','\\(a^{\\frac{1}{6}}\\)','\\(a^{\\frac{5}{3}}\\)'], ans:0, exp:'\\(a^{\\frac{1}{3}} \\cdot a^{\\frac{1}{2}} = a^{\\frac{1}{3}+\\frac{1}{2}} = a^{\\frac{5}{6}}\\)。' },
+  { id:53, topic:'指数函数', diff:3, q:'方程 \\(2^x = 8\\) 的解是？', opts:['\\(x=2\\)','\\(x=3\\)','\\(x=4\\)','\\(x=1\\)'], ans:1, exp:'\\(8 = 2^3\\)，所以 \\(2^x = 2^3\\)，\\(x=3\\)。' },
+
+  // ========== 对数函数 ==========
+  { id:54, topic:'对数函数', diff:1, q:'\\(\\log_2 8\\) 的值是？', opts:['2','3','4','8'], ans:1, exp:'\\(\\log_2 8 = \\log_2 2^3 = 3\\)。' },
+  { id:55, topic:'对数函数', diff:1, q:'\\(\\lg 100\\) 的值是？', opts:['1','2','10','100'], ans:1, exp:'\\(\\lg 100 = \\log_{10} 100 = \\log_{10} 10^2 = 2\\)。' },
+  { id:56, topic:'对数函数', diff:1, q:'\\(\\log_a 1\\)（\\(a>0, a \\neq 1\\)）的值是？', opts:['0','1','\\(a\\)','无意义'], ans:0, exp:'对任何底数 \\(a>0, a\\neq1\\)，都有 \\(\\log_a 1 = 0\\)，因为 \\(a^0=1\\)。' },
+  { id:57, topic:'对数函数', diff:2, q:'计算：\\(\\log_2 3 + \\log_2 \\frac{1}{3}\\)', opts:['0','1','\\(\\log_2 3\\)','-1'], ans:0, exp:'\\(\\log_2 3 + \\log_2 \\frac{1}{3} = \\log_2(3 \\times \\frac{1}{3}) = \\log_2 1 = 0\\)。' },
+  { id:58, topic:'对数函数', diff:2, q:'\\(\\log_3 27 - \\log_3 9\\) 的值是？', opts:['1','2','3','\\(\\log_3 18\\)'], ans:0, exp:'\\(\\log_3 27 = 3\\)，\\(\\log_3 9 = 2\\)，\\(3-2=1\\)。或 \\(\\log_3 \\frac{27}{9} = \\log_3 3 = 1\\)。' },
+  { id:59, topic:'对数函数', diff:2, q:'\\(\\log_4 8\\) 的值是？', opts:['\\(\\frac{3}{2}\\)','2','\\(\\frac{2}{3}\\)','\\(\\frac{1}{2}\\)'], ans:0, exp:'\\(\\log_4 8 = \\frac{\\log_2 8}{\\log_2 4} = \\frac{3}{2}\\)。或者 \\(4^{3/2} = (\\sqrt{4})^3 = 8\\)。' },
+  { id:60, topic:'对数函数', diff:3, q:'若 \\(\\log_2 (x-1) + \\log_2 (x+1) = 3\\)，则 \\(x\\) 的值为？', opts:['3','-3','\\(\\pm 3\\)','4'], ans:0, exp:'\\(\\log_2[(x-1)(x+1)] = 3\\) → \\(x^2-1 = 2^3 = 8\\) → \\(x^2=9\\) → \\(x=\\pm 3\\)。由真数 \\(x-1>0, x+1>0\\)，\\(x>1\\)，故只取 \\(x=3\\)。' },
+
+  // ========== 综合 ==========
+  { id:61, topic:'综合', diff:2, q:'函数 \\(f(x) = \\ln(x-2) + \\sqrt{4-x}\\) 的定义域是？', opts:['\\((2, 4]\\)','\\([2, 4]\\)','\\((2, 4)\\)','\\([2, 4)\\)'], ans:0, exp:'\\(\\ln(x-2)\\) 要求 \\(x-2>0\\) → \\(x>2\\)。\\(\\sqrt{4-x}\\) 要求 \\(4-x \\geq 0\\) → \\(x \\leq 4\\)。取交集：\\((2, 4]\\)。' },
+  { id:62, topic:'综合', diff:3, q:'已知 \\(f(x)\\) 是定义在 \\(\\mathbb{R}\\) 上的偶函数，当 \\(x \\geq 0\\) 时 \\(f(x) = x^2 - 2x\\)，则当 \\(x < 0\\) 时 \\(f(x)\\) 的表达式为？', opts:['\\(x^2 + 2x\\)','\\(x^2 - 2x\\)','\\(-x^2 + 2x\\)','\\(-x^2 - 2x\\)'], ans:0, exp:'偶函数 \\(f(-x)=f(x)\\)。当 \\(x<0\\) 时，\\(-x>0\\)，\\(f(x)=f(-x)=(-x)^2-2(-x)=x^2+2x\\)。' },
+  { id:63, topic:'综合', diff:3, q:'已知集合 \\(A = \\{x \\mid x^2 - 5x + 6 < 0\\}\\)，\\(B = \\{x \\mid x^2 - 4x + 3 > 0\\}\\)，则 \\(A \\cap B\\) 等于？', opts:['\\((2, 3)\\)','\\((1, 2) \\cup (3, +\\infty)\\)','\\((2, 3)\\)','\\((-\\infty, 1) \\cup (3, +\\infty)\\)'], ans:0, exp:'\\(A: x^2-5x+6=(x-2)(x-3)<0\\) → \\(2<x<3\\)。\\(B: x^2-4x+3=(x-1)(x-3)>0\\) → \\(x<1\\) 或 \\(x>3\\)。\\(A \\cap B = (2,3) \\cap ((-\\infty,1)\\cup(3,+\\infty)) = (2,3)\\)。' },
+];
+
+// ==================== APP STATE ====================
+let currentQuiz = [];
+let currentIndex = 0;
+let score = 0;
+let answers = []; // { q, userAnswer, correct }
+let timerSeconds = 0;
+let timerInterval = null;
+let quizActive = false;
+
+// ==================== INIT ====================
+function init() {
+  renderTopicTags();
+  renderHistory();
+}
+const TOPICS = ['全部', ...new Set(QUESTION_BANK.map(q => q.topic))];
+
+function renderTopicTags() {
+  const container = document.getElementById('topicTags');
+  let html = '';
+  TOPICS.forEach((t, i) => {
+    const cls = i === 0 ? 'topic-tag selected' : 'topic-tag';
+    html += `<span class="${cls}" data-topic="${t}" onclick="selectTopic(this, '${t}')">${t}</span>`;
+  });
+  container.innerHTML = html;
+}
+
+let selectedTopics = ['全部'];
+function selectTopic(el, topic) {
+  if (topic === '全部') {
+    selectedTopics = ['全部'];
+    document.querySelectorAll('.topic-tag').forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+  } else {
+    // Deselect "全部"
+    const allTag = document.querySelector('.topic-tag[data-topic="全部"]');
+    if (allTag) allTag.classList.remove('selected');
+    selectedTopics = selectedTopics.filter(t => t !== '全部');
+
+    if (el.classList.contains('selected')) {
+      el.classList.remove('selected');
+      selectedTopics = selectedTopics.filter(t => t !== topic);
+      if (selectedTopics.length === 0) {
+        selectedTopics = ['全部'];
+        if (allTag) allTag.classList.add('selected');
+      }
+    } else {
+      el.classList.add('selected');
+      selectedTopics.push(topic);
+    }
+  }
+}
+
+// ==================== QUIZ LOGIC ====================
+function startQuiz() {
+  // Filter questions
+  let pool = [...QUESTION_BANK];
+  if (!selectedTopics.includes('全部')) {
+    pool = pool.filter(q => selectedTopics.includes(q.topic));
+  }
+  const diff = document.getElementById('diffSelect').value;
+  if (diff !== 'all') {
+    pool = pool.filter(q => q.diff === parseInt(diff));
+  }
+
+  if (pool.length === 0) {
+    alert('没有符合条件的题目，请调整筛选条件。');
+    return;
+  }
+
+  // Shuffle
+  pool = shuffle([...pool]);
+
+  // Determine count
+  let count = parseInt(document.getElementById('countSelect').value);
+  if (count === 0 || count > pool.length) count = pool.length;
+  currentQuiz = pool.slice(0, count);
+
+  // Reset state
+  currentIndex = 0;
+  score = 0;
+  answers = [];
+  timerSeconds = 0;
+  quizActive = true;
+
+  // UI
+  document.getElementById('controls').style.display = 'none';
+  document.getElementById('statsBar').style.display = 'flex';
+  document.getElementById('resultArea').classList.remove('show');
+  document.getElementById('resultArea').innerHTML = '';
+  document.getElementById('historySection').style.display = 'none';
+
+  updateStats();
+  renderQuestion();
+  startTimer();
+  document.getElementById('questionArea').scrollIntoView({ behavior:'smooth' });
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderQuestion() {
+  if (currentIndex >= currentQuiz.length) {
+    endQuiz();
+    return;
+  }
+
+  const q = currentQuiz[currentIndex];
+  const diffLabel = {1:'基础', 2:'进阶', 3:'挑战'}[q.diff];
+  const diffClass = {1:'easy', 2:'medium', 3:'hard'}[q.diff];
+  const letters = ['A', 'B', 'C', 'D'];
+
+  // Shuffle options with tracking
+  const optIndices = [0, 1, 2, 3];
+  const shuffledOpts = shuffle([...optIndices]);
+  q._shuffled = shuffledOpts;
+  q._correctShuffled = shuffledOpts.indexOf(q.ans);
+
+  let html = `<div class="q-card active" id="qCard">
+    <div class="q-meta">
+      <span class="q-num">第 ${currentIndex+1}/${currentQuiz.length} 题</span>
+      <span class="q-topic ${diffClass}">${q.topic} · ${diffLabel}</span>
+    </div>
+    <div class="q-text">${q.q}</div>
+    <div class="options">`;
+
+  shuffledOpts.forEach((oi, si) => {
+    html += `<div class="option" data-index="${si}" onclick="selectAnswer(this, ${si})">
+      <span class="opt-letter">${letters[si]}</span>
+      <span class="opt-text">${q.opts[oi]}</span>
+    </div>`;
+  });
+
+  html += `</div>
+    <div class="explanation" id="explanation">
+      <h4>💡 解析</h4>
+      <p>${q.exp}</p>
+    </div>
+    <div style="margin-top:18px;text-align:center;">
+      <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" style="display:none;">
+        ${currentIndex < currentQuiz.length - 1 ? '下一题 →' : '查看成绩 🎯'}
+      </button>
+    </div>
+  </div>`;
+
+  document.getElementById('questionArea').innerHTML = html;
+  renderKaTeXIn(document.getElementById('questionArea'));
+}
+
+function selectAnswer(el, si) {
+  if (!quizActive) return;
+
+  const q = currentQuiz[currentIndex];
+  const isCorrect = (si === q._correctShuffled);
+
+  // Lock all options
+  const allOpts = el.parentElement.querySelectorAll('.option');
+  allOpts.forEach(o => o.classList.add('locked'));
+
+  // Highlight
+  allOpts.forEach((o, i) => {
+    if (i === q._correctShuffled) o.classList.add('correct');
+    if (i === si && !isCorrect) o.classList.add('wrong');
+  });
+  el.classList.add('selected');
+
+  // Show explanation
+  document.getElementById('explanation').classList.add('show');
+  document.getElementById('btnNext').style.display = 'inline-flex';
+
+  // Record
+  if (isCorrect) score++;
+  answers.push({
+    question: q.q,
+    topic: q.topic,
+    userAnswer: q.opts[q._shuffled[si]],
+    correctAnswer: q.opts[q.ans],
+    isCorrect: isCorrect,
+    explanation: q.exp
+  });
+
+  quizActive = false; // prevent double-select
+  updateStats();
+}
+
+function nextQuestion() {
+  currentIndex++;
+  quizActive = true;
+  if (currentIndex >= currentQuiz.length) {
+    endQuiz();
+  } else {
+    renderQuestion();
+    updateStats();
+  }
+}
+
+function endQuiz() {
+  clearInterval(timerInterval);
+  quizActive = false;
+
+  const total = currentQuiz.length;
+  const pct = Math.round((score / total) * 100);
+  let cls, emoji, msg;
+  if (pct >= 80) { cls = 'great'; emoji = '🎉'; msg = '太棒了！你对初升高数学掌握得很好！'; }
+  else if (pct >= 60) { cls = 'good'; emoji = '👍'; msg = '不错！继续加油，查漏补缺！'; }
+  else { cls = 'ok'; emoji = '💪'; msg = '别灰心，多练习几次就会进步的！'; }
+
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+  const timeStr = mins > 0 ? `${mins}分${secs}秒` : `${secs}秒`;
+
+  document.getElementById('questionArea').innerHTML = '';
+  document.getElementById('statsBar').style.display = 'none';
+
+  let html = `<div class="result-area show">
+    <div class="score-circle ${cls}">${pct}%</div>
+    <h3>${emoji} ${msg}</h3>
+    <table class="detail-table">
+      <tr><th>总题数</th><td>${total}</td></tr>
+      <tr><th>正确</th><td style="color:#2e7d32;">${score} 题</td></tr>
+      <tr><th>错误</th><td style="color:#c62828;">${total - score} 题</td></tr>
+      <tr><th>用时</th><td>${timeStr}</td></tr>
+      <tr><th>正确率</th><td>${pct}%</td></tr>
+    </table>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="retryQuiz()">🔄 再来一轮</button>
+      <button class="btn btn-outline" onclick="resetQuiz()">📋 重新选题</button>
+    </div>
+  </div>`;
+
+  // Review section
+  html += `<div class="review-section"><h3>📖 答题回顾</h3>`;
+  answers.forEach((a, i) => {
+    const cls2 = a.isCorrect ? 'correct' : 'wrong';
+    const icon = a.isCorrect ? '✅' : '❌';
+    html += `<div class="review-item">
+      <span class="ri-status ${cls2}">${icon} ${a.isCorrect ? '正确' : '错误'}</span>
+      <strong>${a.topic}</strong> · ${a.question}
+      <br>你的答案：${a.userAnswer} ${a.isCorrect ? '' : '| 正确答案：' + a.correctAnswer}
+      <br><span style="color:#757575;">${a.explanation}</span>
+    </div>`;
+  });
+  html += `</div>`;
+
+  document.getElementById('resultArea').innerHTML = html;
+  document.getElementById('historySection').style.display = 'block';
+  renderKaTeXIn(document.getElementById('resultArea'));
+
+  // Save history
+  saveHistory(total, score, pct, timerSeconds);
+  renderHistory();
+}
+
+function retryQuiz() {
+  currentIndex = 0;
+  score = 0;
+  answers = [];
+  timerSeconds = 0;
+  quizActive = true;
+  document.getElementById('resultArea').innerHTML = '';
+  document.getElementById('resultArea').classList.remove('show');
+  document.getElementById('statsBar').style.display = 'flex';
+  document.getElementById('historySection').style.display = 'none';
+  updateStats();
+  renderQuestion();
+  startTimer();
+}
+
+function resetQuiz() {
+  clearInterval(timerInterval);
+  quizActive = false;
+  document.getElementById('controls').style.display = 'block';
+  document.getElementById('statsBar').style.display = 'none';
+  document.getElementById('questionArea').innerHTML = '';
+  document.getElementById('resultArea').innerHTML = '';
+  document.getElementById('resultArea').classList.remove('show');
+  document.getElementById('historySection').style.display = 'block';
+}
+
+// ==================== TIMER ====================
+function startTimer() {
+  clearInterval(timerInterval);
+  timerSeconds = 0;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  document.getElementById('statTimer').textContent = m > 0 ? `${m}m ${s}s` : `${s}s`;
+}
+
+// ==================== STATS ====================
+function updateStats() {
+  document.getElementById('statProgress').textContent = `${currentIndex+1}/${currentQuiz.length}`;
+  document.getElementById('statScore').textContent = score;
+  const answered = answers.length;
+  document.getElementById('statAccuracy').textContent = answered > 0 ? Math.round((answers.filter(a=>a.isCorrect).length/answered)*100) + '%' : '--';
+}
+
+// ==================== HISTORY ====================
+function saveHistory(total, score, pct, seconds) {
+  const history = JSON.parse(localStorage.getItem('sishu_quiz_history') || '[]');
+  history.unshift({
+    date: new Date().toLocaleString('zh-CN'),
+    total, score, pct,
+    time: seconds,
+    topics: selectedTopics.includes('全部') ? '全部' : selectedTopics.join(',')
+  });
+  // Keep last 20
+  if (history.length > 20) history.length = 20;
+  localStorage.setItem('sishu_quiz_history', JSON.stringify(history));
+}
+
+function clearHistory() {
+  if (confirm('确定要清除所有刷题历史记录吗？此操作不可恢复。')) {
+    localStorage.removeItem('sishu_quiz_history');
+    renderHistory();
+  }
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('sishu_quiz_history') || '[]');
+  const container = document.getElementById('historyList');
+  const clearWrap = document.getElementById('clearHistoryWrap');
+  if (history.length === 0) {
+    container.innerHTML = '<div class="history-empty">暂无刷题记录，快来开始第一轮练习吧！ 📝</div>';
+    if (clearWrap) clearWrap.style.display = 'none';
+    return;
+  }
+  if (clearWrap) clearWrap.style.display = 'block';
+  let html = '';
+  history.forEach(h => {
+    const mins = Math.floor(h.time / 60);
+    const secs = h.time % 60;
+    const timeStr = mins > 0 ? `${mins}分${secs}秒` : `${secs}秒`;
+    html += `<div class="history-item">
+      <div>
+        <strong>${h.date}</strong> · ${h.topics}<br>
+        <span style="color:#757575;">${h.total}题 · 用时${timeStr}</span>
+      </div>
+      <div class="hi-score" style="color:${h.pct>=80?'#2e7d32':h.pct>=60?'#e65100':'#c62828'}">${h.score}/${h.total} (${h.pct}%)</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+// ==================== KATEX ====================
+function renderKaTeXIn(el) {
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(el, {
+      delimiters: [
+        {left: '\\\\(', right: '\\\\)', display: false},
+        {left: '\\\\[', right: '\\\\]', display: true}
+      ],
+      throwOnError: false
+    });
+  }
+}
+
+// ==================== Keyboard ====================
+document.addEventListener('keydown', e => {
+  if (!quizActive) return;
+  const keys = ['a','b','c','d','A','B','C','D','1','2','3','4'];
+  const map = {'a':0,'b':1,'c':2,'d':3,'A':0,'B':1,'C':2,'D':3,'1':0,'2':1,'3':2,'4':3};
+  if (map[e.key] !== undefined) {
+    const options = document.querySelectorAll('.option');
+    if (options.length > 0 && !options[0].classList.contains('locked')) {
+      options[map[e.key]].click();
+    }
+  }
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    const btnNext = document.getElementById('btnNext');
+    if (btnNext && btnNext.style.display !== 'none') {
+      nextQuestion();
+    }
+  }
+});
+
+// ==================== START ====================
+init();
+</script>
+</body>
+</html>
