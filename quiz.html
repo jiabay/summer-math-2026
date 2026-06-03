@@ -398,7 +398,7 @@ function init() {
   renderTopicTags();
   renderHistory();
 }
-const TOPICS = ['全部', ...new Set(QUESTION_BANK.map(q => q.topic))];
+const TOPICS = ['全部', ...new Set(QUESTION_BANK.map(q => q.chapter))];
 
 function renderTopicTags() {
   const container = document.getElementById('topicTags');
@@ -441,7 +441,7 @@ function startQuiz() {
   // Filter questions
   let pool = [...QUESTION_BANK];
   if (!selectedTopics.includes('全部')) {
-    pool = pool.filter(q => selectedTopics.includes(q.topic));
+    pool = pool.filter(q => selectedTopics.includes(q.chapter));
   }
   const diff = document.getElementById('diffSelect').value;
   if (diff !== 'all') {
