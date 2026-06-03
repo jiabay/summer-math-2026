@@ -154,6 +154,25 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 .footer p { font-size:12px; color:#90caf9; }
 .footer a { color:#ffd54f; text-decoration:none; }
 
+
+/* ===== Achievements ===== */
+.ach-toast { position:fixed; top:20px; right:20px; background:#fff; border-radius:12px; padding:16px 20px; box-shadow:0 8px 30px rgba(0,0,0,.2); z-index:999; display:flex; align-items:center; gap:12px; animation:slideIn .4s ease; max-width:320px; }
+@keyframes slideIn { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
+.ach-toast .ach-icon { font-size:36px; }
+.ach-toast .ach-info h4 { font-size:14px; color:#1a237e; margin:0; }
+.ach-toast .ach-info p { font-size:12px; color:#757575; margin:2px 0 0; }
+.ach-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:20px; font-size:12px; font-weight:700; }
+.ach-badge.locked { background:#f5f5f5; color:#bdbdbd; }
+.ach-badge.unlocked { background:#fff8e1; color:#e65100; border:1px solid #ffe082; }
+.ach-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:10px; margin-top:12px; }
+.ach-card { background:#fff; border-radius:10px; padding:14px; text-align:center; box-shadow:0 1px 6px rgba(0,0,0,.04); transition:all .2s; }
+.ach-card.locked { opacity:.45; filter:grayscale(1); }
+.ach-card .ach-icon2 { font-size:32px; margin-bottom:6px; }
+.ach-card .ach-name { font-size:13px; font-weight:700; color:#1a237e; margin-bottom:2px; }
+.ach-card .ach-desc { font-size:11px; color:#9e9e9e; }
+.ach-notify { background:#1a237e; color:#fff; padding:8px 16px; border-radius:20px; font-size:13px; cursor:pointer; display:inline-block; margin-top:8px; }
+.ach-notify:hover { background:#283593; }
+
 @media (max-width:640px) {
   .q-card { padding:18px 14px; }
   .q-card .q-text { font-size:15px; }
@@ -175,6 +194,7 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
     <div>
       <a href="index.html">🏠 首页</a>
       <a href="quiz.html" class="active">📝 刷题练习</a>
+      <a href="#" onclick="showAchievements();return false;" style="color:#bbdefb;text-decoration:none;font-size:14px;margin-left:16px;">🏆 成就</a>
     </div>
   </div>
 </nav>
@@ -238,6 +258,13 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
   <div id="clearHistoryWrap" style="display:none;text-align:center;margin-top:12px;">
     <button class="btn btn-sm btn-outline" onclick="clearHistory()">🗑️ 清除历史</button>
   </div>
+</div>
+
+
+<!-- Achievements -->
+<div class="history-section" id="achSection" style="display:none;">
+  <h3>🏆 成就墙 <span id="achCount" style="font-size:13px;color:#9e9e9e;"></span></h3>
+  <div class="ach-grid" id="achGrid"></div>
 </div>
 
 </div><!-- .container -->
@@ -384,6 +411,113 @@ const QUESTION_BANK = [
   { id:132, chapter:'三角恒等变换', topic:'凑角问题', diff:3, q:'已知\\(\\sin(\\alpha+\\beta)=\\frac{3}{5}\\)，\\(\\sin(\\alpha-\\beta)=\\frac{1}{5}\\)，则\\(\\frac{\\tan\\alpha}{\\tan\\beta}=\\)？', opts:['2','\\(\\frac{1}{2}\\)','4','\\(\\frac{3}{5}\\)'], ans:0, exp:'两式分别展开后相加得2sinαcosβ=4/5→sinαcosβ=2/5；相减得2cosαsinβ=2/5→cosαsinβ=1/5。tanα/tanβ=(sinαcosβ)/(cosαsinβ)=2。' }
   { id:133, chapter:'三角恒等变换', topic:'辅助角公式', diff:3, q:'\\(\\sqrt{3}\\sin x+\\cos x\\)可化为？', opts:['\\(2\\sin(x+\\frac{\\pi}{6})\\)','\\(2\\sin(x+\\frac{\\pi}{3})\\)','\\(\\sqrt{2}\\sin(x+\\frac{\\pi}{4})\\)','\\(2\\cos(x-\\frac{\\pi}{3})\\)'], ans:0, exp:'\\(\\sqrt{3}\\sin x+\\cos x=\\sqrt{(\\sqrt{3})^2+1^2}\\sin(x+\\varphi)=\\sqrt{4}\\sin(x+\\frac{\\pi}{6})=2\\sin(x+\\frac{\\pi}{6})\\)。其中tanφ=1/√3→φ=π/6。' }
 ];
+
+// ==================== ACHIEVEMENT SYSTEM ====================
+const ACHIEVEMENTS = [
+  { id:'first_quiz', name:'初来乍到', icon:'🆕', desc:'完成第一次刷题' },
+  { id:'perfect', name:'满分学霸', icon:'🎯', desc:'一次刷题中正确率100%（≥10题）' },
+  { id:'streak_5', name:'五连击', icon:'🔥', desc:'连续答对5题' },
+  { id:'streak_10', name:'十全十美', icon:'💎', desc:'连续答对10题' },
+  { id:'five_quizzes', name:'刷题勇士', icon:'💪', desc:'累计完成5次刷题' },
+  { id:'ten_quizzes', name:'刷题达人', icon:'📚', desc:'累计完成10次刷题' },
+  { id:'fifty_questions', name:'五十题斩', icon:'⭐', desc:'累计回答50题' },
+  { id:'hundred_questions', name:'百题斩', icon:'💯', desc:'累计回答100题' },
+  { id:'speed_demon', name:'闪电侠', icon:'⚡', desc:'5秒内答对一道题' },
+  { id:'all_chapters', name:'全章节制霸', icon:'🏆', desc:'所有10个章节都刷过题' },
+  { id:'hard_warrior', name:'挑战者', icon:'🎖️', desc:'完成一次全是难题的刷题（≥5题）' },
+  { id:'night_owl', name:'夜猫子', icon:'🦉', desc:'完成一次20题以上的刷题' },
+];
+let currentStreak = 0;
+let lastAnswerTime = 0;
+let unlockedAch = []; // track newly unlocked in this session
+
+function getStats() {
+  try {
+    let s = JSON.parse(localStorage.getItem('sishu_ach_stats')||'{}');
+    if (!s.quizzesTaken) s.quizzesTaken = 0;
+    if (!s.totalQuestions) s.totalQuestions = 0;
+    if (!s.totalCorrect) s.totalCorrect = 0;
+    if (!s.chaptersDone) s.chaptersDone = [];
+    return s;
+  } catch(e) { return {quizzesTaken:0,totalQuestions:0,totalCorrect:0,chaptersDone:[]}; }
+}
+function saveStats(s) {
+  try { localStorage.setItem('sishu_ach_stats', JSON.stringify(s)); } catch(e) {}
+}
+function getUnlocked() {
+  try { return JSON.parse(localStorage.getItem('sishu_ach_unlocked')||'[]'); } catch(e) { return []; }
+}
+function unlockAch(id) {
+  let ul = getUnlocked();
+  if (ul.includes(id)) return false;
+  ul.push(id);
+  try { localStorage.setItem('sishu_ach_unlocked', JSON.stringify(ul)); } catch(e) {}
+  unlockedAch.push(id);
+  return true;
+}
+
+function checkAchievements(quizSummary) {
+  let stats = getStats();
+  let newlyUnlocked = [];
+
+  let checks = [
+    { id:'first_quiz', ok: stats.quizzesTaken >= 1 },
+    { id:'perfect', ok: quizSummary && quizSummary.total >= 10 && quizSummary.score === quizSummary.total },
+    { id:'streak_5', ok: currentStreak >= 5 },
+    { id:'streak_10', ok: currentStreak >= 10 },
+    { id:'five_quizzes', ok: stats.quizzesTaken >= 5 },
+    { id:'ten_quizzes', ok: stats.quizzesTaken >= 10 },
+    { id:'fifty_questions', ok: stats.totalQuestions >= 50 },
+    { id:'hundred_questions', ok: stats.totalQuestions >= 100 },
+    { id:'speed_demon', ok: lastAnswerTime > 0 && lastAnswerTime <= 5 },
+    { id:'all_chapters', ok: stats.chaptersDone && stats.chaptersDone.length >= 10 },
+    { id:'hard_warrior', ok: quizSummary && quizSummary.total >= 5 && quizSummary.allHard },
+    { id:'night_owl', ok: quizSummary && quizSummary.total >= 20 },
+  ];
+
+  checks.forEach(c => {
+    if (c.ok && unlockAch(c.id)) newlyUnlocked.push(c.id);
+  });
+
+  // Show toasts for newly unlocked
+  newlyUnlocked.forEach(id => showAchToast(id));
+  if (newlyUnlocked.length > 0) renderAchievements();
+}
+
+function showAchToast(id) {
+  let ach = ACHIEVEMENTS.find(a => a.id === id);
+  if (!ach) return;
+  let toast = document.createElement('div');
+  toast.className = 'ach-toast';
+  toast.innerHTML = `<div class="ach-icon">${ach.icon}</div><div class="ach-info"><h4>🏆 成就解锁！</h4><p>${ach.name} — ${ach.desc}</p></div>`;
+  document.body.appendChild(toast);
+  setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity .4s'; setTimeout(() => toast.remove(), 400); }, 3000);
+}
+
+function renderAchievements() {
+  let grid = document.getElementById('achGrid');
+  let countEl = document.getElementById('achCount');
+  if (!grid) return;
+  let ul = getUnlocked();
+  if (countEl) countEl.textContent = `(${ul.length}/${ACHIEVEMENTS.length})`;
+  let html = '';
+  ACHIEVEMENTS.forEach(a => {
+    let unlocked = ul.includes(a.id);
+    html += `<div class="ach-card ${unlocked?'':'locked'}">
+      <div class="ach-icon2">${unlocked ? a.icon : '🔒'}</div>
+      <div class="ach-name">${a.name}</div>
+      <div class="ach-desc">${a.desc}</div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+}
+
+function showAchievements() {
+  document.getElementById('achSection').style.display = 'block';
+  renderAchievements();
+  document.getElementById('achSection').scrollIntoView({behavior:'smooth'});
+}
+
 // ==================== APP STATE ====================
 let currentQuiz = [];
 let currentIndex = 0;
@@ -392,6 +526,7 @@ let answers = []; // { q, userAnswer, correct }
 let timerSeconds = 0;
 let timerInterval = null;
 let quizActive = false;
+let quizStartTime = null;
 
 // ==================== INIT ====================
 function init() {
@@ -467,6 +602,8 @@ function startQuiz() {
   answers = [];
   timerSeconds = 0;
   quizActive = true;
+  quizStartTime = new Date();
+  currentStreak = 0;
 
   // UI
   document.getElementById('controls').style.display = 'none';
@@ -559,7 +696,8 @@ function selectAnswer(el, si) {
   document.getElementById('btnNext').style.display = 'inline-flex';
 
   // Record
-  if (isCorrect) score++;
+  if (isCorrect) { score++; currentStreak++; } else { currentStreak = 0; }
+  lastAnswerTime = (new Date() - quizStartTime) / 1000;
   answers.push({
     question: q.q,
     topic: q.topic,
@@ -576,6 +714,8 @@ function selectAnswer(el, si) {
 function nextQuestion() {
   currentIndex++;
   quizActive = true;
+  quizStartTime = new Date();
+  currentStreak = 0;
   if (currentIndex >= currentQuiz.length) {
     endQuiz();
   } else {
@@ -637,6 +777,18 @@ function endQuiz() {
   renderKaTeXIn(document.getElementById('resultArea'));
 
   // Save history
+  // Update stats
+  let stats = getStats();
+  stats.quizzesTaken++;
+  stats.totalQuestions += total;
+  stats.totalCorrect += score;
+  // Track chapters done in this quiz
+  let chaptersInQuiz = new Set(currentQuiz.map(q => q.chapter));
+  chaptersInQuiz.forEach(ch => { if (!stats.chaptersDone.includes(ch)) stats.chaptersDone.push(ch); });
+  saveStats(stats);
+  // Check achievements
+  let allHard = currentQuiz.every(q => q.diff === 3);
+  checkAchievements({total, score, pct, allHard});
   saveHistory(total, score, pct, timerSeconds);
   renderHistory();
 }
@@ -647,6 +799,8 @@ function retryQuiz() {
   answers = [];
   timerSeconds = 0;
   quizActive = true;
+  quizStartTime = new Date();
+  currentStreak = 0;
   document.getElementById('resultArea').innerHTML = '';
   document.getElementById('resultArea').classList.remove('show');
   document.getElementById('statsBar').style.display = 'flex';
@@ -775,6 +929,7 @@ document.addEventListener('keydown', e => {
 
 // ==================== START ====================
 init();
+showAchievements();
 </script>
 </body>
 </html>
