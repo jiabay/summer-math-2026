@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思数培优 · 2026暑假初升高数学衔接班</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121; line-height:1.7; background:#fafafa; }
+.container { max-width:860px; margin:0 auto; padding:0 16px; }
+
+/* Hero */
+.hero { background:linear-gradient(135deg, #1a237e, #283593); color:#fff; padding:60px 0 50px; text-align:center; }
+.hero .tag { font-size:14px; color:#90caf9; letter-spacing:4px; margin-bottom:8px; }
+.hero h1 { font-size:36px; font-weight:900; margin-bottom:10px; }
+.hero .sub { font-size:16px; color:#ffd54f; font-weight:700; margin-bottom:6px; }
+.hero .desc { font-size:13px; color:#bbdefb; margin-top:10px; }
+
+/* Section */
+.sec { padding:40px 0; }
+.sec h2 { font-size:22px; text-align:center; margin-bottom:6px; color:#1a237e; }
+.sec .subtitle { text-align:center; font-size:13px; color:#9e9e9e; margin-bottom:28px; }
+.sec .section-line { width:50px; height:3px; background:#ffd54f; margin:0 auto 28px; border-radius:2px; }
+
+/* Cards */
+.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px; }
+.card { background:#fff; border-radius:12px; padding:24px 18px; box-shadow:0 2px 12px rgba(0,0,0,.06); text-align:center; }
+.card .icon { font-size:32px; margin-bottom:10px; }
+.card h4 { font-size:15px; color:#1a237e; margin-bottom:6px; }
+.card p { font-size:13px; color:#757575; }
+
+/* Week cards */
+.week-cards { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
+.week-card { border-radius:10px; padding:16px 12px; text-align:center; }
+.week-card .badge { display:inline-block; padding:3px 14px; border-radius:12px; font-size:11px; font-weight:700; color:#fff; margin-bottom:8px; }
+.week-card h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
+.week-card p { font-size:11px; color:#757575; line-height:1.6; }
+
+.color-blue { background:#e3f2fd; } .color-blue h4 { color:#1565c0; }
+.color-green { background:#e8f5e9; } .color-green h4 { color:#2e7d32; }
+.color-red { background:#fce4ec; } .color-red h4 { color:#c62828; }
+.color-orange { background:#fff3e0; } .color-orange h4 { color:#e65100; }
+.badge-blue { background:#1565c0; } .badge-green { background:#2e7d32; }
+.badge-red { background:#c62828; } .badge-orange { background:#e65100; }
+
+/* Team */
+.team-cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+.team-card { background:#fff; border-radius:12px; padding:22px 16px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.team-card .avatar { width:56px; height:56px; border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.team-card h4 { font-size:15px; color:#1a237e; margin-bottom:4px; }
+.team-card p { font-size:12px; color:#757575; line-height:1.6; }
+
+/* Extra services */
+.extra-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+.extra-card { border-radius:12px; padding:24px 20px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.extra-card h4 { font-size:16px; font-weight:700; margin-bottom:8px; }
+.extra-card p { font-size:13px; color:#757575; line-height:1.8; }
+
+/* Info table */
+.info-box { background:#fff; border-radius:12px; padding:28px 24px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.info-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:14px; }
+.info-row:last-child { border:none; }
+.info-row .label { color:#757575; }
+.info-row .value { font-weight:700; color:#212121; }
+
+/* Price */
+.price-box { background:linear-gradient(135deg, #fff8e1, #fff3e0); border:2px solid #ffe082; border-radius:12px; padding:20px 24px; text-align:center; margin-top:16px; }
+.price-box .main-price { font-size:32px; font-weight:900; color:#e65100; }
+.price-box .early { font-size:16px; font-weight:700; color:#c62828; margin:8px 0; }
+.price-box .group { font-size:14px; color:#e65100; font-weight:700; }
+
+/* Schedule table */
+.schedule-table { width:100%; border-collapse:collapse; font-size:12px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+.schedule-table th { background:#37474f; color:#fff; padding:10px 8px; font-weight:700; font-size:11px; text-align:center; }
+.schedule-table td { padding:8px; border-bottom:1px solid #f0f0f0; text-align:center; vertical-align:middle; }
+.schedule-table tr:nth-child(even) td { background:#fafafa; }
+.schedule-table .day-tag { display:inline-block; padding:2px 10px; border-radius:10px; color:#fff; font-weight:700; font-size:11px; }
+.schedule-table .topic { font-weight:700; font-size:12px; }
+.schedule-table .am { text-align:left; font-size:11px; color:#555; }
+.schedule-table .pm { text-align:left; font-size:11px; }
+.schedule-table .test-row td { background:#fff3e0!important; }
+.schedule-table .test-tag { display:inline-block; background:#e65100; color:#fff; padding:1px 8px; border-radius:8px; font-size:10px; font-weight:700; margin-left:6px; }
+
+.week-title-tr td { background:#f5f5f5!important; font-weight:700; font-size:13px; padding:10px 8px; text-align:left; }
+
+/* Notice */
+.notice-box { background:#f5f5f5; border-radius:12px; padding:24px; }
+.notice-box h4 { color:#1a237e; font-size:16px; margin-bottom:14px; }
+.notice-box ol { padding-left:20px; }
+.notice-box li { font-size:13px; color:#555; margin-bottom:8px; line-height:1.7; }
+
+/* Footer */
+.footer { background:#1a237e; color:#fff; text-align:center; padding:36px 16px; margin-top:40px; }
+.footer h3 { font-size:20px; margin-bottom:8px; }
+.footer p { font-size:13px; color:#90caf9; }
+.footer .qr { background:#fff; border-radius:10px; padding:8px; display:inline-block; margin:16px 0; }
+.footer .qr span { color:#9e9e9e; font-size:11px; display:block; width:100px; height:100px; line-height:100px; text-align:center; border:1px dashed #ccc; border-radius:8px; }
+
+/* CTA */
+.cta-bar { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:2px solid #e0e0e0; padding:12px 16px; display:flex; gap:10px; justify-content:center; z-index:100; }
+.cta-btn { padding:12px 32px; border-radius:24px; font-size:15px; font-weight:700; text-decoration:none; display:inline-block; text-align:center; }
+.cta-phone { background:#fff; color:#1a237e; border:2px solid #1a237e; }
+.cta-wx { background:#1a237e; color:#fff; }
+
+@media (max-width:640px) {
+  .hero h1 { font-size:24px; }
+  .cards, .team-cards, .extra-cards { grid-template-columns:1fr; }
+  .week-cards { grid-template-columns:repeat(2, 1fr); }
+  .info-row { flex-direction:column; gap:4px; }
+  .schedule-table { font-size:10px; }
+  .schedule-table th, .schedule-table td { padding:5px 3px; }
+  .cta-bar { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="tag">思 数 培 优</div>
+    <h1>2026暑假 · 初升高数学衔接班</h1>
+    <div class="sub">4周攻克高一数学核心基础，开学快人一步</div>
+    <div class="desc">由优秀师范生、国奖大学生与准研究生领衔的数学团队<br>完整知识体系 · 循序渐进 · 不跳跃不脱节</div>
+  </div>
+</section>
+
+<!-- 四大优势 -->
+<section class="sec">
+  <div class="container">
+    <h2>为什么选择我们</h2>
+    <div class="section-line"></div>
+    <div class="cards">
+      <div class="card"><div class="icon">📐</div><h4>完整知识体系</h4><p>初中衔接→高中新课<br>循序渐进不跳跃<br>每节课环环相扣</p></div>
+      <div class="card"><div class="icon">✏️</div><h4>讲练面批过关</h4><p>上午精讲+下午练习<br>逐个面批，当日知识<br>当日消化不留死角</p></div>
+      <div class="card"><div class="icon">📊</div><h4>小班数据跟踪</h4><p>15人精品小班<br>每周测试+学情分析<br>结课家长汇报会</p></div>
+      <div class="card"><div class="icon">🎁</div><h4>报班即享增值</h4><p>志愿填报指导<br>升学规划免费咨询<br>高考亲历者团队答疑</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 课程速览 -->
+<section class="sec" style="background:#fff;">
+  <div class="container">
+    <h2>4周课程安排速览</h2>
+    <div class="section-line"></div>
+    <div class="week-cards">
+      <div class="week-card color-blue">
+        <span class="badge badge-blue">第1周</span>
+        <h4>初中衔接·代数工具箱</h4>
+        <p>因式分解 · 韦达定理<br>二次函数 · 不等式<br>只讲高中真正用到的</p>
+      </div>
+      <div class="week-card color-green">
+        <span class="badge badge-green">第2周</span>
+        <h4>集合与函数概念</h4>
+        <p>集合运算 · 函数定义<br>定义域 · 值域<br>高中数学第一章</p>
+      </div>
+      <div class="week-card color-red">
+        <span class="badge badge-red">第3周</span>
+        <h4>函数的基本性质</h4>
+        <p>单调性 · 奇偶性<br>幂函数入门<br>函数核心两大性质</p>
+      </div>
+      <div class="week-card color-orange">
+        <span class="badge badge-orange">第4周</span>
+        <h4>初等函数与学法指导</h4>
+        <p>指数·对数函数<br>结课测试 · 家长汇报<br>高中数学学习方法</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 团队 -->
+<section class="sec">
+  <div class="container">
+    <h2>我们的团队</h2>
+    <div class="section-line"></div>
+    <div class="team-cards">
+      <div class="team-card">
+        <div class="avatar" style="background:#e3f2fd;color:#1565c0;">🎓</div>
+        <h4>师范生领衔</h4>
+        <p>一线师范院校数学专业<br>懂教学 · 懂学生 · 懂考点</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar" style="background:#fff3e0;color:#e65100;">🏅</div>
+        <h4>国奖学霸</h4>
+        <p>国家奖学金获得者<br>方法可复制 · 经验可落地</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar" style="background:#e8f5e9;color:#2e7d32;">🚀</div>
+        <h4>准研究生</h4>
+        <p>保研/考研上岸985名校<br>功底扎实 · 视野开阔</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 增值服务 -->
+<section class="sec" style="background:#fff;">
+  <div class="container">
+    <h2>报班即享 · 免费增值服务</h2>
+    <div class="section-line"></div>
+    <div class="extra-cards">
+      <div class="extra-card" style="background:#e3f2fd;">
+        <h4 style="color:#1565c0;">📋 志愿填报指导</h4>
+        <p>团队全员高考亲历者，深谙各省录取规则<br>从分数定位 → 院校筛选 → 专业推荐，一站式指导<br>帮你把每一分都用在刀刃上</p>
+      </div>
+      <div class="extra-card" style="background:#e8f5e9;">
+        <h4 style="color:#2e7d32;">💡 升学规划咨询</h4>
+        <p>大学学习规划 · 考研保研路径 · 竞赛科研经验<br>师范生 + 国奖学霸 + 准研究生多视角答疑<br>不止补数学，更帮你看见未来的路</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 开班信息+费用 -->
+<section class="sec">
+  <div class="container">
+    <h2>开班信息 & 课程费用</h2>
+    <div class="section-line"></div>
+    <div class="info-box">
+      <div class="info-row"><span class="label">开班时间</span><span class="value">2026年7月6日（周一）正式开课</span></div>
+      <div class="info-row"><span class="label">上课时间</span><span class="value">周一至周五  8:30–11:30 / 14:00–17:00</span></div>
+      <div class="info-row"><span class="label">招生对象</span><span class="value">2026年9月入读高一的新生</span></div>
+      <div class="info-row"><span class="label">班级人数</span><span class="value">15人精品小班，招满即止</span></div>
+      <div class="info-row"><span class="label">上课地址</span><span class="value">唐山市 思数培优</span></div>
+      <div class="price-box">
+        <div class="main-price">3,280<span style="font-size:16px;">元/人</span></div>
+        <div class="early">早鸟价 2,580元（6月20日前报名）</div>
+        <div class="group">三人团报 2,280元/人（含教材+练习册）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 详细课程表 -->
+<section class="sec" style="background:#fff;">
+  <div class="container">
+    <h2>4周课程详细安排</h2>
+    <div class="section-line"></div>
+    <div style="overflow-x:auto;">
+    <table class="schedule-table">
+      <thead>
+        <tr><th style="width:7%">日期</th><th style="width:9%">课题</th><th style="width:42%">上午·新课精讲（8:30–11:30）</th><th style="width:42%">下午·练习巩固（14:00–17:00）</th></tr>
+      </thead>
+      <tbody>
+        <tr class="week-title-tr"><td colspan="4" style="color:#0d47a1;">第1周：代数工具回顾（初中衔接·浓缩版）—— 只讲高中真正用到的</td></tr>
+        <tr><td><span class="day-tag badge-blue">周一</span></td><td class="topic" style="color:#1565c0">因式分解</td><td class="am">提公因式法、公式法、十字相乘法、分组分解法</td><td class="pm">限时训练+逐个面批纠错</td></tr>
+        <tr><td><span class="day-tag badge-blue">周二</span></td><td class="topic" style="color:#1565c0">根式与分式</td><td class="am">二次根式化简、分母有理化、分式四则运算</td><td class="pm">根式+分式混合运算强化</td></tr>
+        <tr><td><span class="day-tag badge-blue">周三</span></td><td class="topic" style="color:#1565c0">一元二次方程</td><td class="am">根的判别式Δ及分类讨论；韦达定理（根与系数关系）</td><td class="pm">判别式+韦达定理综合专题</td></tr>
+        <tr><td><span class="day-tag badge-blue">周四</span></td><td class="topic" style="color:#1565c0">二次函数</td><td class="am">图像与性质；闭区间上的最值（三类情形）</td><td class="pm">图像+最值分类训练</td></tr>
+        <tr class="test-row"><td><span class="day-tag badge-blue">周五</span></td><td class="topic" style="color:#1565c0">不等式</td><td class="am">一元二次不等式（图像法）；分式/高次不等式（穿根法）</td><td class="pm" style="color:#e65100;font-weight:700;">周测(一) + 讲评<span class="test-tag">测试</span></td></tr>
+
+        <tr class="week-title-tr"><td colspan="4" style="color:#1b5e20;">第2周：集合与函数概念（高中新课·第一章）</td></tr>
+        <tr><td><span class="day-tag badge-green">周一</span></td><td class="topic" style="color:#2e7d32">集合(一)</td><td class="am">元素、集合、空集；列举法、描述法、常用数集记号</td><td class="pm">集合概念辨析+表示法练习</td></tr>
+        <tr><td><span class="day-tag badge-green">周二</span></td><td class="topic" style="color:#2e7d32">集合(二)</td><td class="am">子集、真子集、相等；∩、∪、补集；Venn图</td><td class="pm">集合交并补运算综合训练</td></tr>
+        <tr><td><span class="day-tag badge-green">周三</span></td><td class="topic" style="color:#2e7d32">函数概念</td><td class="am">映射与函数定义；f(x)符号理解；三种表示法及其互化</td><td class="pm">函数概念辨析+图像绘制</td></tr>
+        <tr><td><span class="day-tag badge-green">周四</span></td><td class="topic" style="color:#2e7d32">定义域</td><td class="am">具体函数定义域(分式/根式型)；复合函数定义域</td><td class="pm">定义域求法专题训练</td></tr>
+        <tr class="test-row"><td><span class="day-tag badge-green">周五</span></td><td class="topic" style="color:#2e7d32">值域</td><td class="am">观察法、配方法、换元法、图像法求值域</td><td class="pm" style="color:#e65100;font-weight:700;">周测(二) + 讲评<span class="test-tag">测试</span></td></tr>
+
+        <tr class="week-title-tr"><td colspan="4" style="color:#b71c1c;">第3周：函数的基本性质（高中新课·核心）</td></tr>
+        <tr><td><span class="day-tag badge-red">周一</span></td><td class="topic" style="color:#c62828">单调性(一)</td><td class="am">增/减函数的严格定义；定义法证明函数单调性</td><td class="pm">定义法证明单调性专项训练</td></tr>
+        <tr><td><span class="day-tag badge-red">周二</span></td><td class="topic" style="color:#c62828">单调性(二)</td><td class="am">单调区间求法；复合函数单调性（同增异减法则）</td><td class="pm">单调区间+复合函数训练</td></tr>
+        <tr><td><span class="day-tag badge-red">周三</span></td><td class="topic" style="color:#c62828">奇偶性</td><td class="am">奇/偶函数的定义与判定；图像对称性</td><td class="pm">奇偶性判定+对称性练习</td></tr>
+        <tr><td><span class="day-tag badge-red">周四</span></td><td class="topic" style="color:#c62828">性质综合</td><td class="am">单调性+奇偶性综合应用；利用性质解不等式</td><td class="pm">函数双性质综合训练</td></tr>
+        <tr class="test-row"><td><span class="day-tag badge-red">周五</span></td><td class="topic" style="color:#c62828">幂函数</td><td class="am">y=xⁿ(n=1,2,3,½,-1)的图像与性质</td><td class="pm" style="color:#e65100;font-weight:700;">阶段测试 + 讲评<span class="test-tag">测试</span></td></tr>
+
+        <tr class="week-title-tr"><td colspan="4" style="color:#e65100;">第4周：初等函数与学法指导（高中新课·收官）</td></tr>
+        <tr><td><span class="day-tag badge-orange">周一</span></td><td class="topic" style="color:#e65100">指数函数</td><td class="am">n次方根与分数指数幂；y=aˣ的图像与性质</td><td class="pm">指数幂运算+指数函数练习</td></tr>
+        <tr><td><span class="day-tag badge-orange">周二</span></td><td class="topic" style="color:#e65100">对数运算</td><td class="am">对数定义、对数恒等式；积/商/幂的运算性质</td><td class="pm">对数运算专项训练</td></tr>
+        <tr><td><span class="day-tag badge-orange">周三</span></td><td class="topic" style="color:#e65100">对数函数</td><td class="am">y=logₐx图像与性质；指对互化</td><td class="pm">对数函数图像与性质训练</td></tr>
+        <tr><td><span class="day-tag badge-orange">周四</span></td><td class="topic" style="color:#e65100">综合+总复习</td><td class="am">指对比较大小；简单指对方程与不等式；四周串讲</td><td class="pm">指对函数+综合训练</td></tr>
+        <tr class="test-row"><td><span class="day-tag badge-orange">周五</span></td><td class="topic" style="color:#e65100">结课</td><td class="am">初高中数学本质区别；学法指导+暑假自学建议</td><td class="pm" style="color:#e65100;font-weight:700;">结课测试(60分钟)+家长汇报<span class="test-tag">测试</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- 报名须知 -->
+<section class="sec">
+  <div class="container">
+    <h2>报名须知</h2>
+    <div class="section-line"></div>
+    <div class="notice-box">
+      <ol>
+        <li><strong>报名时间：</strong>即日起至2026年7月4日，满额即止（15人小班，额满不加位）。</li>
+        <li><strong>授课地址：</strong>唐山市 思数培优（XX中学正对面）。</li>
+        <li><strong>咨询方式：</strong>15033952509（微信同号）| 扫码添加微信，领取免费试听名额。</li>
+        <li><strong>优惠说明：</strong>6月20日前报名享早鸟价2,580元/人；三人及以上团报享2,280元/人。</li>
+        <li><strong>费用包含：</strong>全部40课时教学 + 教材《2026版初升高衔接培优》+ 配套练习册。</li>
+        <li><strong>退费保障：</strong>开课后3天内不满意可全额退费，超出按剩余课时比例退费。</li>
+        <li><strong>师资团队：</strong>由优秀师范生、国奖大学生与准研究生领衔，兼具教学经验与学术实力。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<section class="footer">
+  <h3>名额有限 · 立即扫码咨询</h3>
+  <div class="qr"><img src="qr.png" alt="微信二维码" style="width:120px;height:120px;border-radius:8px;"></div>
+  <p>电话：15033952509 &nbsp;|&nbsp; 微信：1529945197 &nbsp;|&nbsp; 地址：唐山市XX区XX路XX号3楼</p>
+  <p style="margin-top:10px;font-size:11px;color:#7986cb;">© 2026 思数培优 · 由优秀师范生、国奖大学生与准研究生领衔的数学团队</p>
+</section>
+
+<!-- 底部CTA -->
+<div class="cta-bar">
+  <a href="tel:15033952509" class="cta-btn cta-phone">📞 电话咨询</a>
+  <a href="#" class="cta-btn cta-wx">💬 微信咨询</a>
+</div>
+
+</body>
+</html>
