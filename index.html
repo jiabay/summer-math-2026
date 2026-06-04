@@ -31,7 +31,8 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 
 /* Week cards */
 .week-cards { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
-.week-card { border-radius:10px; padding:16px 12px; text-align:center; }
+.week-card { border-radius:10px; padding:16px 12px; text-align:center; cursor:pointer; transition:transform .2s,box-shadow .2s; }
+.week-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
 .week-card .badge { display:inline-block; padding:3px 14px; border-radius:12px; font-size:11px; font-weight:700; color:#fff; margin-bottom:8px; }
 .week-card h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
 .week-card p { font-size:11px; color:#757575; line-height:1.6; }
@@ -169,25 +170,29 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
     <h2>4周课程安排速览</h2>
     <div class="section-line"></div>
     <div class="week-cards">
-      <div class="week-card color-blue">
+      <div class="week-card color-blue" onclick="document.getElementById('schedule-w1').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-blue">第1周</span>
         <h4>初中衔接·代数工具箱</h4>
         <p>因式分解 · 韦达定理<br>二次函数 · 不等式<br>只讲高中真正用到的</p>
+        <span style="font-size:11px;color:#1565c0;">点击查看课表 →</span>
       </div>
-      <div class="week-card color-green">
+      <div class="week-card color-green" onclick="document.getElementById('schedule-w2').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-green">第2周</span>
         <h4>集合与函数概念</h4>
         <p>集合运算 · 函数定义<br>定义域 · 值域<br>高中数学第一章</p>
+        <span style="font-size:11px;color:#2e7d32;">点击查看课表 →</span>
       </div>
-      <div class="week-card color-red">
+      <div class="week-card color-red" onclick="document.getElementById('schedule-w3').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-red">第3周</span>
         <h4>函数的基本性质</h4>
         <p>单调性 · 奇偶性<br>幂函数入门<br>函数核心两大性质</p>
+        <span style="font-size:11px;color:#c62828;">点击查看课表 →</span>
       </div>
-      <div class="week-card color-orange">
+      <div class="week-card color-orange" onclick="document.getElementById('schedule-w4').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-orange">第4周</span>
         <h4>初等函数与学法指导</h4>
         <p>指数·对数函数<br>结课测试 · 家长汇报<br>高中数学学习方法</p>
+        <span style="font-size:11px;color:#e65100;">点击查看课表 →</span>
       </div>
     </div>
   </div>
@@ -267,28 +272,28 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
         <tr><th style="width:7%">日期</th><th style="width:9%">课题</th><th style="width:42%">上午·新课精讲（8:30–11:30）</th><th style="width:42%">下午·练习巩固（14:00–17:00）</th></tr>
       </thead>
       <tbody>
-        <tr class="week-title-tr"><td colspan="4" style="color:#0d47a1;">第1周：代数工具回顾（初中衔接·浓缩版）—— 只讲高中真正用到的</td></tr>
+        <tr class="week-title-tr" id="schedule-w1"><td colspan="4" style="color:#0d47a1;">第1周：代数工具回顾（初中衔接·浓缩版）—— 只讲高中真正用到的</td></tr>
         <tr><td><span class="day-tag badge-blue">周一</span></td><td class="topic" style="color:#1565c0">因式分解</td><td class="am">提公因式法、公式法、十字相乘法、分组分解法</td><td class="pm">限时训练+逐个面批纠错</td></tr>
         <tr><td><span class="day-tag badge-blue">周二</span></td><td class="topic" style="color:#1565c0">根式与分式</td><td class="am">二次根式化简、分母有理化、分式四则运算</td><td class="pm">根式+分式混合运算强化</td></tr>
         <tr><td><span class="day-tag badge-blue">周三</span></td><td class="topic" style="color:#1565c0">一元二次方程</td><td class="am">根的判别式Δ及分类讨论；韦达定理（根与系数关系）</td><td class="pm">判别式+韦达定理综合专题</td></tr>
         <tr><td><span class="day-tag badge-blue">周四</span></td><td class="topic" style="color:#1565c0">二次函数</td><td class="am">图像与性质；闭区间上的最值（三类情形）</td><td class="pm">图像+最值分类训练</td></tr>
         <tr class="test-row"><td><span class="day-tag badge-blue">周五</span></td><td class="topic" style="color:#1565c0">不等式</td><td class="am">一元二次不等式（图像法）；分式/高次不等式（穿根法）</td><td class="pm" style="color:#e65100;font-weight:700;">周测(一) + 讲评<span class="test-tag">测试</span></td></tr>
 
-        <tr class="week-title-tr"><td colspan="4" style="color:#1b5e20;">第2周：集合与函数概念（高中新课·第一章）</td></tr>
+        <tr class="week-title-tr" id="schedule-w2"><td colspan="4" style="color:#1b5e20;">第2周：集合与函数概念（高中新课·第一章）</td></tr>
         <tr><td><span class="day-tag badge-green">周一</span></td><td class="topic" style="color:#2e7d32">集合(一)</td><td class="am">元素、集合、空集；列举法、描述法、常用数集记号</td><td class="pm">集合概念辨析+表示法练习</td></tr>
         <tr><td><span class="day-tag badge-green">周二</span></td><td class="topic" style="color:#2e7d32">集合(二)</td><td class="am">子集、真子集、相等；∩、∪、补集；Venn图</td><td class="pm">集合交并补运算综合训练</td></tr>
         <tr><td><span class="day-tag badge-green">周三</span></td><td class="topic" style="color:#2e7d32">函数概念</td><td class="am">映射与函数定义；f(x)符号理解；三种表示法及其互化</td><td class="pm">函数概念辨析+图像绘制</td></tr>
         <tr><td><span class="day-tag badge-green">周四</span></td><td class="topic" style="color:#2e7d32">定义域</td><td class="am">具体函数定义域(分式/根式型)；复合函数定义域</td><td class="pm">定义域求法专题训练</td></tr>
         <tr class="test-row"><td><span class="day-tag badge-green">周五</span></td><td class="topic" style="color:#2e7d32">值域</td><td class="am">观察法、配方法、换元法、图像法求值域</td><td class="pm" style="color:#e65100;font-weight:700;">周测(二) + 讲评<span class="test-tag">测试</span></td></tr>
 
-        <tr class="week-title-tr"><td colspan="4" style="color:#b71c1c;">第3周：函数的基本性质（高中新课·核心）</td></tr>
+        <tr class="week-title-tr" id="schedule-w3"><td colspan="4" style="color:#b71c1c;">第3周：函数的基本性质（高中新课·核心）</td></tr>
         <tr><td><span class="day-tag badge-red">周一</span></td><td class="topic" style="color:#c62828">单调性(一)</td><td class="am">增/减函数的严格定义；定义法证明函数单调性</td><td class="pm">定义法证明单调性专项训练</td></tr>
         <tr><td><span class="day-tag badge-red">周二</span></td><td class="topic" style="color:#c62828">单调性(二)</td><td class="am">单调区间求法；复合函数单调性（同增异减法则）</td><td class="pm">单调区间+复合函数训练</td></tr>
         <tr><td><span class="day-tag badge-red">周三</span></td><td class="topic" style="color:#c62828">奇偶性</td><td class="am">奇/偶函数的定义与判定；图像对称性</td><td class="pm">奇偶性判定+对称性练习</td></tr>
         <tr><td><span class="day-tag badge-red">周四</span></td><td class="topic" style="color:#c62828">性质综合</td><td class="am">单调性+奇偶性综合应用；利用性质解不等式</td><td class="pm">函数双性质综合训练</td></tr>
         <tr class="test-row"><td><span class="day-tag badge-red">周五</span></td><td class="topic" style="color:#c62828">幂函数</td><td class="am">y=xⁿ(n=1,2,3,½,-1)的图像与性质</td><td class="pm" style="color:#e65100;font-weight:700;">阶段测试 + 讲评<span class="test-tag">测试</span></td></tr>
 
-        <tr class="week-title-tr"><td colspan="4" style="color:#e65100;">第4周：初等函数与学法指导（高中新课·收官）</td></tr>
+        <tr class="week-title-tr" id="schedule-w4"><td colspan="4" style="color:#e65100;">第4周：初等函数与学法指导（高中新课·收官）</td></tr>
         <tr><td><span class="day-tag badge-orange">周一</span></td><td class="topic" style="color:#e65100">指数函数</td><td class="am">n次方根与分数指数幂；y=aˣ的图像与性质</td><td class="pm">指数幂运算+指数函数练习</td></tr>
         <tr><td><span class="day-tag badge-orange">周二</span></td><td class="topic" style="color:#e65100">对数运算</td><td class="am">对数定义、对数恒等式；积/商/幂的运算性质</td><td class="pm">对数运算专项训练</td></tr>
         <tr><td><span class="day-tag badge-orange">周三</span></td><td class="topic" style="color:#e65100">对数函数</td><td class="am">y=logₐx图像与性质；指对互化</td><td class="pm">对数函数图像与性质训练</td></tr>

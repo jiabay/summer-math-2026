@@ -1251,23 +1251,37 @@ function getDailyQuestion() {
 
 function initDaily() {
   const daily = getDailyQuestion();
-  const card = document.getElementById('dailyCard');
-  if (!card) return;
-  card.style.display = 'block';
   const q = daily.q;
-  document.getElementById('dailyQ').textContent = q.q;
-  document.getElementById('dailyAnswer').innerHTML = `
-    <div class="da-correct">✅ 正确答案：${q.opts[q.ans]}</div>
-    <div class="da-exp">💡 ${q.exp}</div>
-    <div style="margin-top:8px;">
-      ${q.opts.map((o,i) => `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`).join('')}
+  const container = document.querySelector('.container');
+  if (!container) return;
+  // Remove existing daily card if any
+  const old = document.getElementById('dailyCard');
+  if (old) old.remove();
+
+  const card = document.createElement('div');
+  card.className = 'daily-card';
+  card.id = 'dailyCard';
+  card.onclick = showDailyAnswer;
+  card.innerHTML = `
+    <div class="dc-badge">📅 每日一题</div>
+    <div class="dc-q" id="dailyQ">${q.q}</div>
+    <div class="dc-hint">点击查看答案 →</div>
+    <div class="daily-answer" id="dailyAnswer">
+      <div class="da-correct">✅ 正确答案：${q.opts[q.ans]}</div>
+      <div class="da-exp">💡 ${q.exp}</div>
+      <div style="margin-top:8px;">
+        ${q.opts.map((o,i) => `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`).join('')}
+      </div>
     </div>`;
-  renderKaTeXIn(document.getElementById('dailyAnswer'));
+  container.insertBefore(card, container.firstChild);
+  renderKaTeXIn(card);
 }
 
 function showDailyAnswer() {
-  const ans = document.getElementById('dailyAnswer');
-  ans.classList.toggle('show');
+  const card = document.getElementById('dailyCard');
+  if (!card) return;
+  const ans = card.querySelector('.daily-answer');
+  if (ans) ans.classList.toggle('show');
 }
 
 // ==================== HOOK into existing functions ====================
@@ -1307,14 +1321,6 @@ showAchievements();
 updateErrBadge();
 initDaily();
 </script>
-<!-- 每日一题 -->
-<div class="daily-card" id="dailyCard" onclick="showDailyAnswer()" style="display:none;">
-  <div class="dc-badge">📅 每日一题</div>
-  <div class="dc-q" id="dailyQ"></div>
-  <div class="dc-hint">点击查看答案 →</div>
-  <div class="daily-answer" id="dailyAnswer"></div>
-</div>
-
 <!-- 错题本浮动按钮 -->
 <button class="err-fab" id="errFab" onclick="toggleErrPanel()" title="错题本">
   📔<span class="badge" id="errBadge">0</span>
