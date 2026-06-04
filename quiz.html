@@ -1,24 +1,4 @@
-,
-  { id:134, stage:'初中', chapter:'有理数', topic:'正负数', diff:1, q:'下列是负数的是？', opts:['0','-3','2','0.5'], ans:1, exp:'-3是负数。' },
-  { id:135, stage:'初中', chapter:'有理数', topic:'绝对值', diff:1, q:'|-5|=？', opts:['-5','5','0','±5'], ans:1, exp:'绝对值是非负数。' },
-  { id:136, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:1, q:'(-2)+(-7)=？', opts:['-9','9','-5','5'], ans:0, exp:'同号相加=-(2+7)=-9。' },
-  { id:137, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:2, q:'6÷(-3)×2=？', opts:['-4','-1','1','4'], ans:0, exp:'乘除同级从左到右。' },
-  { id:138, stage:'初中', chapter:'整式', topic:'合并同类项', diff:1, q:'合并：2x²+3x+5x²-x=？', opts:['7x²+2x','10x²','7x²+4x','5x²+2x'], ans:0, exp:'2x²+5x²=7x²，3x-x=2x。' },
-  { id:139, stage:'初中', chapter:'整式', topic:'去括号', diff:2, q:'化简：2(a-b)-3(a+b)=？', opts:['-a-5b','-a+b','5a-b','a-5b'], ans:0, exp:'2a-2b-3a-3b=-a-5b。' },
-  { id:140, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:1, q:'解方程：2x+3=11', opts:['x=3','x=4','x=5','x=2'], ans:1, exp:'2x+3=11→2x=8→x=4。' },
-  { id:141, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:2, q:'3(x-2)+1=2x+4的解是？', opts:['x=9','x=7','x=5','x=3'], ans:0, exp:'3x-6+1=2x+4→x=9。' },
-  { id:142, stage:'初中', chapter:'一元一次方程', topic:'应用题', diff:2, q:'买3支笔和2个笔记本花16元，笔2元/支，笔记本？元', opts:['4元','5元','6元','3元'], ans:1, exp:'3×2+2x=16→x=5。' },
-  { id:143, stage:'初中', chapter:'二元一次方程组', topic:'代入消元', diff:2, q:'x+y=5, 2x-y=1的解？', opts:['x=2,y=3','x=3,y=2','x=1,y=4','x=4,y=1'], ans:0, exp:'相加消y→x=2,y=3。' },
-  { id:144, stage:'初中', chapter:'平面直角坐标系', topic:'象限', diff:1, q:'点P(-2,3)在第几象限？', opts:['一','二','三','四'], ans:1, exp:'x负y正→第二象限。' },
-  { id:145, stage:'初中', chapter:'三角形', topic:'内角和', diff:1, q:'三角形内角和=？', opts:['90°','180°','360°','270°'], ans:1, exp:'三角形内角和=180°。' },
-  { id:146, stage:'初中', chapter:'三角形', topic:'勾股定理', diff:2, q:'直角边3和4，斜边=？', opts:['5','6','7','8'], ans:0, exp:'3²+4²=25→√25=5。' },
-  { id:147, stage:'初中', chapter:'全等三角形', topic:'判定', diff:2, q:'不能判定全等的是？', opts:['SSS','SAS','AAA','ASA'], ans:2, exp:'AAA只能判定相似。' },
-  { id:148, stage:'初中', chapter:'实数', topic:'平方根', diff:1, q:'√16=？', opts:['4','±4','2','-4'], ans:0, exp:'算术平方根取正数。' },
-  { id:149, stage:'初中', chapter:'数据的分析', topic:'中位数', diff:1, q:'1,2,3,4,5的中位数？', opts:['3','2','4','2.5'], ans:0, exp:'5个数中间是第3个=3。' },
-  { id:150, stage:'高中', chapter:'集合', topic:'集合运算', diff:1, q:'若A={1,2,3},B={2,3,4}，则A∩B=？', opts:['{2,3}','{1,2,3,4}','{1,4}','∅'], ans:0, exp:'交集取公共元素{2,3}。' },
-  { id:151, stage:'高中', chapter:'函数的概念', topic:'定义域', diff:1, q:'函数f(x)=√(x-1)的定义域是？', opts:['x≥1','x>1','x≤1','全体实数'], ans:0, exp:'根号内≥0→x-1≥0→x≥1。' },
-  { id:152, stage:'高中', chapter:'函数的性质', topic:'单调性', diff:2, q:'f(x)=x²在(-∞,0)上的单调性是？', opts:['单调递增','单调递减','先增后减','常数'], ans:1, exp:'开口向上，x<0时递减。' },
-  { id:153, stage:'高中', chapter:'三角函数', topic:'诱导公式', diff:1, q:'sin(90°)=？', opts:['0','1','-1','1/2'], ans:1, exp:'sin90°=1。' }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -492,6 +472,27 @@ const QUESTION_BANK = [
   { id:131, stage:'高中', chapter:'三角恒等变换', topic:'二倍角公式', diff:2, q:'\\(\\sin 2\\alpha=2\\sin\\alpha\\cos\\alpha\\)。若sinα=4/5, cosα=3/5，则sin2α=？', opts:['\\(\\frac{24}{25}\\)','\\(\\frac{12}{25}\\)','\\(\\frac{7}{25}\\)','\\(\\frac{8}{25}\\)'], ans:0, exp:'sin2α=2×(4/5)×(3/5)=24/25。' },
   { id:132, stage:'高中', chapter:'三角恒等变换', topic:'凑角问题', diff:3, q:'已知\\(\\sin(\\alpha+\\beta)=\\frac{3}{5}\\)，\\(\\sin(\\alpha-\\beta)=\\frac{1}{5}\\)，则\\(\\frac{\\tan\\alpha}{\\tan\\beta}=\\)？', opts:['2','\\(\\frac{1}{2}\\)','4','\\(\\frac{3}{5}\\)'], ans:0, exp:'两式分别展开后相加得2sinαcosβ=4/5→sinαcosβ=2/5；相减得2cosαsinβ=2/5→cosαsinβ=1/5。tanα/tanβ=(sinαcosβ)/(cosαsinβ)=2。' },
   { id:133, stage:'高中', chapter:'三角恒等变换', topic:'辅助角公式', diff:3, q:'\\(\\sqrt{3}\\sin x+\\cos x\\)可化为？', opts:['\\(2\\sin(x+\\frac{\\pi}{6})\\)','\\(2\\sin(x+\\frac{\\pi}{3})\\)','\\(\\sqrt{2}\\sin(x+\\frac{\\pi}{4})\\)','\\(2\\cos(x-\\frac{\\pi}{3})\\)'], ans:0, exp:'\\(\\sqrt{3}\\sin x+\\cos x=\\sqrt{(\\sqrt{3})^2+1^2}\\sin(x+\\varphi)=\\sqrt{4}\\sin(x+\\frac{\\pi}{6})=2\\sin(x+\\frac{\\pi}{6})\\)。其中tanφ=1/√3→φ=π/6。' }
+,
+  { id:134, stage:'初中', chapter:'有理数', topic:'正负数', diff:1, q:'下列是负数的是？', opts:['0','-3','2','0.5'], ans:1, exp:'-3是负数。' },
+  { id:135, stage:'初中', chapter:'有理数', topic:'绝对值', diff:1, q:'|-5|=？', opts:['-5','5','0','±5'], ans:1, exp:'绝对值是非负数。' },
+  { id:136, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:1, q:'(-2)+(-7)=？', opts:['-9','9','-5','5'], ans:0, exp:'同号相加=-(2+7)=-9。' },
+  { id:137, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:2, q:'6÷(-3)×2=？', opts:['-4','-1','1','4'], ans:0, exp:'乘除同级从左到右。' },
+  { id:138, stage:'初中', chapter:'整式', topic:'合并同类项', diff:1, q:'合并：2x²+3x+5x²-x=？', opts:['7x²+2x','10x²','7x²+4x','5x²+2x'], ans:0, exp:'2x²+5x²=7x²，3x-x=2x。' },
+  { id:139, stage:'初中', chapter:'整式', topic:'去括号', diff:2, q:'化简：2(a-b)-3(a+b)=？', opts:['-a-5b','-a+b','5a-b','a-5b'], ans:0, exp:'2a-2b-3a-3b=-a-5b。' },
+  { id:140, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:1, q:'解方程：2x+3=11', opts:['x=3','x=4','x=5','x=2'], ans:1, exp:'2x+3=11→2x=8→x=4。' },
+  { id:141, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:2, q:'3(x-2)+1=2x+4的解是？', opts:['x=9','x=7','x=5','x=3'], ans:0, exp:'3x-6+1=2x+4→x=9。' },
+  { id:142, stage:'初中', chapter:'一元一次方程', topic:'应用题', diff:2, q:'买3支笔和2个笔记本花16元，笔2元/支，笔记本？元', opts:['4元','5元','6元','3元'], ans:1, exp:'3×2+2x=16→x=5。' },
+  { id:143, stage:'初中', chapter:'二元一次方程组', topic:'代入消元', diff:2, q:'x+y=5, 2x-y=1的解？', opts:['x=2,y=3','x=3,y=2','x=1,y=4','x=4,y=1'], ans:0, exp:'相加消y→x=2,y=3。' },
+  { id:144, stage:'初中', chapter:'平面直角坐标系', topic:'象限', diff:1, q:'点P(-2,3)在第几象限？', opts:['一','二','三','四'], ans:1, exp:'x负y正→第二象限。' },
+  { id:145, stage:'初中', chapter:'三角形', topic:'内角和', diff:1, q:'三角形内角和=？', opts:['90°','180°','360°','270°'], ans:1, exp:'三角形内角和=180°。' },
+  { id:146, stage:'初中', chapter:'三角形', topic:'勾股定理', diff:2, q:'直角边3和4，斜边=？', opts:['5','6','7','8'], ans:0, exp:'3²+4²=25→√25=5。' },
+  { id:147, stage:'初中', chapter:'全等三角形', topic:'判定', diff:2, q:'不能判定全等的是？', opts:['SSS','SAS','AAA','ASA'], ans:2, exp:'AAA只能判定相似。' },
+  { id:148, stage:'初中', chapter:'实数', topic:'平方根', diff:1, q:'√16=？', opts:['4','±4','2','-4'], ans:0, exp:'算术平方根取正数。' },
+  { id:149, stage:'初中', chapter:'数据的分析', topic:'中位数', diff:1, q:'1,2,3,4,5的中位数？', opts:['3','2','4','2.5'], ans:0, exp:'5个数中间是第3个=3。' },
+  { id:150, stage:'高中', chapter:'集合', topic:'集合运算', diff:1, q:'若A={1,2,3},B={2,3,4}，则A∩B=？', opts:['{2,3}','{1,2,3,4}','{1,4}','∅'], ans:0, exp:'交集取公共元素{2,3}。' },
+  { id:151, stage:'高中', chapter:'函数的概念', topic:'定义域', diff:1, q:'函数f(x)=√(x-1)的定义域是？', opts:['x≥1','x>1','x≤1','全体实数'], ans:0, exp:'根号内≥0→x-1≥0→x≥1。' },
+  { id:152, stage:'高中', chapter:'函数的性质', topic:'单调性', diff:2, q:'f(x)=x²在(-∞,0)上的单调性是？', opts:['单调递增','单调递减','先增后减','常数'], ans:1, exp:'开口向上，x<0时递减。' },
+  { id:153, stage:'高中', chapter:'三角函数', topic:'诱导公式', diff:1, q:'sin(90°)=？', opts:['0','1','-1','1/2'], ans:1, exp:'sin90°=1。' }
 ];
 
 // ==================== ACHIEVEMENT SYSTEM ====================
