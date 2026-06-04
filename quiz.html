@@ -1046,12 +1046,12 @@ function renderHistory() {
 // ==================== KATEX ====================
 function renderKaTeXIn(el) {
   if (typeof renderMathInElement !== 'undefined') {
-    renderMathInElement(el, { throwOnError: false });
+    renderMathInElement(el, {delimiters:[{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});
   } else {
     // CDN加载失败时，稍后重试
     setTimeout(function() {
       if (typeof renderMathInElement !== 'undefined') {
-        renderMathInElement(el, { throwOnError: false });
+        renderMathInElement(el, {delimiters:[{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});
       }
     }, 2000);
   }

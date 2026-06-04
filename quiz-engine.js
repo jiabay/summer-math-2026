@@ -93,7 +93,7 @@ function renderQuestion(){
     <button class="btn btn-primary" id="btnNext" onclick="window._nextQ()" style="display:none;">
     ${currentIndex<currentQuiz.length-1?'下一题 →':'查看成绩 🎯'}</button></div></div>`;
   document.getElementById('questionArea').innerHTML=html;
-  setTimeout(()=>{if(typeof renderMathInElement!=='undefined')renderMathInElement(document.getElementById('questionArea'),{throwOnError:false});},100);
+  setTimeout(()=>{if(typeof renderMathInElement!=='undefined')renderMathInElement(document.getElementById('questionArea'),{delimiters:[{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});},100);
 }
 
 // ===== ANSWER =====
