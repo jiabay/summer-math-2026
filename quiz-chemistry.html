@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化学刷题 · 思数培优</title>
+<link rel="stylesheet" href="quiz-shared.css">
+<script>
+(function(){
+var CDNS=['https://unpkg.com/katex@0.16.9/dist','https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9','https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/KaTeX/0.16.9'];
+var cssEl=document.createElement('link');cssEl.rel='stylesheet';document.head.appendChild(cssEl);
+function tryCDN(idx){if(idx>=CDNS.length){console.warn('KaTeX load failed');return;}
+var base=CDNS[idx];cssEl.href=base+'/katex.min.css';var script=document.createElement('script');
+script.src=base+'/katex.min.js';script.onload=function(){var auto=document.createElement('script');
+auto.src=base+'/contrib/auto-render.min.js';auto.onerror=function(){tryCDN(idx+1);};document.head.appendChild(auto);};
+script.onerror=function(){tryCDN(idx+1);};document.head.appendChild(script);}tryCDN(0);})();
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo">思<span>数</span>培优</a>
+    <div>
+      <a href="index.html">🏠 首页</a>
+      <a href="subjects.html">📝 刷题</a>
+      <a href="quiz-chemistry.html" class="active">🧪 化学</a>
+    </div>
+  </div>
+</nav>
+
+<section class="quiz-header">
+  <div class="container">
+    <h1>🧪 高中<span class="subj-name">化学</span>刷题练习</h1>
+    <div class="sub">覆盖高中化学必修核心知识点 · 按章节筛选</div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="controls" id="controls">
+    <div class="row"><label>🎓 学段：</label><div class="topic-tags" id="stageTags"></div></div>
+    <div class="row"><label>📂 章节：</label><div class="topic-tags" id="topicTags"></div></div>
+    <div class="row" style="justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <label>🔢 题量：</label>
+        <select id="countSelect"><option value="10">10题</option><option value="20" selected>20题</option><option value="30">30题</option><option value="0">全部</option></select>
+        <label>📏 难度：</label>
+        <select id="diffSelect" onchange="updateAvail()"><option value="all" selected>全部</option><option value="1">⭐ 基础</option><option value="2">⭐⭐ 进阶</option><option value="3">⭐⭐⭐ 挑战</option></select>
+      </div>
+      <span style="font-size:13px;color:#757575;">可用：<strong id="availCount">0</strong> 题</span>
+    </div>
+    <button class="btn btn-primary" onclick="startQuiz()" style="width:100%;justify-content:center;margin-top:12px;font-size:16px;padding:14px;">🚀 开始刷题</button>
+  </div>
+
+  <div class="stats-bar" id="statsBar" style="display:none;">
+    <div class="stat-card"><div class="num" id="scoreDisp">✅ 0</div><div class="label">正确</div></div>
+    <div class="stat-card"><div class="num" id="progDisp">📋 0/0</div><div class="label">进度</div></div>
+    <div class="stat-card"><div class="num" id="accDisp">📊 0%</div><div class="label">正确率</div></div>
+    <div class="stat-card"><div class="num" id="timerDisp">⏱ 00:00</div><div class="label">计时</div></div>
+  </div>
+
+  <div class="question-area" id="questionArea"></div>
+  <div id="resultArea"></div>
+
+  <div class="history-section" id="historySection">
+    <h3>📜 刷题记录</h3>
+    <div id="historyList"></div>
+    <div id="clearHistoryWrap" style="text-align:right;margin-top:8px;display:none;">
+      <button class="btn btn-outline btn-sm" onclick="localStorage.removeItem('sishu_quiz_history');renderHistory();">清空记录</button>
+    </div>
+  </div>
+</div>
+
+<button class="photo-fab" onclick="_openCamera()" title="拍照提问">📸</button>
+<button class="err-fab" id="errFab" onclick="_toggleErr()">📔<span class="badge" id="errBadge">0</span></button>
+
+<div class="err-panel" id="errPanel">
+  <div class="ep-header"><h3>📔 错题本</h3><button class="ep-close" onclick="_toggleErr()">✕</button></div>
+  <div class="ep-body" id="errBody"></div>
+  <div class="ep-footer">
+    <button style="background:#c62828;color:#fff;" onclick="_exportErr()">📋 复制错题</button>
+    <button style="background:#f5f5f5;color:#757575;" onclick="_clearErr()">🗑 清空</button>
+  </div>
+</div>
+<div id="errOverlay" onclick="_toggleErr()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.3);z-index:999;"></div>
+
+<div class="poster-overlay" id="posterOverlay">
+  <div class="poster-card">
+    <canvas id="posterCanvas" width="360" height="520"></canvas>
+    <div class="poster-actions">
+      <button style="background:#f5f5f5;color:#757575;" onclick="_closePoster()">关闭</button>
+      <button style="background:#6a1b9a;color:#fff;" onclick="_savePoster()">💾 保存图片</button>
+    </div>
+  </div>
+</div>
+
+<div class="photo-modal" id="photoModal">
+  <div class="pm-card">
+    <img id="photoPreview" src="" alt="题目照片">
+    <div class="pm-body">
+      <h3>📸 拍照提问</h3>
+      <p style="font-size:13px;color:#757575;">拍下你不会的题，老师会尽快回复</p>
+      <textarea id="photoDesc" placeholder="补充说明（可选）：这道题哪里不会..."></textarea>
+      <div class="pm-actions">
+        <button style="flex:1;padding:12px;border:none;border-radius:8px;background:#f5f5f5;font-size:14px;cursor:pointer;" onclick="_closePhoto()">取消</button>
+        <button style="flex:1;padding:12px;border:none;border-radius:8px;background:#6a1b9a;color:#fff;font-size:14px;cursor:pointer;" onclick="_submitPhoto()">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none;" onchange="_handlePhoto(event)">
+
+<script src="questions-chemistry.js"></script>
+<script src="quiz-engine.js"></script>
+</body>
+</html>

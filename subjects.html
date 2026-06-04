@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高中数理化刷题 · 思数培优</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Microsoft YaHei','微软雅黑',sans-serif;background:#f5f5f5;color:#212121;line-height:1.7;}
+
+.nav{background:#1a237e;padding:12px 0;position:sticky;top:0;z-index:99;}
+.nav .container{max-width:900px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;}
+.nav .logo{color:#fff;font-weight:900;font-size:18px;text-decoration:none;}
+.nav .logo span{color:#ffd54f;}
+.nav a{color:#bbdefb;text-decoration:none;font-size:14px;margin-left:16px;}
+
+.hero{background:linear-gradient(135deg,#1a237e,#283593);color:#fff;padding:60px 16px 50px;text-align:center;}
+.hero h1{font-size:32px;font-weight:900;margin-bottom:8px;}
+.hero p{font-size:16px;color:#90caf9;}
+
+.container{max-width:900px;margin:0 auto;padding:0 16px;}
+
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0;}
+
+.subj-card{display:block;background:#fff;border-radius:16px;padding:36px 24px;text-align:center;text-decoration:none;color:#212121;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;}
+.subj-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.12);}
+.subj-card .sc-icon{font-size:56px;display:block;margin-bottom:12px;}
+.subj-card .sc-name{font-size:24px;font-weight:900;display:block;}
+.subj-card .sc-count{font-size:13px;color:#757575;margin-top:6px;}
+.subj-card.math{border-top:4px solid #1a237e;}
+.subj-card.physics{border-top:4px solid #00695c;}
+.subj-card.chemistry{border-top:4px solid #6a1b9a;}
+
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0;}
+.feat-card{background:#fff;border-radius:12px;padding:20px 16px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,.04);}
+.feat-card .fi{font-size:32px;margin-bottom:8px;}
+.feat-card .fl{font-size:13px;font-weight:700;color:#1a237e;}
+
+.cta{text-align:center;padding:40px 0 60px;}
+.cta p{color:#757575;margin-bottom:8px;}
+
+@media(max-width:768px){.subjects{grid-template-columns:1fr;}.feat{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo">思<span>数</span>培优</a>
+    <div>
+      <a href="index.html">🏠 首页</a>
+      <a href="subjects.html" style="color:#ffd54f;font-weight:700;">📝 刷题</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>🗂️ 高中数理化在线刷题</h1>
+  <p>数学 · 物理 · 化学 — 选择科目开始练习</p>
+</section>
+
+<div class="container">
+
+  <div class="subjects">
+    <a href="quiz.html" class="subj-card math">
+      <span class="sc-icon">📐</span>
+      <span class="sc-name">数学</span>
+      <span class="sc-count">153题 · 10个章节 · 初高中衔接+必修一</span>
+    </a>
+    <a href="quiz-physics.html" class="subj-card physics">
+      <span class="sc-icon">⚛️</span>
+      <span class="sc-name">物理</span>
+      <span class="sc-count">10题 · 5个章节 · 必修一（持续更新中）</span>
+    </a>
+    <a href="quiz-chemistry.html" class="subj-card chemistry">
+      <span class="sc-icon">🧪</span>
+      <span class="sc-name">化学</span>
+      <span class="sc-count">10题 · 5个章节 · 必修一（持续更新中）</span>
+    </a>
+  </div>
+
+  <div class="feat">
+    <div class="feat-card"><div class="fi">🎯</div><div class="fl">分章节练习</div></div>
+    <div class="feat-card"><div class="fi">📊</div><div class="fl">即时判分</div></div>
+    <div class="feat-card"><div class="fi">📔</div><div class="fl">自动错题本</div></div>
+    <div class="feat-card"><div class="fi">📸</div><div class="fl">拍照提问</div></div>
+  </div>
+
+  <div class="cta">
+    <p>题库持续更新中，题目覆盖高中必修全章节</p>
+    <p style="font-size:13px;">📅 每日一题 · 🏆 成就系统 · 📊 成绩海报</p>
+  </div>
+
+</div>
+</body>
+</html>
