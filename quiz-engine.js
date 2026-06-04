@@ -287,6 +287,26 @@ window._showPoster=function(score,total,pct){
 window._closePoster=function(){document.getElementById('posterOverlay').classList.remove('show');};
 window._savePoster=function(){const c=document.getElementById('posterCanvas');const a=document.createElement('a');a.download='思数培优-'+SUBJECT+'刷题.png';a.href=c.toDataURL('image/png');a.click();};
 
+// ===== LATEX CLEANER =====
+function cleanLatex(s){
+  if(!s)return'';
+  s=s.replace(/\\[\(\)]/g,'').replace(/\\[\[\]]/g,'').replace(/\$/g,'');
+  const map={'\\\\alpha':'α','\\\\beta':'β','\\\\gamma':'γ','\\\\delta':'δ','\\\\theta':'θ','\\\\pi':'π','\\\\sigma':'σ','\\\\omega':'ω',
+    '\\\\pm':'±','\\\\times':'×','\\\\div':'÷','\\\\cdot':'·','\\\\leq':'≤','\\\\geq':'≥','\\\\neq':'≠','\\\\approx':'≈',
+    '\\\\infty':'∞','\\\\sqrt':'√','\\\\frac':'/','\\\\to':'→','\\\\Rightarrow':'⇒','\\\\forall':'∀','\\\\exists':'∃',
+    '\\\\in':'∈','\\\\notin':'∉','\\\\subset':'⊂','\\\\subseteq':'⊆','\\\\cup':'∪','\\\\cap':'∩',
+    '\\\\mathbb{R}':'ℝ','\\\\mathbb{N}':'ℕ','\\\\mathbb{Z}':'ℤ',
+    '\\\\sin':'sin','\\\\cos':'cos','\\\\tan':'tan','\\\\log':'log','\\\\ln':'ln','\\\\lg':'lg',
+    '\\\\degree':'°','\\\\circ':'°','\\\\partial':'∂','\\\\int':'∫','\\\\sum':'Σ','\\\\prod':'Π',
+    '\\\\rightarrow':'→','\\\\leftarrow':'←','\\\\angle':'∠','\\\\triangle':'△',
+    '\\\\text':'','\\\\mathrm':'','\\\\displaystyle':'','\\\\limits':'','\\\\left':'','\\\\right':'',
+    '\\\\big':'','\\\\Big':'','\\\\quad':' ','\\\\qquad':' ','\\\\;':' ','\\\\:':' ','\\\\,':'',
+    '\\\\{':'{','\\\\}':'}','\\{':'{','\\}':'}','\\\\_':'_','\\\\^':'^','\\\\ ':' '};
+  Object.keys(map).sort((a,b)=>b.length-a.length).forEach(k=>{s=s.split(k).join(map[k]);});
+  s=s.replace(/\\[a-zA-Z]+/g,'');
+  return s;
+}
+
 // ===== DAILY =====
 function getDailyQ(){
   const today=new Date().toISOString().slice(0,10);
@@ -303,11 +323,11 @@ function initDaily(){
   const old=document.getElementById('dailyCard');if(old)old.remove();
   const card=document.createElement('div');card.className='daily-card';card.id='dailyCard';
   card.onclick=()=>{const a=card.querySelector('.daily-answer');a&&a.classList.toggle('show');};
-  card.innerHTML=`<div class="dc-badge">📅 每日一题 · ${SUBJECT}</div><div class="dc-q" id="dailyQ">${q.q}</div><div class="dc-hint">点击查看答案 →</div>
-    <div class="daily-answer" id="dailyAnswer"><div class="da-correct">✅ 正确答案：${q.opts[q.ans]}</div><div class="da-exp">💡 ${q.exp}</div>
-    <div style="margin-top:8px;">${q.opts.map((o,i)=>`<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${LETTERS[i]}. ${o}</div>`).join('')}</div></div>`;
+  const cq=cleanLatex(q.q), co=q.opts.map(o=>cleanLatex(o)), ce=cleanLatex(q.exp);
+  card.innerHTML=`<div class="dc-badge">📅 每日一题 · ${SUBJECT}</div><div class="dc-q">${cq}</div><div class="dc-hint">点击查看答案 →</div>
+    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div>
+    <div style="margin-top:8px;">${co.map((o,i)=>`<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${LETTERS[i]}. ${o}</div>`).join('')}</div></div>`;
   container.insertBefore(card,container.firstChild);
-  setTimeout(()=>{if(typeof renderMathInElement!=='undefined')renderMathInElement(card,{throwOnError:false});},200);
 }
 
 // ===== PHOTO UPLOAD =====

@@ -1249,32 +1249,31 @@ function getDailyQuestion() {
   return saved;
 }
 
+function cleanDailylLatex(s){
+  if(!s)return'';
+  s=s.replace(/\\\\[\(\)]/g,'').replace(/\\\\[\[\]]/g,'').replace(/\$/g,'');
+  var map={'\\\\alpha':'α','\\\\beta':'β','\\\\gamma':'γ','\\\\theta':'θ','\\\\pi':'π','\\\\pm':'±','\\\\times':'×','\\\\div':'÷','\\\\cdot':'·','\\\\leq':'≤','\\\\geq':'≥','\\\\neq':'≠','\\\\approx':'≈','\\\\infty':'∞','\\\\to':'→','\\\\Rightarrow':'⇒','\\\\forall':'∀','\\\\exists':'∃','\\\\in':'∈','\\\\subset':'⊂','\\\\cup':'∪','\\\\cap':'∩','\\\\mathbb{R}':'ℝ','\\\\mathbb{N}':'ℕ','\\\\sin':'sin','\\\\cos':'cos','\\\\tan':'tan','\\\\log':'log','\\\\ln':'ln','\\\\sqrt':'√','\\\\frac':'/','\\\\text':'','\\\\displaystyle':'','\\\\left':'','\\\\right':'','\\\\limits':'','\\\\quad':' ','\\\\;':' ','\\\\,':'','\\\\_':'_','\\\\^':'^','\\{':'{','\\}':'}','\\\\{':'{','\\\\}':'}'};
+  Object.keys(map).sort(function(a,b){return b.length-a.length;}).forEach(function(k){s=s.split(k).join(map[k]);});
+  s=s.replace(/\\\\[a-zA-Z]+/g,'');
+  return s;
+}
 function initDaily() {
-  const daily = getDailyQuestion();
-  const q = daily.q;
-  const container = document.querySelector('.container');
+  var daily = getDailyQuestion();
+  var q = daily.q;
+  var cq=cleanDailylLatex(q.q), co=q.opts.map(function(o){return cleanDailylLatex(o);}), ce=cleanDailylLatex(q.exp);
+  var container = document.querySelector('.container');
   if (!container) return;
-  // Remove existing daily card if any
-  const old = document.getElementById('dailyCard');
+  var old = document.getElementById('dailyCard');
   if (old) old.remove();
 
-  const card = document.createElement('div');
+  var card = document.createElement('div');
   card.className = 'daily-card';
   card.id = 'dailyCard';
   card.onclick = showDailyAnswer;
-  card.innerHTML = `
-    <div class="dc-badge">📅 每日一题</div>
-    <div class="dc-q" id="dailyQ">${q.q}</div>
-    <div class="dc-hint">点击查看答案 →</div>
-    <div class="daily-answer" id="dailyAnswer">
-      <div class="da-correct">✅ 正确答案：${q.opts[q.ans]}</div>
-      <div class="da-exp">💡 ${q.exp}</div>
-      <div style="margin-top:8px;">
-        ${q.opts.map((o,i) => `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`).join('')}
-      </div>
-    </div>`;
+  card.innerHTML = `<div class="dc-badge">📅 每日一题</div><div class="dc-q">${cq}</div><div class="dc-hint">点击查看答案 →</div>
+    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div>
+    <div style="margin-top:8px;">${co.map(function(o,i){return `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`;}).join('')}</div></div>`;
   container.insertBefore(card, container.firstChild);
-  renderKaTeXIn(card);
 }
 
 function showDailyAnswer() {
