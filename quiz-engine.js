@@ -292,17 +292,17 @@ window._savePoster=function(){const c=document.getElementById('posterCanvas');co
 function cleanLatex(s){
   if(!s)return'';
   s=s.replace(/\\[\(\)]/g,'').replace(/\\[\[\]]/g,'').replace(/\$/g,'');
-  const map={'\\\\alpha':'α','\\\\beta':'β','\\\\gamma':'γ','\\\\delta':'δ','\\\\theta':'θ','\\\\pi':'π','\\\\sigma':'σ','\\\\omega':'ω',
-    '\\\\pm':'±','\\\\times':'×','\\\\div':'÷','\\\\cdot':'·','\\\\leq':'≤','\\\\geq':'≥','\\\\neq':'≠','\\\\approx':'≈',
-    '\\\\infty':'∞','\\\\sqrt':'√','\\\\frac':'/','\\\\to':'→','\\\\Rightarrow':'⇒','\\\\forall':'∀','\\\\exists':'∃',
-    '\\\\in':'∈','\\\\notin':'∉','\\\\subset':'⊂','\\\\subseteq':'⊆','\\\\cup':'∪','\\\\cap':'∩',
-    '\\\\mathbb{R}':'ℝ','\\\\mathbb{N}':'ℕ','\\\\mathbb{Z}':'ℤ',
-    '\\\\sin':'sin','\\\\cos':'cos','\\\\tan':'tan','\\\\log':'log','\\\\ln':'ln','\\\\lg':'lg',
-    '\\\\degree':'°','\\\\circ':'°','\\\\partial':'∂','\\\\int':'∫','\\\\sum':'Σ','\\\\prod':'Π',
-    '\\\\rightarrow':'→','\\\\leftarrow':'←','\\\\angle':'∠','\\\\triangle':'△',
-    '\\\\text':'','\\\\mathrm':'','\\\\displaystyle':'','\\\\limits':'','\\\\left':'','\\\\right':'',
-    '\\\\big':'','\\\\Big':'','\\\\quad':' ','\\\\qquad':' ','\\\\;':' ','\\\\:':' ','\\\\,':'',
-    '\\\\{':'{','\\\\}':'}','\\{':'{','\\}':'}','\\\\_':'_','\\\\^':'^','\\\\ ':' '};
+  const map={'\\alpha':'α','\\beta':'β','\\gamma':'γ','\\delta':'δ','\\theta':'θ','\\pi':'π','\\sigma':'σ','\\omega':'ω',
+    '\\pm':'±','\\times':'×','\\div':'÷','\\cdot':'·','\\leq':'≤','\\geq':'≥','\\neq':'≠','\\approx':'≈',
+    '\\infty':'∞','\\sqrt':'√','\\frac':'/','\\to':'→','\\Rightarrow':'⇒','\\forall':'∀','\\exists':'∃',
+    '\\in':'∈','\\notin':'∉','\\subset':'⊂','\\subseteq':'⊆','\\cup':'∪','\\cap':'∩',
+    '\\mathbb{R}':'ℝ','\\mathbb{N}':'ℕ','\\mathbb{Z}':'ℤ',
+    '\\sin':'sin','\\cos':'cos','\\tan':'tan','\\log':'log','\\ln':'ln','\\lg':'lg',
+    '\\degree':'°','\\circ':'°','\\partial':'∂','\\int':'∫','\\sum':'Σ','\\prod':'Π',
+    '\\rightarrow':'→','\\leftarrow':'←','\\angle':'∠','\\triangle':'△',
+    '\\text':'','\\mathrm':'','\\displaystyle':'','\\limits':'','\\left':'','\\right':'',
+    '\\big':'','\\Big':'','\\quad':' ','\\qquad':' ','\\;':' ','\\:':' ','\\,':'',
+    '\\{':'{','\\}':'}','\\_':'_','\\^':'^','\\ ':' '};
   Object.keys(map).sort((a,b)=>b.length-a.length).forEach(k=>{s=s.split(k).join(map[k]);});
   s=s.replace(/\\[a-zA-Z]+/g,'');
   return s;
