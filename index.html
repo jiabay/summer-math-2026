@@ -323,15 +323,89 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 <section class="footer">
   <h3>名额有限 · 立即扫码咨询</h3>
   <div class="qr"><img src="qr.png" alt="微信二维码" style="width:120px;height:120px;border-radius:8px;"></div>
-  <p>电话：15033952509 &nbsp;|&nbsp; 微信：1529945197 &nbsp;|&nbsp; 地址：唐山市XX区XX路XX号3楼</p>
+  <p>电话：<a href="javascript:void(0)" onclick="copyText('15033952509')" style="color:#ffd54f;text-decoration:underline;">15033952509</a> &nbsp;|&nbsp; 微信：<a href="javascript:void(0)" onclick="copyText('1529945197')" style="color:#ffd54f;text-decoration:underline;">1529945197</a> &nbsp;|&nbsp; 地址：唐山市XX区XX路XX号3楼</p>
   <p style="margin-top:10px;font-size:11px;color:#7986cb;">© 2026 思数培优 · 由优秀师范生、国奖大学生与准研究生领衔的数学团队</p>
 </section>
 
 <!-- 底部CTA -->
 <div class="cta-bar">
-  <a href="tel:15033952509" class="cta-btn cta-phone">📞 电话咨询</a>
-  <a href="#" class="cta-btn cta-wx">💬 微信咨询</a>
+  <a href="javascript:void(0)" class="cta-btn cta-phone" onclick="copyText('15033952509')">📞 点击复制电话</a>
+  <a href="javascript:void(0)" class="cta-btn cta-wx" onclick="copyText('1529945197')">💬 点击复制微信</a>
 </div>
+
+
+<!-- WeChat JS-SDK & Copy Helper -->
+<script>
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('已复制：' + text + '，请打开微信搜索添加');
+    }).catch(function() {
+      prompt('请手动复制', text);
+    });
+  } else {
+    prompt('请手动复制', text);
+  }
+}
+
+function showToast(msg) {
+  var toast = document.createElement('div');
+  toast.textContent = msg;
+  toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.85);color:#fff;padding:16px 28px;border-radius:10px;font-size:15px;z-index:99999;pointer-events:none;animation:fadeInOut 2.5s ease forwards;';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 2600);
+}
+
+// Inject fade animation
+var style = document.createElement('style');
+style.textContent = '@keyframes fadeInOut { 0%{opacity:0;transform:translate(-50%,-50%) translateY(10px)} 15%{opacity:1;transform:translate(-50%,-50%) translateY(0)} 70%{opacity:1} 100%{opacity:0} }';
+document.head.appendChild(style);
+
+// WeChat JS-SDK sharing (only activates inside WeChat browser)
+(function() {
+  var isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  if (!isWeChat) return;
+
+  var s = document.createElement('script');
+  s.src = 'https://res.wx.qq.com/open/js/jweixin-1.6.0.js';
+  s.onload = function() {
+    var pageUrl = location.href.split('#')[0];
+    fetch('https://YOUR-DOMAIN.com//api/wechat/js-config', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url: pageUrl})
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(cfg) {
+      if (cfg.error) { console.warn('JS-SDK config error:', cfg.error); return; }
+      wx.config({
+        debug: false,
+        appId: cfg.appId,
+        timestamp: cfg.timestamp,
+        nonceStr: cfg.nonceStr,
+        signature: cfg.signature,
+        jsApiList: cfg.jsApiList || ['updateAppMessageShareData', 'updateTimelineShareData']
+      });
+      wx.ready(function() {
+        var shareData = {
+          title: '思数培优 · 2026暑假初升高数学衔接班',
+          desc: '4周攻克高一数学核心基础，开学快人一步！优秀师范生+国奖学霸团队，8人小班招满即止。',
+          link: location.href,
+          imgUrl: location.origin + '/qr.png'
+        };
+        wx.updateAppMessageShareData(shareData);
+        wx.updateTimelineShareData(shareData);
+        // Legacy API (compatible with older WeChat versions)
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+      });
+      wx.error(function(err) { console.warn('WeChat wx.config error:', err); });
+    })
+    .catch(function(e) { console.warn('JS-SDK fetch failed:', e); });
+  };
+  document.head.appendChild(s);
+})();
+</script>
 
 </body>
 </html>

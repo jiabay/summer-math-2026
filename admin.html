@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思数培优 · 管理后台</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Microsoft YaHei', sans-serif; background:#f5f5f5; color:#212121; }
+.container { max-width:1100px; margin:0 auto; padding:20px; }
+
+/* Login */
+.login-box { max-width:360px; margin:120px auto; background:#fff; border-radius:12px; padding:40px; box-shadow:0 2px 20px rgba(0,0,0,.08); text-align:center; }
+.login-box h2 { color:#1a237e; margin-bottom:24px; }
+.login-box input { width:100%; padding:12px; border:2px solid #e0e0e0; border-radius:8px; font-size:15px; margin-bottom:16px; }
+.login-box input:focus { outline:none; border-color:#1a237e; }
+.login-box button { width:100%; padding:12px; background:#1a237e; color:#fff; border:none; border-radius:8px; font-size:15px; cursor:pointer; font-weight:600; }
+
+/* Header */
+.header { background:linear-gradient(135deg, #1a237e, #283593); color:#fff; padding:20px 0; }
+.header h1 { font-size:22px; }
+.header .logout { float:right; color:#90caf9; cursor:pointer; font-size:14px; margin-top:4px; }
+
+/* Stats */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:24px 0; }
+.stat-card { background:#fff; border-radius:12px; padding:24px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.stat-card .num { font-size:36px; font-weight:900; }
+.stat-card .label { font-size:13px; color:#757575; margin-top:4px; }
+.stat-card:nth-child(1) .num { color:#1a237e; }
+.stat-card:nth-child(2) .num { color:#2e7d32; }
+.stat-card:nth-child(3) .num { color:#e65100; }
+.stat-card:nth-child(4) .num { color:#1565c0; }
+
+/* Topic stats */
+.topic-stats { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.topic-stat { background:#fff; border-radius:20px; padding:8px 20px; font-size:13px; box-shadow:0 1px 8px rgba(0,0,0,.04); }
+.topic-stat b { color:#1a237e; }
+
+/* Table */
+.table-wrap { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.table-wrap table { width:100%; border-collapse:collapse; }
+.table-wrap th { background:#f5f5f5; padding:14px 16px; font-size:13px; text-align:left; color:#757575; font-weight:600; }
+.table-wrap td { padding:12px 16px; font-size:14px; border-bottom:1px solid #f0f0f0; }
+.acc-badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:13px; font-weight:700; }
+.acc-high { background:#e8f5e9; color:#2e7d32; }
+.acc-mid  { background:#fff3e0; color:#e65100; }
+.acc-low  { background:#fce4ec; color:#c62828; }
+
+.refresh { text-align:right; margin:12px 0; }
+.refresh button { padding:8px 24px; background:#1a237e; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:13px; }
+
+@media(max-width:768px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+
+<div id="loginPage">
+  <div class="login-box">
+    <h2>🔐 思数培优 · 管理后台</h2>
+    <input type="password" id="pwdInput" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()">登 录</button>
+    <p style="color:#ef4444;font-size:13px;margin-top:12px;display:none;" id="loginErr">密码错误</p>
+  </div>
+</div>
+
+<div id="mainPage" style="display:none;">
+  <div class="header">
+    <div class="container">
+      <span class="logout" onclick="logout()">退出登录</span>
+      <h1>📊 思数培优 · 学生刷题数据</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="refresh"><button onclick="loadData()">🔄 刷新数据</button></div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="totalQuizzes">-</div><div class="label">总刷题次数</div></div>
+      <div class="stat-card"><div class="num" id="totalUsers">-</div><div class="label">刷题用户数</div></div>
+      <div class="stat-card"><div class="num" id="avgAccuracy">-%</div><div class="label">平均正确率</div></div>
+      <div class="stat-card"><div class="num" id="todayQuizzes">-</div><div class="label">今日刷题</div></div>
+    </div>
+
+    <div class="topic-stats" id="topicStats"></div>
+
+    <h3 style="margin:20px 0 12px;">📋 刷题记录</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>时间</th><th>用户</th><th>得分</th><th>正确率</th><th>专题</th><th>难度</th></tr>
+        </thead>
+        <tbody id="recordsTable"></tbody>
+      </table>
+    </div>
+    <p style="text-align:center;color:#757575;margin:20px 0;font-size:12px;" id="emptyMsg" hidden>暂无数据</p>
+  </div>
+</div>
+
+<script>
+let token = localStorage.getItem('sishu_admin_token') || '';
+
+function login() {
+  const pwd = document.getElementById('pwdInput').value;
+  fetch('/api/admin/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({password:pwd}) })
+  .then(r => r.json())
+  .then(d => {
+    if (d.success) {
+      token = d.token;
+      localStorage.setItem('sishu_admin_token', token);
+      showMain();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  });
+}
+
+function logout() {
+  localStorage.removeItem('sishu_admin_token');
+  token = '';
+  location.reload();
+}
+
+function showMain() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('mainPage').style.display = 'block';
+  loadData();
+}
+
+function loadData() {
+  if (!token) return;
+  fetch('/api/admin/stats?token=' + token)
+    .then(r => r.json())
+    .then(d => {
+      if (d.error) { logout(); return; }
+      document.getElementById('totalQuizzes').textContent = d.totalQuizzes;
+      document.getElementById('totalUsers').textContent = d.totalUsers;
+      document.getElementById('avgAccuracy').textContent = d.avgAccuracy + '%';
+      document.getElementById('todayQuizzes').textContent = d.todayQuizzes;
+
+      let th = '';
+      (d.topicStats || []).forEach(t => {
+        th += '<span class="topic-stat"><b>' + t.topic + '</b>: ' + t.count + '次 (均' + t.avgAccuracy + '%)</span>';
+      });
+      document.getElementById('topicStats').innerHTML = th;
+    });
+
+  fetch('/api/admin/students?token=' + token + '&limit=100')
+    .then(r => r.json())
+    .then(d => {
+      if (d.error) return;
+      const tbody = document.getElementById('recordsTable');
+      if (!d.results || d.results.length === 0) {
+        document.getElementById('emptyMsg').hidden = false;
+        return;
+      }
+      document.getElementById('emptyMsg').hidden = true;
+      let accClass = v => v >= 80 ? 'acc-high' : v >= 60 ? 'acc-mid' : 'acc-low';
+      tbody.innerHTML = d.results.map(r =>
+        '<tr>' +
+        '<td>' + (r.createdAt || '').replace('T',' ').substring(0,16) + '</td>' +
+        '<td>' + r.openid + '</td>' +
+        '<td>' + r.score + '/' + r.total + '</td>' +
+        '<td><span class="acc-badge ' + accClass(r.accuracy) + '">' + r.accuracy + '%</span></td>' +
+        '<td>' + r.topics + '</td>' +
+        '<td>' + r.difficulty + '</td>' +
+        '</tr>'
+      ).join('');
+    });
+}
+
+// Auto-login if token exists
+if (token) showMain();
+</script>
+</body>
+</html>

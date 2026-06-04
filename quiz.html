@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+,
+  { id:134, stage:'初中', chapter:'有理数', topic:'正负数', diff:1, q:'下列是负数的是？', opts:['0','-3','2','0.5'], ans:1, exp:'-3是负数。' },
+  { id:135, stage:'初中', chapter:'有理数', topic:'绝对值', diff:1, q:'|-5|=？', opts:['-5','5','0','±5'], ans:1, exp:'绝对值是非负数。' },
+  { id:136, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:1, q:'(-2)+(-7)=？', opts:['-9','9','-5','5'], ans:0, exp:'同号相加=-(2+7)=-9。' },
+  { id:137, stage:'初中', chapter:'有理数', topic:'有理数运算', diff:2, q:'6÷(-3)×2=？', opts:['-4','-1','1','4'], ans:0, exp:'乘除同级从左到右。' },
+  { id:138, stage:'初中', chapter:'整式', topic:'合并同类项', diff:1, q:'合并：2x²+3x+5x²-x=？', opts:['7x²+2x','10x²','7x²+4x','5x²+2x'], ans:0, exp:'2x²+5x²=7x²，3x-x=2x。' },
+  { id:139, stage:'初中', chapter:'整式', topic:'去括号', diff:2, q:'化简：2(a-b)-3(a+b)=？', opts:['-a-5b','-a+b','5a-b','a-5b'], ans:0, exp:'2a-2b-3a-3b=-a-5b。' },
+  { id:140, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:1, q:'解方程：2x+3=11', opts:['x=3','x=4','x=5','x=2'], ans:1, exp:'2x+3=11→2x=8→x=4。' },
+  { id:141, stage:'初中', chapter:'一元一次方程', topic:'解方程', diff:2, q:'3(x-2)+1=2x+4的解是？', opts:['x=9','x=7','x=5','x=3'], ans:0, exp:'3x-6+1=2x+4→x=9。' },
+  { id:142, stage:'初中', chapter:'一元一次方程', topic:'应用题', diff:2, q:'买3支笔和2个笔记本花16元，笔2元/支，笔记本？元', opts:['4元','5元','6元','3元'], ans:1, exp:'3×2+2x=16→x=5。' },
+  { id:143, stage:'初中', chapter:'二元一次方程组', topic:'代入消元', diff:2, q:'x+y=5, 2x-y=1的解？', opts:['x=2,y=3','x=3,y=2','x=1,y=4','x=4,y=1'], ans:0, exp:'相加消y→x=2,y=3。' },
+  { id:144, stage:'初中', chapter:'平面直角坐标系', topic:'象限', diff:1, q:'点P(-2,3)在第几象限？', opts:['一','二','三','四'], ans:1, exp:'x负y正→第二象限。' },
+  { id:145, stage:'初中', chapter:'三角形', topic:'内角和', diff:1, q:'三角形内角和=？', opts:['90°','180°','360°','270°'], ans:1, exp:'三角形内角和=180°。' },
+  { id:146, stage:'初中', chapter:'三角形', topic:'勾股定理', diff:2, q:'直角边3和4，斜边=？', opts:['5','6','7','8'], ans:0, exp:'3²+4²=25→√25=5。' },
+  { id:147, stage:'初中', chapter:'全等三角形', topic:'判定', diff:2, q:'不能判定全等的是？', opts:['SSS','SAS','AAA','ASA'], ans:2, exp:'AAA只能判定相似。' },
+  { id:148, stage:'初中', chapter:'实数', topic:'平方根', diff:1, q:'√16=？', opts:['4','±4','2','-4'], ans:0, exp:'算术平方根取正数。' },
+  { id:149, stage:'初中', chapter:'数据的分析', topic:'中位数', diff:1, q:'1,2,3,4,5的中位数？', opts:['3','2','4','2.5'], ans:0, exp:'5个数中间是第3个=3。' },
+  { id:150, stage:'高中', chapter:'集合', topic:'集合运算', diff:1, q:'若A={1,2,3},B={2,3,4}，则A∩B=？', opts:['{2,3}','{1,2,3,4}','{1,4}','∅'], ans:0, exp:'交集取公共元素{2,3}。' },
+  { id:151, stage:'高中', chapter:'函数的概念', topic:'定义域', diff:1, q:'函数f(x)=√(x-1)的定义域是？', opts:['x≥1','x>1','x≤1','全体实数'], ans:0, exp:'根号内≥0→x-1≥0→x≥1。' },
+  { id:152, stage:'高中', chapter:'函数的性质', topic:'单调性', diff:2, q:'f(x)=x²在(-∞,0)上的单调性是？', opts:['单调递增','单调递减','先增后减','常数'], ans:1, exp:'开口向上，x<0时递减。' },
+  { id:153, stage:'高中', chapter:'三角函数', topic:'诱导公式', diff:1, q:'sin(90°)=？', opts:['0','1','-1','1/2'], ans:1, exp:'sin90°=1。' }<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -183,6 +203,47 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
   .nav .container { flex-wrap:wrap; gap:8px; }
   .nav a { margin-left:10px; font-size:12px; }
 }
+  .poster-qr{color:#9e9e9e;font-size:12px;margin-top:4px;}
+
+/* ===== 错题本 ===== */
+.err-fab{position:fixed;bottom:24px;right:20px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#c62828,#ef5350);color:#fff;font-size:24px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(198,40,40,.35);z-index:999;display:none;align-items:center;justify-content:center;transition:transform .2s;}
+.err-fab:hover{transform:scale(1.1);}
+.err-fab .badge{position:absolute;top:-4px;right:-4px;background:#fff;color:#c62828;border-radius:10px;padding:1px 7px;font-size:11px;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+.err-panel{position:fixed;top:0;right:0;width:100%;max-width:420px;height:100%;background:#fff;z-index:1000;box-shadow:-4px 0 24px rgba(0,0,0,.15);display:none;flex-direction:column;animation:slideIn .25s ease;}
+@keyframes slideIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+.err-panel .ep-header{padding:16px 20px;background:#c62828;color:#fff;display:flex;align-items:center;justify-content:space-between;}
+.err-panel .ep-header h3{margin:0;font-size:17px;}
+.err-panel .ep-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
+.err-panel .ep-body{flex:1;overflow-y:auto;padding:16px;}
+.err-panel .ep-footer{padding:12px 20px;border-top:1px solid #eee;display:flex;gap:10px;}
+.err-panel .ep-footer button{flex:1;padding:10px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;}
+.err-panel .ep-empty{text-align:center;padding:60px 20px;color:#9e9e9e;}
+.err-item{background:#fff;border:1px solid #f0f0f0;border-radius:10px;padding:16px;margin-bottom:12px;}
+.err-item .ei-topic{font-size:11px;padding:2px 10px;border-radius:8px;background:#fce4ec;color:#c62828;display:inline-block;margin-bottom:8px;}
+.err-item .ei-q{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.7;}
+.err-item .ei-ans{font-size:13px;color:#757575;margin-bottom:2px;}
+.err-item .ei-exp{font-size:12px;color:#9e9e9e;margin-top:6px;padding:8px 12px;background:#fff8e1;border-radius:6px;}
+.ei-wrong{color:#c62828;font-weight:600;}
+.ei-right{color:#2e7d32;}
+
+/* ===== 分享海报 ===== */
+.poster-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1001;display:none;align-items:center;justify-content:center;}
+.poster-overlay.show{display:flex;}
+.poster-card{background:#fff;border-radius:16px;overflow:hidden;width:90%;max-width:360px;box-shadow:0 8px 40px rgba(0,0,0,.2);}
+.poster-card canvas{display:block;width:100%;}
+.poster-actions{display:flex;gap:10px;padding:16px;}
+.poster-actions button{flex:1;padding:12px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;}
+
+/* ===== 每日一题 ===== */
+.daily-card{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:14px;padding:20px 24px;margin-bottom:20px;cursor:pointer;transition:transform .2s;box-shadow:0 2px 12px rgba(46,125,50,.1);}
+.daily-card:hover{transform:translateY(-2px);}
+.daily-card .dc-badge{display:inline-block;padding:3px 12px;border-radius:10px;background:#2e7d32;color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;}
+.daily-card .dc-q{font-size:15px;font-weight:600;color:#1b5e20;margin-bottom:8px;line-height:1.7;}
+.daily-card .dc-hint{font-size:12px;color:#757575;}
+.daily-answer{padding:16px 24px;background:#f1f8e9;border-radius:0 0 14px 14px;margin-top:-4px;display:none;}
+.daily-answer.show{display:block;}
+.daily-answer .da-correct{font-size:14px;font-weight:700;color:#2e7d32;margin-bottom:4px;}
+.daily-answer .da-exp{font-size:13px;color:#555;}
 </style>
 </head>
 <body>
@@ -195,6 +256,7 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
       <a href="index.html">🏠 首页</a>
       <a href="quiz.html" class="active">📝 刷题练习</a>
       <a href="#" onclick="showAchievements();return false;" style="color:#bbdefb;text-decoration:none;font-size:14px;margin-left:16px;">🏆 成就</a>
+        <span id="userArea" style="margin-left:16px;font-size:14px;color:#ffd54f;"></span>
     </div>
   </div>
 </nav>
@@ -202,8 +264,8 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 <!-- Header -->
 <section class="quiz-header">
   <div class="container">
-    <h1>📐 初升高数学 · 刷题练习</h1>
-    <div class="sub">题库基于《2026版初升高衔接培优》课程内容 · 支持按专题筛选</div>
+    <h1>📐 数学刷题练习</h1>
+    <div class="sub">覆盖初中、高中核心知识点 · 按学段+专题筛选</div>
   </div>
 </section>
 
@@ -211,6 +273,10 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 
 <!-- Controls -->
 <div class="controls" id="controls">
+  <div class="row" style="margin-bottom:12px;">
+    <label>🎓 学段：</label>
+    <div class="topic-tags" id="stageTags"></div>
+  </div>
   <div class="row">
     <label>📂 按专题：</label>
     <div class="topic-tags" id="topicTags"></div>
@@ -277,139 +343,139 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 <script>
 // ==================== QUESTION BANK ====================
 const QUESTION_BANK = [
-  { id:1, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 + 5x + 6\\)', opts:['\\((x+2)(x+3)\\)','\\((x+1)(x+6)\\)','\\((x-2)(x-3)\\)','\\((x+2)(x-3)\\)'], ans:0, exp:'十字相乘法：两数之和5，积6 → 2和3。\\(x^2+5x+6=(x+2)(x+3)\\)。' },
-  { id:2, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 7x + 12\\)', opts:['\\((x-3)(x-4)\\)','\\((x+3)(x+4)\\)','\\((x-3)(x+4)\\)','\\((x-2)(x-6)\\)'], ans:0, exp:'(-3)+(-4)=-7, (-3)×(-4)=12，所以\\(x^2-7x+12=(x-3)(x-4)\\)。' },
-  { id:3, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 9\\)', opts:['\\((x-3)^2\\)','\\((x+3)(x-3)\\)','\\((x+9)(x-1)\\)','\\((x-9)(x+1)\\)'], ans:1, exp:'平方差公式：\\(a^2-b^2=(a+b)(a-b)\\)，\\(x^2-9=(x+3)(x-3)\\)。' },
-  { id:4, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 4x + 4\\)', opts:['\\((x-2)^2\\)','\\((x+2)^2\\)','\\((x-4)(x-1)\\)','\\((x-2)(x+2)\\)'], ans:0, exp:'完全平方：\\(a^2-2ab+b^2=(a-b)^2\\)，\\(x^2-4x+4=(x-2)^2\\)。' },
-  { id:5, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'分解因式：\\(2x^2 + 7x + 3\\)', opts:['\\((2x+3)(x+1)\\)','\\((2x+1)(x+3)\\)','\\((2x-1)(x-3)\\)','\\((x+1)(2x+3)\\)'], ans:1, exp:'十字相乘：拆两边凑中间。\\(2x^2+7x+3=(2x+1)(x+3)\\)。' },
-  { id:6, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'分解因式：\\(6x^2 - x - 2\\)', opts:['\\((2x+1)(3x-2)\\)','\\((3x+2)(2x-1)\\)','\\((2x-1)(3x+1)\\)','\\((6x+1)(x-2)\\)'], ans:0, exp:'\\(6x^2-x-2=(2x+1)(3x-2)\\)。验证：\\(2x·3x=6x^2\\)，\\(2x·(-2)+1·3x=-x\\)，\\(1·(-2)=-2\\)。' },
-  { id:7, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'方程\\(x^2 - 5x + 6 = 0\\)的两根之和为？', opts:['5','−5','6','−6'], ans:0, exp:'韦达定理：\\(x_1+x_2=-\\frac{b}{a}=-\\frac{-5}{1}=5\\)。' },
-  { id:8, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'若\\(x_1,x_2\\)是方程\\(2x^2-3x-1=0\\)的两根，则\\(x_1x_2=\\)？', opts:['\\(\\frac{3}{2}\\)','\\(-\\frac{1}{2}\\)','\\(\\frac{1}{2}\\)','\\(-\\frac{3}{2}\\)'], ans:1, exp:'韦达定理：\\(x_1x_2=\\frac{c}{a}=\\frac{-1}{2}=-\\frac{1}{2}\\)。' },
-  { id:9, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:3, q:'已知\\(x_1,x_2\\)是方程\\(x^2-4x+1=0\\)的两根，求\\(x_1^2+x_2^2\\)。', opts:['14','16','18','12'], ans:0, exp:'\\(x_1+x_2=4, x_1x_2=1\\)。\\(x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=16-2=14\\)。' },
-  { id:10, chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:3, q:'若\\(x_1,x_2\\)是方程\\(x^2-x-3=0\\)的两根，则\\(\\frac{1}{x_1}+\\frac{1}{x_2}=\\)？', opts:['\\(-\\frac{1}{3}\\)','\\(\\frac{1}{3}\\)','3','−3'], ans:0, exp:'\\(x_1+x_2=1, x_1x_2=-3\\)。\\(\\frac{1}{x_1}+\\frac{1}{x_2}=\\frac{x_1+x_2}{x_1x_2}=\\frac{1}{-3}=-\\frac{1}{3}\\)。' },
-  { id:11, chapter:'初高中衔接', topic:'一元二次不等式', diff:1, q:'不等式\\(x^2 - 5x + 6 > 0\\)的解集是？', opts:['\\(x<2\\) 或 \\(x>3\\)','\\(2<x<3\\)','\\(x<-3\\) 或 \\(x>-2\\)','\\(-3<x<-2\\)'], ans:0, exp:'\\((x-2)(x-3)>0\\)，开口向上取两边：\\(x<2\\)或\\(x>3\\)。' },
-  { id:12, chapter:'初高中衔接', topic:'一元二次不等式', diff:1, q:'不等式\\(x^2 + 2x - 3 \\leq 0\\)的解集是？', opts:['\\([-3,1]\\)','\\([-1,3]\\)','\\((-\\infty,-3]\\cup[1,+\\infty)\\)','\\([-3,-1]\\)'], ans:0, exp:'\\((x+3)(x-1)\\leq 0\\)，开口向上取中间：\\(-3\\leq x\\leq 1\\)。' },
-  { id:13, chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'不等式\\(-x^2 + 4x - 3 > 0\\)的解集是？', opts:['\\((1,3)\\)','\\((-\\infty,1)\\cup(3,+\\infty)\\)','\\((3,+\\infty)\\)','\\((-3,-1)\\)'], ans:0, exp:'两边乘−1并变号：\\(x^2-4x+3<0\\)→\\((x-1)(x-3)<0\\)→\\(1<x<3\\)。' },
-  { id:14, chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'若不等式\\(x^2 - 2x + k > 0\\)恒成立，则\\(k\\)的取值范围是？', opts:['\\(k>1\\)','\\(k<1\\)','\\(k\\geq 1\\)','\\(k\\leq 1\\)'], ans:0, exp:'开口向上需\\(\\Delta<0\\)：\\(4-4k<0\\)→\\(k>1\\)。' },
-  { id:15, chapter:'初高中衔接', topic:'一元二次不等式', diff:3, q:'不等式\\(x^2 - (a+1)x + a < 0\\)的解集为\\((1,2)\\)，则\\(a=\\)？', opts:['2','1','3','−1'], ans:0, exp:'\\((x-a)(x-1)<0\\)→解集为两根之间的区间\\((1,a)\\)（若\\(a>1\\)）→\\(a=2\\)。' },
-  { id:16, chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'不等式\\(x^2-3x+2\\geq 0\\)且\\(x^2-5x+6<0\\)的解集是？', opts:['\\((2,3)\\)','\\([2,3)\\)','\\((2,3]\\)','\\([2,3]\\)'], ans:0, exp:'第一个：\\(x\\leq 1\\)或\\(x\\geq 2\\)；第二个：\\(2<x<3\\)。交集：\\(2<x<3\\)。' },
-  { id:17, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:1, q:'不等式\\(|x-2| < 3\\)的解集是？', opts:['\\((-1,5)\\)','\\((-5,1)\\)','\\((2,5)\\)','\\((-\\infty,-1)\\cup(5,+\\infty)\\)'], ans:0, exp:'\\(|x-2|<3 \\iff -3<x-2<3 \\iff -1<x<5\\)。' },
-  { id:18, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:1, q:'不等式\\(|x+1| \\geq 2\\)的解集是？', opts:['\\(x\\leq -3\\) 或 \\(x\\geq 1\\)','\\(-3\\leq x\\leq 1\\)','\\(x\\geq 1\\)','\\(x\\leq -3\\)'], ans:0, exp:'\\(x+1\\leq -2\\)或\\(x+1\\geq 2\\)→\\(x\\leq-3\\)或\\(x\\geq1\\)。' },
-  { id:19, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{x-1}{x+2} > 0\\)的解集是？', opts:['\\(x<-2\\) 或 \\(x>1\\)','\\(-2<x<1\\)','\\(x>1\\)','\\(x<-2\\)'], ans:0, exp:'穿根法：零点1,−2。\\(x<-2\\)：负/负=正；\\(-2<x<1\\)：负/正=负；\\(x>1\\)：正/正=正。解集\\(x<-2\\)或\\(x>1\\)。' },
-  { id:20, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{2x-1}{x+1} \\geq 0\\)的解集是？', opts:['\\((-\\infty,-1)\\cup[\\frac{1}{2},+\\infty)\\)','\\((-1,\\frac{1}{2}]\\)','\\([\\frac{1}{2},+\\infty)\\)','\\((-\\infty,-1)\\)'], ans:0, exp:'零点\\(\\frac{1}{2},-1\\)。\\(x<-1\\)：负/负=正；\\(-1<x<\\frac{1}{2}\\)：负/正=负；\\(x\\geq\\frac{1}{2}\\)：非负/正=非负。注意\\(x=-1\\)取不到。' },
-  { id:21, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:3, q:'不等式\\(|2x-1| > |x+2|\\)的解集是？', opts:['\\((-\\infty,-\\frac{1}{3})\\cup(3,+\\infty)\\)','\\((-\\frac{1}{3},3)\\)','\\((3,+\\infty)\\)','\\((0,2)\\)'], ans:0, exp:'两边平方：\\(4x^2-4x+1>x^2+4x+4\\)→\\(3x^2-8x-3>0\\)→\\((3x+1)(x-3)>0\\)→\\(x<-\\frac{1}{3}\\)或\\(x>3\\)。' },
-  { id:22, chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{x-2}{x^2-1} \\leq 0\\)的解集是？', opts:['\\((-\\infty,-1)\\cup[2,+\\infty)\\)','\\((-1,1)\\cup[2,+\\infty)\\)','\\((-\\infty,-1)\\cup(1,2]\\)','\\((-1,1)\\cup(1,2]\\)'], ans:3, exp:'分子零点2；分母零点±1。穿根得\\((-1,1)\\cup(1,2]\\)。注意\\(x\\neq\\pm1\\)。' },
-  { id:23, chapter:'初高中衔接', topic:'二次函数的最值', diff:1, q:'函数\\(y=x^2-4x+3\\)的顶点坐标是？', opts:['\\((2,-1)\\)','\\((-2,15)\\)','\\((2,3)\\)','\\((1,0)\\)'], ans:0, exp:'配方：\\(y=(x-2)^2-1\\)，顶点\\((2,-1)\\)。' },
-  { id:24, chapter:'初高中衔接', topic:'二次函数的最值', diff:1, q:'函数\\(y=-x^2+2x+3\\)的最大值是？', opts:['4','3','2','5'], ans:0, exp:'配方：\\(y=-(x-1)^2+4\\)，最大值\\(y=4\\)（当\\(x=1\\)时）。' },
-  { id:25, chapter:'初高中衔接', topic:'二次函数的最值', diff:2, q:'\\(y=x^2-2x+3\\)在\\([0,3]\\)上的最小值是？', opts:['2','3','6','1'], ans:0, exp:'\\(y=(x-1)^2+2\\)，对称轴x=1在区间内，最小值为\\(f(1)=2\\)。' },
-  { id:26, chapter:'初高中衔接', topic:'二次函数的最值', diff:2, q:'\\(y=x^2-2x+3\\)在\\([2,4]\\)上的最大值是？', opts:['11','7','3','8'], ans:0, exp:'\\(y=(x-1)^2+2\\)，对称轴x=1不在区间右侧，函数在\\([2,4]\\)递增，最大\\(f(4)=11\\)。' },
-  { id:27, chapter:'初高中衔接', topic:'二次函数的最值', diff:3, q:'若\\(y=x^2-2ax+3\\)在\\([1,2]\\)上最大值为5，则\\(a=\\)？', opts:['\\(\\frac{1}{2}\\)','1','\\(\\frac{3}{2}\\)','2'], ans:0, exp:'对称轴x=a。分类讨论：a≤1.5时最大值f(2)=7-4a=5→a=0.5；a>1.5时最大值f(1)=4-2a=5→a=-0.5（舍）。' },
-  { id:28, chapter:'初高中衔接', topic:'二次函数的最值', diff:3, q:'二次函数\\(y=x^2-2mx+2m^2-1\\)的最小值为\\(-\\frac{1}{2}\\)，则\\(m=\\)？', opts:['\\(\\pm\\frac{1}{2}\\)','\\(\\frac{1}{2}\\)','\\(-\\frac{1}{2}\\)','无解'], ans:0, exp:'配方：\\(y=(x-m)^2+m^2-1\\)，最小值\\(m^2-1=-\\frac{1}{2}\\)→\\(m^2=\\frac{1}{2}\\)→\\(m=\\pm\\frac{\\sqrt{2}}{2}\\)。' },
-  { id:29, chapter:'集合', topic:'集合的概念与表示', diff:1, q:'集合\\(\\{x\\mid x^2=4\\}\\)用列举法表示为？', opts:['\\(\\{2\\}\\)','\\(\\{-2,2\\}\\)','\\(\\{-2\\}\\)','\\(\\emptyset\\)'], ans:1, exp:'\\(x^2=4\\)→\\(x=2\\)或\\(x=-2\\)。' },
-  { id:30, chapter:'集合', topic:'集合的概念与表示', diff:1, q:'下列正确的是？', opts:['\\(0\\in\\emptyset\\)','\\(\\emptyset\\subset\\{0\\}\\)','\\(\\{0\\}=\\emptyset\\)','\\(0=\\emptyset\\)'], ans:1, exp:'空集是任何集合的子集。A错：空集不含元素；C错：{0}含元0；D错：0是数不是集合。' },
-  { id:31, chapter:'集合', topic:'集合的概念与表示', diff:2, q:'集合\\(\\{x\\in\\mathbb{N}^*\\mid x^2-5x+6<0\\}\\)用列举法表示为？', opts:['\\(\\{2\\}\\)','\\(\\{2,3\\}\\)','\\(\\{3\\}\\)','\\(\\emptyset\\)'], ans:3, exp:'\\((x-2)(x-3)<0\\)的解为\\(2<x<3\\)，而\\(\\mathbb{N}^*\\)是正整数集，在\\((2,3)\\)内没有正整数，故该集合为空集\\(\\emptyset\\)。' },
-  { id:32, chapter:'集合', topic:'集合之间的关系', diff:1, q:'集合\\(\\{1,2\\}\\)的子集个数是？', opts:['2','3','4','1'], ans:2, exp:'\\(2^2=4\\)：\\(\\emptyset,\\{1\\},\\{2\\},\\{1,2\\}\\)。' },
-  { id:33, chapter:'集合', topic:'集合之间的关系', diff:2, q:'已知\\(A=\\{1,2,3\\}\\)，\\(B=\\{x\\mid x\\subseteq A\\}\\)，则\\(B\\)中元素个数为？', opts:['3','6','8','9'], ans:2, exp:'B是A的幂集，\\(2^3=8\\)个元素。' },
-  { id:34, chapter:'集合', topic:'集合之间的关系', diff:2, q:'若\\(\\{1,a\\}\\subseteq\\{1,2,3\\}\\)，则\\(a\\)的可能取值个数为？', opts:['1','2','3','4'], ans:1, exp:'\\(a\\)可以是2或3（a≠1因为集合元素互异）。' },
-  { id:35, chapter:'集合', topic:'集合之间的关系', diff:3, q:'集合\\(A=\\{x\\mid x^2-3x+2=0\\}\\)，\\(B=\\{x\\mid 0<x<4,x\\in\\mathbb{N}\\}\\)，则A与B的关系是？', opts:['\\(A=B\\)','\\(A\\subset B\\)','\\(B\\subset A\\)','\\(A\\cap B=\\emptyset\\)'], ans:1, exp:'\\(A=\\{1,2\\}\\)，\\(B=\\{1,2,3\\}\\)，所以\\(A\\subset B\\)。' },
-  { id:36, chapter:'集合', topic:'集合之间的运算', diff:1, q:'设\\(A=\\{1,2,3\\}\\)，\\(B=\\{2,3,4\\}\\)，则\\(A\\cap B=\\)？', opts:['\\(\\{1,2,3,4\\}\\)','\\(\\{2,3\\}\\)','\\(\\{1\\}\\)','\\(\\{4\\}\\)'], ans:1, exp:'交集：同时属于两集合的元素→\\(\\{2,3\\}\\)。' },
-  { id:37, chapter:'集合', topic:'集合之间的运算', diff:1, q:'设全集\\(U=\\{1,2,3,4,5\\}\\)，\\(A=\\{1,2,3\\}\\)，则\\(\\complement_U A=\\)？', opts:['\\(\\{4,5\\}\\)','\\(\\{1,2,3\\}\\)','\\(\\{1,2,3,4,5\\}\\)','\\(\\emptyset\\)'], ans:0, exp:'补集：全集中去掉A的元素。' },
-  { id:38, chapter:'集合', topic:'集合之间的运算', diff:2, q:'\\(A=\\{x\\mid -1<x<3\\}\\)，\\(B=\\{x\\mid x\\geq 1\\}\\)，则\\(A\\cup B=\\)？', opts:['\\(\\{x\\mid x>-1\\}\\)','\\(\\{x\\mid 1\\leq x<3\\}\\)','\\(\\{x\\mid x\\geq 1\\}\\)','\\(\\{x\\mid x<3\\}\\)'], ans:0, exp:'\\(A=(-1,3), B=[1,+\\infty)\\)，并集覆盖\\((-1,+\\infty)\\)。' },
-  { id:39, chapter:'集合', topic:'集合之间的运算', diff:2, q:'\\(A=\\{1,2,a\\}\\)，\\(B=\\{2,a^2\\}\\)，若\\(A\\cup B=\\{1,2,4,16\\}\\)，则\\(a=\\)？', opts:['4','±4','2','16'], ans:0, exp:'观察A∪B中有16，而B中有a²，故a²=16→a=±4。若a=-4则A={1,2,-4},B={2,16},A∪B={1,2,16,-4} 不是题目给的。所以a=4。' },
-  { id:40, chapter:'集合', topic:'集合中的含参问题', diff:3, q:'\\(A=\\{x\\mid x^2-3x+2=0\\}\\)，\\(B=\\{x\\mid ax-1=0\\}\\)，若\\(B\\subseteq A\\)，则\\(a\\)的取值集合是？', opts:['\\(\\{0,1,\\frac{1}{2}\\}\\)','\\(\\{1,\\frac{1}{2}\\}\\)','\\(\\{0,1\\}\\)','\\(\\{0,\\frac{1}{2}\\}\\)'], ans:0, exp:'A={1,2}。①B=∅时a=0；②B={1}时a=1；③B={2}时a=1/2。' },
-  { id:41, chapter:'集合', topic:'集合中的含参问题', diff:2, q:'已知\\(A=\\{x\\mid x<2\\}\\)，\\(B=\\{x\\mid x>a\\}\\)，若\\(A\\cup B=\\mathbb{R}\\)，则\\(a\\)的范围是？', opts:['\\(a<2\\)','\\(a\\leq 2\\)','\\(a>2\\)','\\(a\\geq 2\\)'], ans:0, exp:'A∪B=R需B能覆盖A没覆盖的部分。A覆盖(-∞,2)，B覆盖(a,+∞)。需a<2才能接上。' },
-  { id:42, chapter:'集合', topic:'集合中的含参问题', diff:3, q:'\\(A=\\{x\\mid x^2-2x-3<0\\}\\)，\\(B=\\{x\\mid |x|<a\\}\\)，若\\(B\\subsetneq A\\)，则\\(a\\)的最大值为？', opts:['1','2','3','4'], ans:0, exp:'A=(-1,3)，B=(-a,a)。B真包含于A需(-a,a)⊆(-1,3)且不等→a≤1（a=1时B=(-1,1)⊂A成立；a>1时超出A的左边界−1）。故a最大为1。' },
-  { id:43, chapter:'集合', topic:'集合中的公式', diff:2, q:'设全集U，A,B为子集，则\\(\\complement_U(A\\cup B)=\\)？', opts:['\\((\\complement_U A)\\cap(\\complement_U B)\\)','\\((\\complement_U A)\\cup(\\complement_U B)\\)','\\(\\complement_U A\\cup B\\)','\\(A\\cap B\\)'], ans:0, exp:'德摩根律：\\(\\complement_U(A\\cup B)=(\\complement_U A)\\cap(\\complement_U B)\\)。' },
-  { id:44, chapter:'集合', topic:'集合中的公式', diff:2, q:'card\\(A\\cup B\\)=card\\(A\\)+card\\(B\\)-card\\(A\\cap B\\)。若card(A)=15, card(B)=12, card(A∩B)=5，则card(A∪B)=?', opts:['22','27','20','32'], ans:0, exp:'15+12-5=22。' },
-  { id:45, chapter:'集合', topic:'集合中的公式', diff:2, q:'已知card(A)=8, card(B)=6, card(A∪B)=12，则card(A∩B)=？', opts:['2','4','6','14'], ans:0, exp:'card(A∩B)=card(A)+card(B)−card(A∪B)=8+6−12=2。' },
-  { id:46, chapter:'常用逻辑用语', topic:'全称和特称命题', diff:1, q:'命题"\\(\\forall x\\in\\mathbb{R}, x^2\\geq 0\\)"的否定是？', opts:['\\(\\exists x\\in\\mathbb{R}, x^2<0\\)','\\(\\forall x\\in\\mathbb{R}, x^2<0\\)','\\(\\exists x\\in\\mathbb{R}, x^2\\geq 0\\)','\\(\\forall x\\notin\\mathbb{R}, x^2<0\\)'], ans:0, exp:'全称命题的否定是特称命题，结论取反。' },
-  { id:47, chapter:'常用逻辑用语', topic:'全称和特称命题', diff:1, q:'命题"\\(\\exists x\\in\\mathbb{R}, x^2+1=0\\)"的否定是？', opts:['\\(\\forall x\\in\\mathbb{R}, x^2+1\\neq 0\\)','\\(\\exists x\\in\\mathbb{R}, x^2+1\\neq 0\\)','\\(\\forall x\\notin\\mathbb{R}, x^2+1=0\\)','\\(\\forall x\\in\\mathbb{R}, x^2+1=0\\)'], ans:0, exp:'特称命题的否定是全称命题，结论取反。' },
-  { id:48, chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:1, q:'"\\(x>2\\)"是"\\(x>1\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:0, exp:'\\(x>2\\Rightarrow x>1\\)（充分），\\(x>1\\nRightarrow x>2\\)（不必要）。' },
-  { id:49, chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:2, q:'"\\(x^2-3x+2=0\\)"是"\\(x=1\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:1, exp:'\\(x=1\\Rightarrow x^2-3x+2=0\\)（必要），但方程还有解x=2（不充分）。' },
-  { id:50, chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:2, q:'"\\(a=b\\)"是"\\(a^2=b^2\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:0, exp:'\\(a=b\\Rightarrow a^2=b^2\\)（充分）；\\(a^2=b^2\\nRightarrow a=b\\)（a=-b时也成立，不必要）。' },
-  { id:51, chapter:'常用逻辑用语', topic:'含参条件的判断', diff:3, q:'p: \\(x^2-3x+2<0\\)，q: \\(x<a\\)。若p是q的充分不必要条件，则\\(a\\)的范围是？', opts:['\\(a\\geq 2\\)','\\(a>2\\)','\\(a\\leq 2\\)','\\(a<2\\)'], ans:1, exp:'p:1<x<2。p⇒q：只要1<x<2就有x<a，即a≥2。q⇏p：需a>2时取x∈(2,a)满足q但不满足p。故a>2。' },
-  { id:52, chapter:'均值不等式', topic:'均值不等式及其应用', diff:1, q:'若\\(a>0,b>0\\)，则\\(\\frac{a+b}{2}\\)与\\(\\sqrt{ab}\\)的关系是？', opts:['\\(\\frac{a+b}{2}\\geq\\sqrt{ab}\\)','\\(\\frac{a+b}{2}\\leq\\sqrt{ab}\\)','相等','无法确定'], ans:0, exp:'均值不等式：\\(\\frac{a+b}{2}\\geq\\sqrt{ab}\\)，当且仅当a=b时取等。' },
-  { id:53, chapter:'均值不等式', topic:'均值不等式及其应用', diff:2, q:'已知\\(x>0\\)，则\\(x+\\frac{4}{x}\\)的最小值为？', opts:['4','2','8','1'], ans:0, exp:'\\(x+\\frac{4}{x}\\geq 2\\sqrt{x\\cdot\\frac{4}{x}}=4\\)，当x=2时取等。' },
-  { id:54, chapter:'均值不等式', topic:'均值不等式及其应用', diff:2, q:'已知\\(x>0,y>0\\)，\\(xy=16\\)，则\\(x+y\\)的最小值为？', opts:['4','8','16','2'], ans:1, exp:'\\(x+y\\geq 2\\sqrt{xy}=8\\)，当x=y=4时取等。' },
-  { id:55, chapter:'均值不等式', topic:'均值不等式中的配凑', diff:3, q:'已知\\(x>0\\)，求\\(x+\\frac{1}{x-1}\\)（\\(x>1\\)）的最小值。', opts:['3','2','4','1'], ans:0, exp:'令t=x-1>0，则x=t+1，原式=\\(t+1+\\frac{1}{t}\\geq 2+1=3\\)（当t=1即x=2时取等）。' },
-  { id:56, chapter:'均值不等式', topic:'多元均值不等式', diff:3, q:'已知\\(a>0,b>0,c>0\\)，\\(a+b+c=3\\)，则\\(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}\\)的最小值为？', opts:['3','6','9','1'], ans:0, exp:'由均值不等式：\\((a+b+c)(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c})\\geq 9\\)，所以\\(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}\\geq 3\\)。' },
-  { id:57, chapter:'函数的概念', topic:'函数的概念与表示', diff:1, q:'下列哪个不是函数？（x为自变量，y为因变量）', opts:['\\(y=x+1\\)','\\(y^2=x\\)','\\(y=x^2\\)','\\(y=|x|\\)'], ans:1, exp:'\\(y^2=x\\)中一个x对应两个y值（x>0时），不满足函数单值性。' },
-  { id:58, chapter:'函数的概念', topic:'函数的概念与表示', diff:1, q:'若\\(f(x)=x^2+1\\)，则\\(f(2)=\\)？', opts:['5','3','4','6'], ans:0, exp:'\\(f(2)=2^2+1=5\\)。' },
-  { id:59, chapter:'函数的概念', topic:'函数的概念与表示', diff:2, q:'下列各组函数表示同一函数的是？', opts:['\\(f(x)=x, g(x)=\\sqrt{x^2}\\)','\\(f(x)=|x|, g(x)=\\sqrt{x^2}\\)','\\(f(x)=\\frac{x}{x}, g(x)=1\\)','\\(f(x)=x+1, g(x)=\\frac{x^2-1}{x-1}\\)'], ans:1, exp:'A：√(x²)=|x|≠x；B：√(x²)=|x|，定义域相同，恒等；C：f定义域x≠0，g定义域R，不同；D：g=x+1但x≠1，f定义域R，不同。' },
-  { id:60, chapter:'函数的概念', topic:'函数的定义域', diff:1, q:'函数\\(f(x)=\\sqrt{x-1}\\)的定义域是？', opts:['\\([1,+\\infty)\\)','\\((1,+\\infty)\\)','\\([0,+\\infty)\\)','\\((-\\infty,1]\\)'], ans:0, exp:'\\(x-1\\geq 0\\)→\\(x\\geq 1\\)。' },
-  { id:61, chapter:'函数的概念', topic:'函数的定义域', diff:2, q:'函数\\(f(x)=\\frac{\\sqrt{x+1}}{x-1}\\)的定义域是？', opts:['\\([-1,+\\infty)\\)','\\([-1,1)\\cup(1,+\\infty)\\)','\\((-1,1)\\cup(1,+\\infty)\\)','\\([0,1)\\cup(1,+\\infty)\\)'], ans:1, exp:'分子需x+1≥0→x≥−1；分母需x−1≠0→x≠1。取交集。' },
-  { id:62, chapter:'函数的概念', topic:'函数的定义域', diff:2, q:'函数\\(f(x)=\\ln(x-2)+\\sqrt{4-x}\\)的定义域是？', opts:['\\((2,4]\\)','\\([2,4]\\)','\\((2,4)\\)','\\([2,4)\\)'], ans:0, exp:'ln(x-2)需x>2；√(4-x)需x≤4。取交集(2,4]。' },
-  { id:63, chapter:'函数的概念', topic:'函数的定义域', diff:3, q:'若\\(f(x)\\)的定义域为\\([0,2]\\)，则\\(f(x+1)\\)的定义域为？', opts:['\\([-1,1]\\)','\\([1,3]\\)','\\([0,2]\\)','\\([-1,0]\\)'], ans:0, exp:'由0≤x+1≤2得−1≤x≤1。' },
-  { id:64, chapter:'函数的概念', topic:'函数的值域', diff:1, q:'函数\\(y=x^2+2x+3\\)的值域是？', opts:['\\([2,+\\infty)\\)','\\([3,+\\infty)\\)','\\((2,+\\infty)\\)','\\([1,+\\infty)\\)'], ans:0, exp:'配方：\\(y=(x+1)^2+2\\geq 2\\)。' },
-  { id:65, chapter:'函数的概念', topic:'函数的值域', diff:2, q:'函数\\(y=\\frac{1}{x^2+1}\\)的值域是？', opts:['\\((0,1]\\)','\\([0,1)\\)','\\((0,+\\infty)\\)','\\([0,1]\\)'], ans:0, exp:'\\(x^2+1\\geq 1\\)→\\(0<\\frac{1}{x^2+1}\\leq 1\\)。' },
-  { id:66, chapter:'函数的概念', topic:'函数的值域', diff:3, q:'函数\\(y=\\frac{x+1}{x-1}\\)（\\(x\\neq 1\\)）的值域是？', opts:['\\(\\{y\\mid y\\neq 1\\}\\)','\\(\\{y\\mid y\\neq -1\\}\\)','\\(\\mathbb{R}\\)','\\((1,+\\infty)\\)'], ans:0, exp:'分离常数：\\(y=1+\\frac{2}{x-1}\\)，\\(\\frac{2}{x-1}\\neq 0\\)，故y≠1。' },
-  { id:67, chapter:'函数的概念', topic:'函数的解析式', diff:2, q:'若\\(f(x-1)=x^2+2x\\)，则\\(f(x)=\\)？', opts:['\\(x^2+4x+3\\)','\\(x^2+2x+1\\)','\\(x^2+2x+3\\)','\\(x^2-2x+3\\)'], ans:0, exp:'令t=x-1→x=t+1。f(t)=(t+1)²+2(t+1)=t²+4t+3。' },
-  { id:68, chapter:'函数的概念', topic:'函数的解析式', diff:3, q:'若\\(f(x)+2f(\\frac{1}{x})=3x\\)，则\\(f(2)=\\)？', opts:['−1','1','2','−2'], ans:0, exp:'x=2：f(2)+2f(1/2)=6①；x=1/2：f(1/2)+2f(2)=3/2②。②×2−①：3f(2)=3−6=−3→f(2)=−1。' },
-  { id:69, chapter:'函数的性质', topic:'函数的单调性', diff:1, q:'函数\\(f(x)=x^2\\)在\\((-\\infty,0]\\)上的单调性是？', opts:['单调递增','单调递减','先增后减','不单调'], ans:1, exp:'\\(y=x^2\\)开口向上，对称轴x=0，在(-∞,0]上递减。' },
-  { id:70, chapter:'函数的性质', topic:'函数的单调性', diff:1, q:'函数\\(f(x)=2x-1\\)在\\(\\mathbb{R}\\)上？', opts:['单调递增','单调递减','常数函数','先减后增'], ans:0, exp:'一次函数k=2>0，在R上单调递增。' },
-  { id:71, chapter:'函数的性质', topic:'函数的单调性', diff:2, q:'函数\\(f(x)=\\frac{1}{x}\\)在\\((0,+\\infty)\\)上？', opts:['单调递增','单调递减','先减后增','不单调'], ans:1, exp:'\\(x_1<x_2\\)时\\(\\frac{1}{x_1}-\\frac{1}{x_2}=\\frac{x_2-x_1}{x_1x_2}>0\\)，故\\(f(x_1)>f(x_2)\\)，递减。' },
-  { id:72, chapter:'函数的性质', topic:'函数的单调性', diff:3, q:'函数\\(f(x)=x+\\frac{1}{x}\\)（x>0）的单调递减区间是？', opts:['\\((0,1]\\)','\\([1,+\\infty)\\)','\\((0,+\\infty)\\)','\\((0,2]\\)'], ans:0, exp:'对勾函数，最低点x=1。在(0,1]递减，[1,+∞)递增。' },
-  { id:73, chapter:'函数的性质', topic:'含参单调性问题', diff:3, q:'若\\(f(x)=x^2-2ax+3\\)在\\((-\\infty,2]\\)上单调递减，则\\(a\\)的范围是？', opts:['\\(a\\geq 2\\)','\\(a\\leq 2\\)','\\(a>2\\)','\\(a<2\\)'], ans:0, exp:'开口向上，对称轴x=a。在(-∞,2]递减需a≥2（对称轴在区间右侧）。' },
-  { id:74, chapter:'函数的性质', topic:'函数奇偶性', diff:1, q:'\\(f(x)=x^2\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:1, exp:'f(-x)=(-x)²=x²=f(x)。' },
-  { id:75, chapter:'函数的性质', topic:'函数奇偶性', diff:1, q:'\\(f(x)=x^3\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:0, exp:'f(-x)=(-x)³=−x³=−f(x)。' },
-  { id:76, chapter:'函数的性质', topic:'函数奇偶性', diff:2, q:'\\(f(x)=x^2+x\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:3, exp:'f(-x)=x²−x，既不等于f(x)也不等于−f(x)。' },
-  { id:77, chapter:'函数的性质', topic:'函数奇偶性', diff:2, q:'若\\(f(x)\\)是R上的奇函数，\\(f(2)=3\\)，则\\(f(-2)=\\)？', opts:['−3','3','0','无法确定'], ans:0, exp:'奇函数：f(-2)=−f(2)=−3。' },
-  { id:78, chapter:'函数的性质', topic:'奇偶性和单调性综合', diff:3, q:'偶函数\\(f(x)\\)在\\([0,+\\infty)\\)上递增，\\(f(1)=0\\)，则\\(f(x)<0\\)的解集是？', opts:['\\((-1,1)\\)','\\((-\\infty,-1)\\cup(1,+\\infty)\\)','\\((-\\infty,-1)\\cup(-1,1)\\)','\\((1,+\\infty)\\)'], ans:0, exp:'偶函数关于y轴对称。x≥0时递增且f(1)=0→0≤x<1时f(x)<0。由对称性−1<x<0时f(x)<0。解集(-1,1)。' },
-  { id:79, chapter:'函数的性质', topic:'抽象函数的单调性和奇偶性', diff:3, q:'已知\\(f(x)\\)是R上的奇函数，x>0时\\(f(x)=x^2-2x\\)，则x<0时\\(f(x)=\\)？', opts:['\\(-x^2-2x\\)','\\(x^2+2x\\)','\\(-x^2+2x\\)','\\(x^2-2x\\)'], ans:0, exp:'x<0时−x>0，f(x)=−f(−x)=−[(−x)²−2(−x)]=−[x²+2x]=−x²−2x。' },
-  { id:80, chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:1, q:'\\(2^3\\times 2^4\\)等于？', opts:['\\(2^7\\)','\\(2^{12}\\)','\\(4^7\\)','\\(2^1\\)'], ans:0, exp:'同底数幂：\\(2^{3+4}=2^7\\)。' },
-  { id:81, chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:2, q:'化简：\\(\\sqrt[3]{a}\\cdot\\sqrt{a}\\)（a>0）', opts:['\\(a^{\\frac{5}{6}}\\)','\\(a^{\\frac{2}{5}}\\)','\\(a^{\\frac{1}{6}}\\)','\\(a^{\\frac{5}{3}}\\)'], ans:0, exp:'\\(a^{1/3}\\cdot a^{1/2}=a^{5/6}\\)。' },
-  { id:82, chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:2, q:'\\((a^{\\frac{2}{3}})^{\\frac{3}{2}}\\)（a>0）等于？', opts:['a','\\(a^{\\frac{4}{9}}\\)','\\(a^{\\frac{3}{2}}\\)','\\(a^2\\)'], ans:0, exp:'\\((a^{m})^n=a^{mn}\\)：\\(a^{\\frac{2}{3}\\cdot\\frac{3}{2}}=a^1=a\\)。' },
-  { id:83, chapter:'指对幂函数', topic:'指数函数及其图象', diff:1, q:'函数\\(y=2^x\\)的图像必过哪个点？', opts:['\\((0,1)\\)','\\((1,0)\\)','\\((1,2)\\)','\\((2,1)\\)'], ans:0, exp:'指数函数y=aˣ恒过定点(0,1)（a⁰=1）。' },
-  { id:84, chapter:'指对幂函数', topic:'指数函数及其图象', diff:2, q:'\\(y=2^x\\)与\\(y=(\\frac{1}{2})^x\\)的图像关于什么对称？', opts:['x轴','y轴','原点','直线y=x'], ans:1, exp:'(1/2)ˣ=2⁻ˣ，f(x)与f(−x)关于y轴对称。' },
-  { id:85, chapter:'指对幂函数', topic:'指数函数的性质', diff:2, q:'比较大小：\\(1.2^{\\frac{1}{2}}\\) 与 \\(1.3^{\\frac{1}{2}}\\)', opts:['\\(1.2^{1/2}<1.3^{1/2}\\)','\\(1.2^{1/2}>1.3^{1/2}\\)','相等','无法比较'], ans:0, exp:'幂函数y=x^(1/2)在(0,+∞)上递增。' },
-  { id:86, chapter:'指对幂函数', topic:'指数函数的性质', diff:3, q:'方程\\(2^x=8\\)的解是？', opts:['x=3','x=2','x=4','x=1'], ans:0, exp:'8=2³，2ˣ=2³→x=3。' },
-  { id:87, chapter:'指对幂函数', topic:'对数的定义与运算', diff:1, q:'\\(\\log_2 8\\)的值是？', opts:['3','2','4','8'], ans:0, exp:'log₂8=log₂2³=3。' },
-  { id:88, chapter:'指对幂函数', topic:'对数的定义与运算', diff:1, q:'\\(\\lg 100\\)的值是？', opts:['2','1','10','100'], ans:0, exp:'lg100=log₁₀10²=2。' },
-  { id:89, chapter:'指对幂函数', topic:'对数的定义与运算', diff:2, q:'\\(\\log_2 3+\\log_2\\frac{1}{3}\\)的值是？', opts:['0','1','log₂3','−1'], ans:0, exp:'log₂(3×1/3)=log₂1=0。' },
-  { id:90, chapter:'指对幂函数', topic:'对数的定义与运算', diff:2, q:'\\(\\log_3 27-\\log_3 9\\)的值是？', opts:['1','2','3','log₃18'], ans:0, exp:'log₃(27/9)=log₃3=1。' },
-  { id:91, chapter:'指对幂函数', topic:'换底公式', diff:2, q:'\\(\\log_4 8\\)的值是？', opts:['\\(\\frac{3}{2}\\)','2','\\(\\frac{2}{3}\\)','\\(\\frac{1}{2}\\)'], ans:0, exp:'log₄8=log₂8/log₂4=3/2。' },
-  { id:92, chapter:'指对幂函数', topic:'换底公式', diff:2, q:'若\\(\\log_2 3=a\\)，则\\(\\log_3 2=\\)？', opts:['\\(\\frac{1}{a}\\)','\\(-a\\)','a','a²'], ans:0, exp:'log₃2=1/log₂3=1/a。' },
-  { id:93, chapter:'指对幂函数', topic:'对数函数及其图象', diff:1, q:'函数\\(y=\\log_2 x\\)的图像必过哪个点？', opts:['\\((0,1)\\)','\\((1,0)\\)','\\((1,2)\\)','\\((2,1)\\)'], ans:1, exp:'对数函数y=logₐx恒过定点(1,0)（因为logₐ1=0）。' },
-  { id:94, chapter:'指对幂函数', topic:'对数函数及其图象', diff:2, q:'函数\\(y=\\log_{\\frac{1}{2}}x\\)的单调性是？', opts:['在\\((0,+\\infty)\\)递增','在\\((0,+\\infty)\\)递减','在R上递增','不单调'], ans:1, exp:'底数0<1/2<1，所以递减。' },
-  { id:95, chapter:'指对幂函数', topic:'对数型函数', diff:2, q:'函数\\(f(x)=\\log_2(x^2-1)\\)的定义域是？', opts:['\\((-\\infty,-1)\\cup(1,+\\infty)\\)','\\((-1,1)\\)','\\((1,+\\infty)\\)','\\((-\\infty,-1)\\)'], ans:0, exp:'需x²−1>0→x<−1或x>1。' },
-  { id:96, chapter:'指对幂函数', topic:'对数型函数', diff:3, q:'函数\\(f(x)=\\ln(x+\\sqrt{x^2+1})\\)的奇偶性是？', opts:['奇函数','偶函数','非奇非偶','无法判断'], ans:0, exp:'定义域R关于原点对称。f(−x)=ln(−x+√(x²+1))=ln(1/(x+√(x²+1)))=−ln(x+√(x²+1))=−f(x)，奇函数。' },
-  { id:97, chapter:'指对幂函数', topic:'指数对数中的大小比较', diff:2, q:'设a=log₃2, b=log₃(1/2), c=3⁰·¹，则它们的大小顺序是？', opts:['b<a<c','a<b<c','c<a<b','b<c<a'], ans:0, exp:'a=log₃2∈(0,1)；b=log₃(1/2)<0；c=3^0.1>1。故b<a<c。' },
-  { id:98, chapter:'指对幂函数', topic:'指数对数中的大小比较', diff:3, q:'设a=log₀.₅2, b=log₀.₅3, c=1，则a,b,c的大小关系是？', opts:['a>b>c','b>a>c','c>a>b','c>b>a'], ans:0, exp:'底数0.5<1，对数函数递减。2<3→log₀.₅2>log₀.₅3。又log₀.₅2>log₀.₅0.5=1，log₀.₅3>log₀.₅0.5=1。所以a>b>1=c。' },
-  { id:99, chapter:'指对幂函数', topic:'指对函数的奇偶性', diff:3, q:'函数\\(f(x)=\\ln\\frac{1-x}{1+x}\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:0, exp:'定义域(−1,1)关于原点对称。f(−x)=ln((1+x)/(1−x))=−ln((1−x)/(1+x))=−f(x)。' },
-  { id:100, chapter:'指对幂函数', topic:'指对函数的奇偶性', diff:2, q:'函数\\(f(x)=e^x+e^{-x}\\)的奇偶性是？', opts:['偶函数','奇函数','非奇非偶','既奇又偶'], ans:0, exp:'f(−x)=e⁻ˣ+eˣ=f(x)，偶函数。' },
-  { id:101, chapter:'指对幂函数', topic:'幂函数及其性质', diff:1, q:'下列是幂函数的是？', opts:['\\(y=2x^3\\)','\\(y=x^3+1\\)','\\(y=x^{\\frac{1}{2}}\\)','\\(y=3^x\\)'], ans:2, exp:'幂函数形式y=x^α，只有C符合。' },
-  { id:102, chapter:'指对幂函数', topic:'幂函数及其性质', diff:1, q:'\\(y=x^{-1}\\)的图像不经过哪个象限？', opts:['第一象限','第二象限','第三象限','第二和第四象限'], ans:3, exp:'y=1/x是双曲线，在第一、三象限。' },
-  { id:103, chapter:'指对幂函数', topic:'幂函数及其性质', diff:2, q:'幂函数\\(y=x^{\\frac{2}{3}}\\)的定义域是？', opts:['\\([0,+\\infty)\\)','\\(\\mathbb{R}\\)','\\((0,+\\infty)\\)','\\(\\mathbb{R}\\setminus\\{0\\}\\)'], ans:1, exp:'\\(y=\\sqrt[3]{x^2}\\)，三次根号下可为任意实数，定义域为R。' },
-  { id:104, chapter:'函数的应用', topic:'方程的根与函数零点', diff:1, q:'函数\\(f(x)=x^2-4\\)的零点是？', opts:['\\(x=2\\)','\\(x=-2\\)','\\(x=\\pm 2\\)','\\(x=4\\)'], ans:2, exp:'f(x)=0→x²=4→x=±2。' },
-  { id:105, chapter:'函数的应用', topic:'方程的根与函数零点', diff:2, q:'方程\\(2^x=3-x\\)的根所在区间是？', opts:['\\((0,1)\\)','\\((1,2)\\)','\\((2,3)\\)','\\((0,2)\\)'], ans:0, exp:'令g(x)=2ˣ+x−3。g(0)=1+0−3=−2<0；g(1)=2+1−3=0。根为x=1∈(0,1]。' },
-  { id:106, chapter:'函数的应用', topic:'零点存在性定理', diff:2, q:'若f(x)在[a,b]上连续且f(a)f(b)<0，则？', opts:['f(x)在(a,b)内有唯一零点','f(x)在(a,b)内至少有一个零点','f(x)在[a,b]上单调','f(x)在(a,b)内无零点'], ans:1, exp:'零点存在性定理：连续函数两端异号，则区间内至少有一个零点。不一定唯一。' },
-  { id:107, chapter:'函数的应用', topic:'零点存在性定理', diff:3, q:'函数\\(f(x)=\\ln x-\\frac{1}{x}\\)的零点个数为？', opts:['0','1','2','3'], ans:1, exp:'f(x)在(0,+∞)连续。f(1)=−1<0；f(e)=1−1/e>0。f\'(x)=1/x+1/x²>0，单调递增，故只有一个零点。' },
-  { id:108, chapter:'函数的应用', topic:'零点个数问题', diff:2, q:'函数\\(f(x)=|x^2-4|-1\\)的零点个数为？', opts:['4','2','3','1'], ans:0, exp:'|x²−4|=1→x²−4=±1→x²=5或x²=3→x=±√5和x=±√3，共4个。' },
-  { id:109, chapter:'函数的应用', topic:'复合函数零点', diff:3, q:'函数\\(f(x)=2^{|x|}-3\\)的零点个数为？', opts:['0','1','2','3'], ans:2, exp:'2^{|x|}=3→|x|=log₂3→x=±log₂3，两个零点。' },
-  { id:110, chapter:'函数的应用', topic:'二分法', diff:1, q:'用二分法求方程近似解的理论依据是？', opts:['零点存在性定理','中值定理','极限定理','费马定理'], ans:0, exp:'二分法基于零点存在性定理：连续函数两端异号则区间内含零点。' },
-  { id:111, chapter:'函数的应用', topic:'函数的应用题', diff:3, q:'某商品每件成本10元，售价x元时销量为(100−x)件。售价定为多少时总利润最大？', opts:['55','50','60','45'], ans:0, exp:'利润P=(x−10)(100−x)=−x²+110x−1000=−(x−55)²+2025。x=55时最大。' },
-  { id:112, chapter:'三角函数', topic:'任意角与弧度制', diff:1, q:'\\(180^\\circ\\)等于多少弧度？', opts:['\\(\\pi\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(\\frac{3\\pi}{2}\\)'], ans:0, exp:'180°=π rad。' },
-  { id:113, chapter:'三角函数', topic:'任意角与弧度制', diff:1, q:'\\(\\frac{\\pi}{3}\\)等于多少度？', opts:['\\(60^\\circ\\)','\\(30^\\circ\\)','\\(45^\\circ\\)','\\(90^\\circ\\)'], ans:0, exp:'π/3×180°/π=60°。' },
-  { id:114, chapter:'三角函数', topic:'任意角与弧度制', diff:2, q:'\\(-150^\\circ\\)等于多少弧度？', opts:['\\(-\\frac{5\\pi}{6}\\)','\\(-\\frac{2\\pi}{3}\\)','\\(-\\frac{3\\pi}{4}\\)','\\(-\\frac{5\\pi}{4}\\)'], ans:0, exp:'−150°=−150×π/180=−5π/6。' },
-  { id:115, chapter:'三角函数', topic:'任意角三角函数', diff:1, q:'\\(\\sin 30^\\circ\\)的值是？', opts:['\\(\\frac{1}{2}\\)','\\(\\frac{\\sqrt{2}}{2}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','1'], ans:0, exp:'特殊角三角函数值。' },
-  { id:116, chapter:'三角函数', topic:'任意角三角函数', diff:1, q:'\\(\\cos\\frac{\\pi}{4}\\)的值是？', opts:['\\(\\frac{\\sqrt{2}}{2}\\)','\\(\\frac{1}{2}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{1}{3}\\)'], ans:0, exp:'cos45°=√2/2。' },
-  { id:117, chapter:'三角函数', topic:'任意角三角函数', diff:2, q:'\\(\\tan\\frac{\\pi}{3}\\)的值是？', opts:['\\(\\sqrt{3}\\)','\\(\\frac{\\sqrt{3}}{3}\\)','1','\\(\\frac{\\sqrt{3}}{2}\\)'], ans:0, exp:'tan60°=√3。' },
-  { id:118, chapter:'三角函数', topic:'同角三角函数基本关系', diff:1, q:'已知\\(\\sin\\alpha=\\frac{3}{5}\\)，α为锐角，则\\(\\cos\\alpha=\\)？', opts:['\\(\\frac{4}{5}\\)','\\(\\frac{3}{4}\\)','\\(-\\frac{4}{5}\\)','\\(\\frac{5}{4}\\)'], ans:0, exp:'sin²α+cos²α=1→cosα=√(1−9/25)=4/5。' },
-  { id:119, chapter:'三角函数', topic:'同角三角函数基本关系', diff:2, q:'已知\\(\\tan\\alpha=2\\)，则\\(\\frac{\\sin\\alpha+\\cos\\alpha}{\\sin\\alpha-\\cos\\alpha}=\\)？', opts:['3','2','1','−3'], ans:0, exp:'\\(\\frac{\\tan\\alpha+1}{\\tan\\alpha-1}=\\frac{2+1}{2-1}=3\\)。' },
-  { id:120, chapter:'三角函数', topic:'诱导公式', diff:2, q:'\\(\\sin(\\pi+\\alpha)\\)等于？', opts:['\\(-\\sin\\alpha\\)','\\(\\sin\\alpha\\)','\\(\\cos\\alpha\\)','\\(-\\cos\\alpha\\)'], ans:0, exp:'sin(π+α)=−sinα。' },
-  { id:121, chapter:'三角函数', topic:'诱导公式', diff:2, q:'\\(\\cos(\\frac{\\pi}{2}-\\alpha)\\)等于？', opts:['\\(\\sin\\alpha\\)','\\(-\\sin\\alpha\\)','\\(\\cos\\alpha\\)','\\(-\\cos\\alpha\\)'], ans:0, exp:'cos(π/2−α)=sinα（余角公式）。' },
-  { id:122, chapter:'三角函数', topic:'正余弦函数的性质', diff:1, q:'函数\\(y=2\\sin x\\)的最大值是？', opts:['2','1','0','−2'], ans:0, exp:'sinx∈[−1,1]，所以2sinx∈[−2,2]，最大值为2。' },
-  { id:123, chapter:'三角函数', topic:'正余弦函数的性质', diff:2, q:'函数\\(y=\\sin x\\)的最小正周期是？', opts:['\\(2\\pi\\)','\\(\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(4\\pi\\)'], ans:0, exp:'y=sinx的最小正周期为2π。' },
-  { id:124, chapter:'三角函数', topic:'正余弦函数的性质', diff:2, q:'函数\\(y=\\cos 2x\\)的最小正周期是？', opts:['\\(\\pi\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(4\\pi\\)'], ans:0, exp:'T=2π/|ω|=2π/2=π。' },
-  { id:125, chapter:'三角函数', topic:'函数y＝Asin(ωx＋φ)的图象', diff:3, q:'函数\\(y=2\\sin(3x+\\frac{\\pi}{6})\\)的最小正周期是？', opts:['\\(\\frac{2\\pi}{3}\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{3}\\)','\\(\\frac{2}{3}\\)'], ans:0, exp:'T=2π/|ω|=2π/3。' },
-  { id:126, chapter:'三角函数', topic:'三角函数的平移', diff:2, q:'将\\(y=\\sin x\\)向左平移\\(\\frac{\\pi}{3}\\)得到？', opts:['\\(y=\\sin(x-\\frac{\\pi}{3})\\)','\\(y=\\sin(x+\\frac{\\pi}{3})\\)','\\(y=\\sin x+\\frac{\\pi}{3}\\)','\\(y=\\sin x-\\frac{\\pi}{3}\\)'], ans:1, exp:'左加右减：向左平移π/3→y=sin(x+π/3)。' },
-  { id:127, chapter:'三角恒等变换', topic:'两角和差公式', diff:2, q:'\\(\\sin 75^\\circ\\)等于？', opts:['\\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{6}-\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{1}{2}\\)'], ans:0, exp:'sin75°=sin(45°+30°)=sin45°cos30°+cos45°sin30°=(√6+√2)/4。' },
-  { id:128, chapter:'三角恒等变换', topic:'两角和差公式', diff:2, q:'\\(\\cos 15^\\circ\\)等于？', opts:['\\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{6}-\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{\\sqrt{2}}{2}\\)'], ans:0, exp:'cos15°=cos(45°−30°)=cos45°cos30°+sin45°sin30°=(√6+√2)/4。' },
-  { id:129, chapter:'三角恒等变换', topic:'两角和差公式', diff:3, q:'已知sinα=3/5，cosβ=5/13，α,β均为锐角，则sin(α+β)=？', opts:['\\(\\frac{63}{65}\\)','\\(\\frac{33}{65}\\)','\\(\\frac{56}{65}\\)','\\(\\frac{16}{65}\\)'], ans:0, exp:'cosα=4/5，sinβ=12/13。sin(α+β)=sinαcosβ+cosαsinβ=(3/5)(5/13)+(4/5)(12/13)=15/65+48/65=63/65。' },
-  { id:130, chapter:'三角恒等变换', topic:'二倍角公式', diff:2, q:'若\\(\\sin\\alpha=\\frac{1}{3}\\)，则\\(\\cos 2\\alpha=\\)？', opts:['\\(\\frac{7}{9}\\)','\\(\\frac{8}{9}\\)','\\(\\frac{2}{3}\\)','\\(-\\frac{7}{9}\\)'], ans:0, exp:'cos2α=1−2sin²α=1−2/9=7/9。' },
-  { id:131, chapter:'三角恒等变换', topic:'二倍角公式', diff:2, q:'\\(\\sin 2\\alpha=2\\sin\\alpha\\cos\\alpha\\)。若sinα=4/5, cosα=3/5，则sin2α=？', opts:['\\(\\frac{24}{25}\\)','\\(\\frac{12}{25}\\)','\\(\\frac{7}{25}\\)','\\(\\frac{8}{25}\\)'], ans:0, exp:'sin2α=2×(4/5)×(3/5)=24/25。' },
-  { id:132, chapter:'三角恒等变换', topic:'凑角问题', diff:3, q:'已知\\(\\sin(\\alpha+\\beta)=\\frac{3}{5}\\)，\\(\\sin(\\alpha-\\beta)=\\frac{1}{5}\\)，则\\(\\frac{\\tan\\alpha}{\\tan\\beta}=\\)？', opts:['2','\\(\\frac{1}{2}\\)','4','\\(\\frac{3}{5}\\)'], ans:0, exp:'两式分别展开后相加得2sinαcosβ=4/5→sinαcosβ=2/5；相减得2cosαsinβ=2/5→cosαsinβ=1/5。tanα/tanβ=(sinαcosβ)/(cosαsinβ)=2。' },
-  { id:133, chapter:'三角恒等变换', topic:'辅助角公式', diff:3, q:'\\(\\sqrt{3}\\sin x+\\cos x\\)可化为？', opts:['\\(2\\sin(x+\\frac{\\pi}{6})\\)','\\(2\\sin(x+\\frac{\\pi}{3})\\)','\\(\\sqrt{2}\\sin(x+\\frac{\\pi}{4})\\)','\\(2\\cos(x-\\frac{\\pi}{3})\\)'], ans:0, exp:'\\(\\sqrt{3}\\sin x+\\cos x=\\sqrt{(\\sqrt{3})^2+1^2}\\sin(x+\\varphi)=\\sqrt{4}\\sin(x+\\frac{\\pi}{6})=2\\sin(x+\\frac{\\pi}{6})\\)。其中tanφ=1/√3→φ=π/6。' }
+  { id:1, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 + 5x + 6\\)', opts:['\\((x+2)(x+3)\\)','\\((x+1)(x+6)\\)','\\((x-2)(x-3)\\)','\\((x+2)(x-3)\\)'], ans:0, exp:'十字相乘法：两数之和5，积6 → 2和3。\\(x^2+5x+6=(x+2)(x+3)\\)。' },
+  { id:2, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 7x + 12\\)', opts:['\\((x-3)(x-4)\\)','\\((x+3)(x+4)\\)','\\((x-3)(x+4)\\)','\\((x-2)(x-6)\\)'], ans:0, exp:'(-3)+(-4)=-7, (-3)×(-4)=12，所以\\(x^2-7x+12=(x-3)(x-4)\\)。' },
+  { id:3, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 9\\)', opts:['\\((x-3)^2\\)','\\((x+3)(x-3)\\)','\\((x+9)(x-1)\\)','\\((x-9)(x+1)\\)'], ans:1, exp:'平方差公式：\\(a^2-b^2=(a+b)(a-b)\\)，\\(x^2-9=(x+3)(x-3)\\)。' },
+  { id:4, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'分解因式：\\(x^2 - 4x + 4\\)', opts:['\\((x-2)^2\\)','\\((x+2)^2\\)','\\((x-4)(x-1)\\)','\\((x-2)(x+2)\\)'], ans:0, exp:'完全平方：\\(a^2-2ab+b^2=(a-b)^2\\)，\\(x^2-4x+4=(x-2)^2\\)。' },
+  { id:5, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'分解因式：\\(2x^2 + 7x + 3\\)', opts:['\\((2x+3)(x+1)\\)','\\((2x+1)(x+3)\\)','\\((2x-1)(x-3)\\)','\\((x+1)(2x+3)\\)'], ans:1, exp:'十字相乘：拆两边凑中间。\\(2x^2+7x+3=(2x+1)(x+3)\\)。' },
+  { id:6, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'分解因式：\\(6x^2 - x - 2\\)', opts:['\\((2x+1)(3x-2)\\)','\\((3x+2)(2x-1)\\)','\\((2x-1)(3x+1)\\)','\\((6x+1)(x-2)\\)'], ans:0, exp:'\\(6x^2-x-2=(2x+1)(3x-2)\\)。验证：\\(2x·3x=6x^2\\)，\\(2x·(-2)+1·3x=-x\\)，\\(1·(-2)=-2\\)。' },
+  { id:7, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:1, q:'方程\\(x^2 - 5x + 6 = 0\\)的两根之和为？', opts:['5','−5','6','−6'], ans:0, exp:'韦达定理：\\(x_1+x_2=-\\frac{b}{a}=-\\frac{-5}{1}=5\\)。' },
+  { id:8, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:2, q:'若\\(x_1,x_2\\)是方程\\(2x^2-3x-1=0\\)的两根，则\\(x_1x_2=\\)？', opts:['\\(\\frac{3}{2}\\)','\\(-\\frac{1}{2}\\)','\\(\\frac{1}{2}\\)','\\(-\\frac{3}{2}\\)'], ans:1, exp:'韦达定理：\\(x_1x_2=\\frac{c}{a}=\\frac{-1}{2}=-\\frac{1}{2}\\)。' },
+  { id:9, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:3, q:'已知\\(x_1,x_2\\)是方程\\(x^2-4x+1=0\\)的两根，求\\(x_1^2+x_2^2\\)。', opts:['14','16','18','12'], ans:0, exp:'\\(x_1+x_2=4, x_1x_2=1\\)。\\(x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=16-2=14\\)。' },
+  { id:10, stage:'初中', chapter:'初高中衔接', topic:'十字相乘与韦达定理', diff:3, q:'若\\(x_1,x_2\\)是方程\\(x^2-x-3=0\\)的两根，则\\(\\frac{1}{x_1}+\\frac{1}{x_2}=\\)？', opts:['\\(-\\frac{1}{3}\\)','\\(\\frac{1}{3}\\)','3','−3'], ans:0, exp:'\\(x_1+x_2=1, x_1x_2=-3\\)。\\(\\frac{1}{x_1}+\\frac{1}{x_2}=\\frac{x_1+x_2}{x_1x_2}=\\frac{1}{-3}=-\\frac{1}{3}\\)。' },
+  { id:11, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:1, q:'不等式\\(x^2 - 5x + 6 > 0\\)的解集是？', opts:['\\(x<2\\) 或 \\(x>3\\)','\\(2<x<3\\)','\\(x<-3\\) 或 \\(x>-2\\)','\\(-3<x<-2\\)'], ans:0, exp:'\\((x-2)(x-3)>0\\)，开口向上取两边：\\(x<2\\)或\\(x>3\\)。' },
+  { id:12, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:1, q:'不等式\\(x^2 + 2x - 3 \\leq 0\\)的解集是？', opts:['\\([-3,1]\\)','\\([-1,3]\\)','\\((-\\infty,-3]\\cup[1,+\\infty)\\)','\\([-3,-1]\\)'], ans:0, exp:'\\((x+3)(x-1)\\leq 0\\)，开口向上取中间：\\(-3\\leq x\\leq 1\\)。' },
+  { id:13, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'不等式\\(-x^2 + 4x - 3 > 0\\)的解集是？', opts:['\\((1,3)\\)','\\((-\\infty,1)\\cup(3,+\\infty)\\)','\\((3,+\\infty)\\)','\\((-3,-1)\\)'], ans:0, exp:'两边乘−1并变号：\\(x^2-4x+3<0\\)→\\((x-1)(x-3)<0\\)→\\(1<x<3\\)。' },
+  { id:14, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'若不等式\\(x^2 - 2x + k > 0\\)恒成立，则\\(k\\)的取值范围是？', opts:['\\(k>1\\)','\\(k<1\\)','\\(k\\geq 1\\)','\\(k\\leq 1\\)'], ans:0, exp:'开口向上需\\(\\Delta<0\\)：\\(4-4k<0\\)→\\(k>1\\)。' },
+  { id:15, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:3, q:'不等式\\(x^2 - (a+1)x + a < 0\\)的解集为\\((1,2)\\)，则\\(a=\\)？', opts:['2','1','3','−1'], ans:0, exp:'\\((x-a)(x-1)<0\\)→解集为两根之间的区间\\((1,a)\\)（若\\(a>1\\)）→\\(a=2\\)。' },
+  { id:16, stage:'初中', chapter:'初高中衔接', topic:'一元二次不等式', diff:2, q:'不等式\\(x^2-3x+2\\geq 0\\)且\\(x^2-5x+6<0\\)的解集是？', opts:['\\((2,3)\\)','\\([2,3)\\)','\\((2,3]\\)','\\([2,3]\\)'], ans:0, exp:'第一个：\\(x\\leq 1\\)或\\(x\\geq 2\\)；第二个：\\(2<x<3\\)。交集：\\(2<x<3\\)。' },
+  { id:17, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:1, q:'不等式\\(|x-2| < 3\\)的解集是？', opts:['\\((-1,5)\\)','\\((-5,1)\\)','\\((2,5)\\)','\\((-\\infty,-1)\\cup(5,+\\infty)\\)'], ans:0, exp:'\\(|x-2|<3 \\iff -3<x-2<3 \\iff -1<x<5\\)。' },
+  { id:18, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:1, q:'不等式\\(|x+1| \\geq 2\\)的解集是？', opts:['\\(x\\leq -3\\) 或 \\(x\\geq 1\\)','\\(-3\\leq x\\leq 1\\)','\\(x\\geq 1\\)','\\(x\\leq -3\\)'], ans:0, exp:'\\(x+1\\leq -2\\)或\\(x+1\\geq 2\\)→\\(x\\leq-3\\)或\\(x\\geq1\\)。' },
+  { id:19, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{x-1}{x+2} > 0\\)的解集是？', opts:['\\(x<-2\\) 或 \\(x>1\\)','\\(-2<x<1\\)','\\(x>1\\)','\\(x<-2\\)'], ans:0, exp:'穿根法：零点1,−2。\\(x<-2\\)：负/负=正；\\(-2<x<1\\)：负/正=负；\\(x>1\\)：正/正=正。解集\\(x<-2\\)或\\(x>1\\)。' },
+  { id:20, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{2x-1}{x+1} \\geq 0\\)的解集是？', opts:['\\((-\\infty,-1)\\cup[\\frac{1}{2},+\\infty)\\)','\\((-1,\\frac{1}{2}]\\)','\\([\\frac{1}{2},+\\infty)\\)','\\((-\\infty,-1)\\)'], ans:0, exp:'零点\\(\\frac{1}{2},-1\\)。\\(x<-1\\)：负/负=正；\\(-1<x<\\frac{1}{2}\\)：负/正=负；\\(x\\geq\\frac{1}{2}\\)：非负/正=非负。注意\\(x=-1\\)取不到。' },
+  { id:21, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:3, q:'不等式\\(|2x-1| > |x+2|\\)的解集是？', opts:['\\((-\\infty,-\\frac{1}{3})\\cup(3,+\\infty)\\)','\\((-\\frac{1}{3},3)\\)','\\((3,+\\infty)\\)','\\((0,2)\\)'], ans:0, exp:'两边平方：\\(4x^2-4x+1>x^2+4x+4\\)→\\(3x^2-8x-3>0\\)→\\((3x+1)(x-3)>0\\)→\\(x<-\\frac{1}{3}\\)或\\(x>3\\)。' },
+  { id:22, stage:'初中', chapter:'初高中衔接', topic:'分式不等式与绝对值不等式', diff:2, q:'不等式\\(\\frac{x-2}{x^2-1} \\leq 0\\)的解集是？', opts:['\\((-\\infty,-1)\\cup[2,+\\infty)\\)','\\((-1,1)\\cup[2,+\\infty)\\)','\\((-\\infty,-1)\\cup(1,2]\\)','\\((-1,1)\\cup(1,2]\\)'], ans:3, exp:'分子零点2；分母零点±1。穿根得\\((-1,1)\\cup(1,2]\\)。注意\\(x\\neq\\pm1\\)。' },
+  { id:23, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:1, q:'函数\\(y=x^2-4x+3\\)的顶点坐标是？', opts:['\\((2,-1)\\)','\\((-2,15)\\)','\\((2,3)\\)','\\((1,0)\\)'], ans:0, exp:'配方：\\(y=(x-2)^2-1\\)，顶点\\((2,-1)\\)。' },
+  { id:24, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:1, q:'函数\\(y=-x^2+2x+3\\)的最大值是？', opts:['4','3','2','5'], ans:0, exp:'配方：\\(y=-(x-1)^2+4\\)，最大值\\(y=4\\)（当\\(x=1\\)时）。' },
+  { id:25, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:2, q:'\\(y=x^2-2x+3\\)在\\([0,3]\\)上的最小值是？', opts:['2','3','6','1'], ans:0, exp:'\\(y=(x-1)^2+2\\)，对称轴x=1在区间内，最小值为\\(f(1)=2\\)。' },
+  { id:26, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:2, q:'\\(y=x^2-2x+3\\)在\\([2,4]\\)上的最大值是？', opts:['11','7','3','8'], ans:0, exp:'\\(y=(x-1)^2+2\\)，对称轴x=1不在区间右侧，函数在\\([2,4]\\)递增，最大\\(f(4)=11\\)。' },
+  { id:27, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:3, q:'若\\(y=x^2-2ax+3\\)在\\([1,2]\\)上最大值为5，则\\(a=\\)？', opts:['\\(\\frac{1}{2}\\)','1','\\(\\frac{3}{2}\\)','2'], ans:0, exp:'对称轴x=a。分类讨论：a≤1.5时最大值f(2)=7-4a=5→a=0.5；a>1.5时最大值f(1)=4-2a=5→a=-0.5（舍）。' },
+  { id:28, stage:'初中', chapter:'初高中衔接', topic:'二次函数的最值', diff:3, q:'二次函数\\(y=x^2-2mx+2m^2-1\\)的最小值为\\(-\\frac{1}{2}\\)，则\\(m=\\)？', opts:['\\(\\pm\\frac{1}{2}\\)','\\(\\frac{1}{2}\\)','\\(-\\frac{1}{2}\\)','无解'], ans:0, exp:'配方：\\(y=(x-m)^2+m^2-1\\)，最小值\\(m^2-1=-\\frac{1}{2}\\)→\\(m^2=\\frac{1}{2}\\)→\\(m=\\pm\\frac{\\sqrt{2}}{2}\\)。' },
+  { id:29, stage:'高中', chapter:'集合', topic:'集合的概念与表示', diff:1, q:'集合\\(\\{x\\mid x^2=4\\}\\)用列举法表示为？', opts:['\\(\\{2\\}\\)','\\(\\{-2,2\\}\\)','\\(\\{-2\\}\\)','\\(\\emptyset\\)'], ans:1, exp:'\\(x^2=4\\)→\\(x=2\\)或\\(x=-2\\)。' },
+  { id:30, stage:'高中', chapter:'集合', topic:'集合的概念与表示', diff:1, q:'下列正确的是？', opts:['\\(0\\in\\emptyset\\)','\\(\\emptyset\\subset\\{0\\}\\)','\\(\\{0\\}=\\emptyset\\)','\\(0=\\emptyset\\)'], ans:1, exp:'空集是任何集合的子集。A错：空集不含元素；C错：{0}含元0；D错：0是数不是集合。' },
+  { id:31, stage:'高中', chapter:'集合', topic:'集合的概念与表示', diff:2, q:'集合\\(\\{x\\in\\mathbb{N}^*\\mid x^2-5x+6<0\\}\\)用列举法表示为？', opts:['\\(\\{2\\}\\)','\\(\\{2,3\\}\\)','\\(\\{3\\}\\)','\\(\\emptyset\\)'], ans:3, exp:'\\((x-2)(x-3)<0\\)的解为\\(2<x<3\\)，而\\(\\mathbb{N}^*\\)是正整数集，在\\((2,3)\\)内没有正整数，故该集合为空集\\(\\emptyset\\)。' },
+  { id:32, stage:'高中', chapter:'集合', topic:'集合之间的关系', diff:1, q:'集合\\(\\{1,2\\}\\)的子集个数是？', opts:['2','3','4','1'], ans:2, exp:'\\(2^2=4\\)：\\(\\emptyset,\\{1\\},\\{2\\},\\{1,2\\}\\)。' },
+  { id:33, stage:'高中', chapter:'集合', topic:'集合之间的关系', diff:2, q:'已知\\(A=\\{1,2,3\\}\\)，\\(B=\\{x\\mid x\\subseteq A\\}\\)，则\\(B\\)中元素个数为？', opts:['3','6','8','9'], ans:2, exp:'B是A的幂集，\\(2^3=8\\)个元素。' },
+  { id:34, stage:'高中', chapter:'集合', topic:'集合之间的关系', diff:2, q:'若\\(\\{1,a\\}\\subseteq\\{1,2,3\\}\\)，则\\(a\\)的可能取值个数为？', opts:['1','2','3','4'], ans:1, exp:'\\(a\\)可以是2或3（a≠1因为集合元素互异）。' },
+  { id:35, stage:'高中', chapter:'集合', topic:'集合之间的关系', diff:3, q:'集合\\(A=\\{x\\mid x^2-3x+2=0\\}\\)，\\(B=\\{x\\mid 0<x<4,x\\in\\mathbb{N}\\}\\)，则A与B的关系是？', opts:['\\(A=B\\)','\\(A\\subset B\\)','\\(B\\subset A\\)','\\(A\\cap B=\\emptyset\\)'], ans:1, exp:'\\(A=\\{1,2\\}\\)，\\(B=\\{1,2,3\\}\\)，所以\\(A\\subset B\\)。' },
+  { id:36, stage:'高中', chapter:'集合', topic:'集合之间的运算', diff:1, q:'设\\(A=\\{1,2,3\\}\\)，\\(B=\\{2,3,4\\}\\)，则\\(A\\cap B=\\)？', opts:['\\(\\{1,2,3,4\\}\\)','\\(\\{2,3\\}\\)','\\(\\{1\\}\\)','\\(\\{4\\}\\)'], ans:1, exp:'交集：同时属于两集合的元素→\\(\\{2,3\\}\\)。' },
+  { id:37, stage:'高中', chapter:'集合', topic:'集合之间的运算', diff:1, q:'设全集\\(U=\\{1,2,3,4,5\\}\\)，\\(A=\\{1,2,3\\}\\)，则\\(\\complement_U A=\\)？', opts:['\\(\\{4,5\\}\\)','\\(\\{1,2,3\\}\\)','\\(\\{1,2,3,4,5\\}\\)','\\(\\emptyset\\)'], ans:0, exp:'补集：全集中去掉A的元素。' },
+  { id:38, stage:'高中', chapter:'集合', topic:'集合之间的运算', diff:2, q:'\\(A=\\{x\\mid -1<x<3\\}\\)，\\(B=\\{x\\mid x\\geq 1\\}\\)，则\\(A\\cup B=\\)？', opts:['\\(\\{x\\mid x>-1\\}\\)','\\(\\{x\\mid 1\\leq x<3\\}\\)','\\(\\{x\\mid x\\geq 1\\}\\)','\\(\\{x\\mid x<3\\}\\)'], ans:0, exp:'\\(A=(-1,3), B=[1,+\\infty)\\)，并集覆盖\\((-1,+\\infty)\\)。' },
+  { id:39, stage:'高中', chapter:'集合', topic:'集合之间的运算', diff:2, q:'\\(A=\\{1,2,a\\}\\)，\\(B=\\{2,a^2\\}\\)，若\\(A\\cup B=\\{1,2,4,16\\}\\)，则\\(a=\\)？', opts:['4','±4','2','16'], ans:0, exp:'观察A∪B中有16，而B中有a²，故a²=16→a=±4。若a=-4则A={1,2,-4},B={2,16},A∪B={1,2,16,-4} 不是题目给的。所以a=4。' },
+  { id:40, stage:'高中', chapter:'集合', topic:'集合中的含参问题', diff:3, q:'\\(A=\\{x\\mid x^2-3x+2=0\\}\\)，\\(B=\\{x\\mid ax-1=0\\}\\)，若\\(B\\subseteq A\\)，则\\(a\\)的取值集合是？', opts:['\\(\\{0,1,\\frac{1}{2}\\}\\)','\\(\\{1,\\frac{1}{2}\\}\\)','\\(\\{0,1\\}\\)','\\(\\{0,\\frac{1}{2}\\}\\)'], ans:0, exp:'A={1,2}。①B=∅时a=0；②B={1}时a=1；③B={2}时a=1/2。' },
+  { id:41, stage:'高中', chapter:'集合', topic:'集合中的含参问题', diff:2, q:'已知\\(A=\\{x\\mid x<2\\}\\)，\\(B=\\{x\\mid x>a\\}\\)，若\\(A\\cup B=\\mathbb{R}\\)，则\\(a\\)的范围是？', opts:['\\(a<2\\)','\\(a\\leq 2\\)','\\(a>2\\)','\\(a\\geq 2\\)'], ans:0, exp:'A∪B=R需B能覆盖A没覆盖的部分。A覆盖(-∞,2)，B覆盖(a,+∞)。需a<2才能接上。' },
+  { id:42, stage:'高中', chapter:'集合', topic:'集合中的含参问题', diff:3, q:'\\(A=\\{x\\mid x^2-2x-3<0\\}\\)，\\(B=\\{x\\mid |x|<a\\}\\)，若\\(B\\subsetneq A\\)，则\\(a\\)的最大值为？', opts:['1','2','3','4'], ans:0, exp:'A=(-1,3)，B=(-a,a)。B真包含于A需(-a,a)⊆(-1,3)且不等→a≤1（a=1时B=(-1,1)⊂A成立；a>1时超出A的左边界−1）。故a最大为1。' },
+  { id:43, stage:'高中', chapter:'集合', topic:'集合中的公式', diff:2, q:'设全集U，A,B为子集，则\\(\\complement_U(A\\cup B)=\\)？', opts:['\\((\\complement_U A)\\cap(\\complement_U B)\\)','\\((\\complement_U A)\\cup(\\complement_U B)\\)','\\(\\complement_U A\\cup B\\)','\\(A\\cap B\\)'], ans:0, exp:'德摩根律：\\(\\complement_U(A\\cup B)=(\\complement_U A)\\cap(\\complement_U B)\\)。' },
+  { id:44, stage:'高中', chapter:'集合', topic:'集合中的公式', diff:2, q:'card\\(A\\cup B\\)=card\\(A\\)+card\\(B\\)-card\\(A\\cap B\\)。若card(A)=15, card(B)=12, card(A∩B)=5，则card(A∪B)=?', opts:['22','27','20','32'], ans:0, exp:'15+12-5=22。' },
+  { id:45, stage:'高中', chapter:'集合', topic:'集合中的公式', diff:2, q:'已知card(A)=8, card(B)=6, card(A∪B)=12，则card(A∩B)=？', opts:['2','4','6','14'], ans:0, exp:'card(A∩B)=card(A)+card(B)−card(A∪B)=8+6−12=2。' },
+  { id:46, stage:'高中', chapter:'常用逻辑用语', topic:'全称和特称命题', diff:1, q:'命题"\\(\\forall x\\in\\mathbb{R}, x^2\\geq 0\\)"的否定是？', opts:['\\(\\exists x\\in\\mathbb{R}, x^2<0\\)','\\(\\forall x\\in\\mathbb{R}, x^2<0\\)','\\(\\exists x\\in\\mathbb{R}, x^2\\geq 0\\)','\\(\\forall x\\notin\\mathbb{R}, x^2<0\\)'], ans:0, exp:'全称命题的否定是特称命题，结论取反。' },
+  { id:47, stage:'高中', chapter:'常用逻辑用语', topic:'全称和特称命题', diff:1, q:'命题"\\(\\exists x\\in\\mathbb{R}, x^2+1=0\\)"的否定是？', opts:['\\(\\forall x\\in\\mathbb{R}, x^2+1\\neq 0\\)','\\(\\exists x\\in\\mathbb{R}, x^2+1\\neq 0\\)','\\(\\forall x\\notin\\mathbb{R}, x^2+1=0\\)','\\(\\forall x\\in\\mathbb{R}, x^2+1=0\\)'], ans:0, exp:'特称命题的否定是全称命题，结论取反。' },
+  { id:48, stage:'高中', chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:1, q:'"\\(x>2\\)"是"\\(x>1\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:0, exp:'\\(x>2\\Rightarrow x>1\\)（充分），\\(x>1\\nRightarrow x>2\\)（不必要）。' },
+  { id:49, stage:'高中', chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:2, q:'"\\(x^2-3x+2=0\\)"是"\\(x=1\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:1, exp:'\\(x=1\\Rightarrow x^2-3x+2=0\\)（必要），但方程还有解x=2（不充分）。' },
+  { id:50, stage:'高中', chapter:'常用逻辑用语', topic:'充分条件和必要条件', diff:2, q:'"\\(a=b\\)"是"\\(a^2=b^2\\)"的什么条件？', opts:['充分不必要','必要不充分','充要','既不充分也不必要'], ans:0, exp:'\\(a=b\\Rightarrow a^2=b^2\\)（充分）；\\(a^2=b^2\\nRightarrow a=b\\)（a=-b时也成立，不必要）。' },
+  { id:51, stage:'高中', chapter:'常用逻辑用语', topic:'含参条件的判断', diff:3, q:'p: \\(x^2-3x+2<0\\)，q: \\(x<a\\)。若p是q的充分不必要条件，则\\(a\\)的范围是？', opts:['\\(a\\geq 2\\)','\\(a>2\\)','\\(a\\leq 2\\)','\\(a<2\\)'], ans:1, exp:'p:1<x<2。p⇒q：只要1<x<2就有x<a，即a≥2。q⇏p：需a>2时取x∈(2,a)满足q但不满足p。故a>2。' },
+  { id:52, stage:'高中', chapter:'均值不等式', topic:'均值不等式及其应用', diff:1, q:'若\\(a>0,b>0\\)，则\\(\\frac{a+b}{2}\\)与\\(\\sqrt{ab}\\)的关系是？', opts:['\\(\\frac{a+b}{2}\\geq\\sqrt{ab}\\)','\\(\\frac{a+b}{2}\\leq\\sqrt{ab}\\)','相等','无法确定'], ans:0, exp:'均值不等式：\\(\\frac{a+b}{2}\\geq\\sqrt{ab}\\)，当且仅当a=b时取等。' },
+  { id:53, stage:'高中', chapter:'均值不等式', topic:'均值不等式及其应用', diff:2, q:'已知\\(x>0\\)，则\\(x+\\frac{4}{x}\\)的最小值为？', opts:['4','2','8','1'], ans:0, exp:'\\(x+\\frac{4}{x}\\geq 2\\sqrt{x\\cdot\\frac{4}{x}}=4\\)，当x=2时取等。' },
+  { id:54, stage:'高中', chapter:'均值不等式', topic:'均值不等式及其应用', diff:2, q:'已知\\(x>0,y>0\\)，\\(xy=16\\)，则\\(x+y\\)的最小值为？', opts:['4','8','16','2'], ans:1, exp:'\\(x+y\\geq 2\\sqrt{xy}=8\\)，当x=y=4时取等。' },
+  { id:55, stage:'高中', chapter:'均值不等式', topic:'均值不等式中的配凑', diff:3, q:'已知\\(x>0\\)，求\\(x+\\frac{1}{x-1}\\)（\\(x>1\\)）的最小值。', opts:['3','2','4','1'], ans:0, exp:'令t=x-1>0，则x=t+1，原式=\\(t+1+\\frac{1}{t}\\geq 2+1=3\\)（当t=1即x=2时取等）。' },
+  { id:56, stage:'高中', chapter:'均值不等式', topic:'多元均值不等式', diff:3, q:'已知\\(a>0,b>0,c>0\\)，\\(a+b+c=3\\)，则\\(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}\\)的最小值为？', opts:['3','6','9','1'], ans:0, exp:'由均值不等式：\\((a+b+c)(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c})\\geq 9\\)，所以\\(\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}\\geq 3\\)。' },
+  { id:57, stage:'高中', chapter:'函数的概念', topic:'函数的概念与表示', diff:1, q:'下列哪个不是函数？（x为自变量，y为因变量）', opts:['\\(y=x+1\\)','\\(y^2=x\\)','\\(y=x^2\\)','\\(y=|x|\\)'], ans:1, exp:'\\(y^2=x\\)中一个x对应两个y值（x>0时），不满足函数单值性。' },
+  { id:58, stage:'高中', chapter:'函数的概念', topic:'函数的概念与表示', diff:1, q:'若\\(f(x)=x^2+1\\)，则\\(f(2)=\\)？', opts:['5','3','4','6'], ans:0, exp:'\\(f(2)=2^2+1=5\\)。' },
+  { id:59, stage:'高中', chapter:'函数的概念', topic:'函数的概念与表示', diff:2, q:'下列各组函数表示同一函数的是？', opts:['\\(f(x)=x, g(x)=\\sqrt{x^2}\\)','\\(f(x)=|x|, g(x)=\\sqrt{x^2}\\)','\\(f(x)=\\frac{x}{x}, g(x)=1\\)','\\(f(x)=x+1, g(x)=\\frac{x^2-1}{x-1}\\)'], ans:1, exp:'A：√(x²)=|x|≠x；B：√(x²)=|x|，定义域相同，恒等；C：f定义域x≠0，g定义域R，不同；D：g=x+1但x≠1，f定义域R，不同。' },
+  { id:60, stage:'高中', chapter:'函数的概念', topic:'函数的定义域', diff:1, q:'函数\\(f(x)=\\sqrt{x-1}\\)的定义域是？', opts:['\\([1,+\\infty)\\)','\\((1,+\\infty)\\)','\\([0,+\\infty)\\)','\\((-\\infty,1]\\)'], ans:0, exp:'\\(x-1\\geq 0\\)→\\(x\\geq 1\\)。' },
+  { id:61, stage:'高中', chapter:'函数的概念', topic:'函数的定义域', diff:2, q:'函数\\(f(x)=\\frac{\\sqrt{x+1}}{x-1}\\)的定义域是？', opts:['\\([-1,+\\infty)\\)','\\([-1,1)\\cup(1,+\\infty)\\)','\\((-1,1)\\cup(1,+\\infty)\\)','\\([0,1)\\cup(1,+\\infty)\\)'], ans:1, exp:'分子需x+1≥0→x≥−1；分母需x−1≠0→x≠1。取交集。' },
+  { id:62, stage:'高中', chapter:'函数的概念', topic:'函数的定义域', diff:2, q:'函数\\(f(x)=\\ln(x-2)+\\sqrt{4-x}\\)的定义域是？', opts:['\\((2,4]\\)','\\([2,4]\\)','\\((2,4)\\)','\\([2,4)\\)'], ans:0, exp:'ln(x-2)需x>2；√(4-x)需x≤4。取交集(2,4]。' },
+  { id:63, stage:'高中', chapter:'函数的概念', topic:'函数的定义域', diff:3, q:'若\\(f(x)\\)的定义域为\\([0,2]\\)，则\\(f(x+1)\\)的定义域为？', opts:['\\([-1,1]\\)','\\([1,3]\\)','\\([0,2]\\)','\\([-1,0]\\)'], ans:0, exp:'由0≤x+1≤2得−1≤x≤1。' },
+  { id:64, stage:'高中', chapter:'函数的概念', topic:'函数的值域', diff:1, q:'函数\\(y=x^2+2x+3\\)的值域是？', opts:['\\([2,+\\infty)\\)','\\([3,+\\infty)\\)','\\((2,+\\infty)\\)','\\([1,+\\infty)\\)'], ans:0, exp:'配方：\\(y=(x+1)^2+2\\geq 2\\)。' },
+  { id:65, stage:'高中', chapter:'函数的概念', topic:'函数的值域', diff:2, q:'函数\\(y=\\frac{1}{x^2+1}\\)的值域是？', opts:['\\((0,1]\\)','\\([0,1)\\)','\\((0,+\\infty)\\)','\\([0,1]\\)'], ans:0, exp:'\\(x^2+1\\geq 1\\)→\\(0<\\frac{1}{x^2+1}\\leq 1\\)。' },
+  { id:66, stage:'高中', chapter:'函数的概念', topic:'函数的值域', diff:3, q:'函数\\(y=\\frac{x+1}{x-1}\\)（\\(x\\neq 1\\)）的值域是？', opts:['\\(\\{y\\mid y\\neq 1\\}\\)','\\(\\{y\\mid y\\neq -1\\}\\)','\\(\\mathbb{R}\\)','\\((1,+\\infty)\\)'], ans:0, exp:'分离常数：\\(y=1+\\frac{2}{x-1}\\)，\\(\\frac{2}{x-1}\\neq 0\\)，故y≠1。' },
+  { id:67, stage:'高中', chapter:'函数的概念', topic:'函数的解析式', diff:2, q:'若\\(f(x-1)=x^2+2x\\)，则\\(f(x)=\\)？', opts:['\\(x^2+4x+3\\)','\\(x^2+2x+1\\)','\\(x^2+2x+3\\)','\\(x^2-2x+3\\)'], ans:0, exp:'令t=x-1→x=t+1。f(t)=(t+1)²+2(t+1)=t²+4t+3。' },
+  { id:68, stage:'高中', chapter:'函数的概念', topic:'函数的解析式', diff:3, q:'若\\(f(x)+2f(\\frac{1}{x})=3x\\)，则\\(f(2)=\\)？', opts:['−1','1','2','−2'], ans:0, exp:'x=2：f(2)+2f(1/2)=6①；x=1/2：f(1/2)+2f(2)=3/2②。②×2−①：3f(2)=3−6=−3→f(2)=−1。' },
+  { id:69, stage:'高中', chapter:'函数的性质', topic:'函数的单调性', diff:1, q:'函数\\(f(x)=x^2\\)在\\((-\\infty,0]\\)上的单调性是？', opts:['单调递增','单调递减','先增后减','不单调'], ans:1, exp:'\\(y=x^2\\)开口向上，对称轴x=0，在(-∞,0]上递减。' },
+  { id:70, stage:'高中', chapter:'函数的性质', topic:'函数的单调性', diff:1, q:'函数\\(f(x)=2x-1\\)在\\(\\mathbb{R}\\)上？', opts:['单调递增','单调递减','常数函数','先减后增'], ans:0, exp:'一次函数k=2>0，在R上单调递增。' },
+  { id:71, stage:'高中', chapter:'函数的性质', topic:'函数的单调性', diff:2, q:'函数\\(f(x)=\\frac{1}{x}\\)在\\((0,+\\infty)\\)上？', opts:['单调递增','单调递减','先减后增','不单调'], ans:1, exp:'\\(x_1<x_2\\)时\\(\\frac{1}{x_1}-\\frac{1}{x_2}=\\frac{x_2-x_1}{x_1x_2}>0\\)，故\\(f(x_1)>f(x_2)\\)，递减。' },
+  { id:72, stage:'高中', chapter:'函数的性质', topic:'函数的单调性', diff:3, q:'函数\\(f(x)=x+\\frac{1}{x}\\)（x>0）的单调递减区间是？', opts:['\\((0,1]\\)','\\([1,+\\infty)\\)','\\((0,+\\infty)\\)','\\((0,2]\\)'], ans:0, exp:'对勾函数，最低点x=1。在(0,1]递减，[1,+∞)递增。' },
+  { id:73, stage:'高中', chapter:'函数的性质', topic:'含参单调性问题', diff:3, q:'若\\(f(x)=x^2-2ax+3\\)在\\((-\\infty,2]\\)上单调递减，则\\(a\\)的范围是？', opts:['\\(a\\geq 2\\)','\\(a\\leq 2\\)','\\(a>2\\)','\\(a<2\\)'], ans:0, exp:'开口向上，对称轴x=a。在(-∞,2]递减需a≥2（对称轴在区间右侧）。' },
+  { id:74, stage:'高中', chapter:'函数的性质', topic:'函数奇偶性', diff:1, q:'\\(f(x)=x^2\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:1, exp:'f(-x)=(-x)²=x²=f(x)。' },
+  { id:75, stage:'高中', chapter:'函数的性质', topic:'函数奇偶性', diff:1, q:'\\(f(x)=x^3\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:0, exp:'f(-x)=(-x)³=−x³=−f(x)。' },
+  { id:76, stage:'高中', chapter:'函数的性质', topic:'函数奇偶性', diff:2, q:'\\(f(x)=x^2+x\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:3, exp:'f(-x)=x²−x，既不等于f(x)也不等于−f(x)。' },
+  { id:77, stage:'高中', chapter:'函数的性质', topic:'函数奇偶性', diff:2, q:'若\\(f(x)\\)是R上的奇函数，\\(f(2)=3\\)，则\\(f(-2)=\\)？', opts:['−3','3','0','无法确定'], ans:0, exp:'奇函数：f(-2)=−f(2)=−3。' },
+  { id:78, stage:'高中', chapter:'函数的性质', topic:'奇偶性和单调性综合', diff:3, q:'偶函数\\(f(x)\\)在\\([0,+\\infty)\\)上递增，\\(f(1)=0\\)，则\\(f(x)<0\\)的解集是？', opts:['\\((-1,1)\\)','\\((-\\infty,-1)\\cup(1,+\\infty)\\)','\\((-\\infty,-1)\\cup(-1,1)\\)','\\((1,+\\infty)\\)'], ans:0, exp:'偶函数关于y轴对称。x≥0时递增且f(1)=0→0≤x<1时f(x)<0。由对称性−1<x<0时f(x)<0。解集(-1,1)。' },
+  { id:79, stage:'高中', chapter:'函数的性质', topic:'抽象函数的单调性和奇偶性', diff:3, q:'已知\\(f(x)\\)是R上的奇函数，x>0时\\(f(x)=x^2-2x\\)，则x<0时\\(f(x)=\\)？', opts:['\\(-x^2-2x\\)','\\(x^2+2x\\)','\\(-x^2+2x\\)','\\(x^2-2x\\)'], ans:0, exp:'x<0时−x>0，f(x)=−f(−x)=−[(−x)²−2(−x)]=−[x²+2x]=−x²−2x。' },
+  { id:80, stage:'高中', chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:1, q:'\\(2^3\\times 2^4\\)等于？', opts:['\\(2^7\\)','\\(2^{12}\\)','\\(4^7\\)','\\(2^1\\)'], ans:0, exp:'同底数幂：\\(2^{3+4}=2^7\\)。' },
+  { id:81, stage:'高中', chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:2, q:'化简：\\(\\sqrt[3]{a}\\cdot\\sqrt{a}\\)（a>0）', opts:['\\(a^{\\frac{5}{6}}\\)','\\(a^{\\frac{2}{5}}\\)','\\(a^{\\frac{1}{6}}\\)','\\(a^{\\frac{5}{3}}\\)'], ans:0, exp:'\\(a^{1/3}\\cdot a^{1/2}=a^{5/6}\\)。' },
+  { id:82, stage:'高中', chapter:'指对幂函数', topic:'指数与指数幂的运算', diff:2, q:'\\((a^{\\frac{2}{3}})^{\\frac{3}{2}}\\)（a>0）等于？', opts:['a','\\(a^{\\frac{4}{9}}\\)','\\(a^{\\frac{3}{2}}\\)','\\(a^2\\)'], ans:0, exp:'\\((a^{m})^n=a^{mn}\\)：\\(a^{\\frac{2}{3}\\cdot\\frac{3}{2}}=a^1=a\\)。' },
+  { id:83, stage:'高中', chapter:'指对幂函数', topic:'指数函数及其图象', diff:1, q:'函数\\(y=2^x\\)的图像必过哪个点？', opts:['\\((0,1)\\)','\\((1,0)\\)','\\((1,2)\\)','\\((2,1)\\)'], ans:0, exp:'指数函数y=aˣ恒过定点(0,1)（a⁰=1）。' },
+  { id:84, stage:'高中', chapter:'指对幂函数', topic:'指数函数及其图象', diff:2, q:'\\(y=2^x\\)与\\(y=(\\frac{1}{2})^x\\)的图像关于什么对称？', opts:['x轴','y轴','原点','直线y=x'], ans:1, exp:'(1/2)ˣ=2⁻ˣ，f(x)与f(−x)关于y轴对称。' },
+  { id:85, stage:'高中', chapter:'指对幂函数', topic:'指数函数的性质', diff:2, q:'比较大小：\\(1.2^{\\frac{1}{2}}\\) 与 \\(1.3^{\\frac{1}{2}}\\)', opts:['\\(1.2^{1/2}<1.3^{1/2}\\)','\\(1.2^{1/2}>1.3^{1/2}\\)','相等','无法比较'], ans:0, exp:'幂函数y=x^(1/2)在(0,+∞)上递增。' },
+  { id:86, stage:'高中', chapter:'指对幂函数', topic:'指数函数的性质', diff:3, q:'方程\\(2^x=8\\)的解是？', opts:['x=3','x=2','x=4','x=1'], ans:0, exp:'8=2³，2ˣ=2³→x=3。' },
+  { id:87, stage:'高中', chapter:'指对幂函数', topic:'对数的定义与运算', diff:1, q:'\\(\\log_2 8\\)的值是？', opts:['3','2','4','8'], ans:0, exp:'log₂8=log₂2³=3。' },
+  { id:88, stage:'高中', chapter:'指对幂函数', topic:'对数的定义与运算', diff:1, q:'\\(\\lg 100\\)的值是？', opts:['2','1','10','100'], ans:0, exp:'lg100=log₁₀10²=2。' },
+  { id:89, stage:'高中', chapter:'指对幂函数', topic:'对数的定义与运算', diff:2, q:'\\(\\log_2 3+\\log_2\\frac{1}{3}\\)的值是？', opts:['0','1','log₂3','−1'], ans:0, exp:'log₂(3×1/3)=log₂1=0。' },
+  { id:90, stage:'高中', chapter:'指对幂函数', topic:'对数的定义与运算', diff:2, q:'\\(\\log_3 27-\\log_3 9\\)的值是？', opts:['1','2','3','log₃18'], ans:0, exp:'log₃(27/9)=log₃3=1。' },
+  { id:91, stage:'高中', chapter:'指对幂函数', topic:'换底公式', diff:2, q:'\\(\\log_4 8\\)的值是？', opts:['\\(\\frac{3}{2}\\)','2','\\(\\frac{2}{3}\\)','\\(\\frac{1}{2}\\)'], ans:0, exp:'log₄8=log₂8/log₂4=3/2。' },
+  { id:92, stage:'高中', chapter:'指对幂函数', topic:'换底公式', diff:2, q:'若\\(\\log_2 3=a\\)，则\\(\\log_3 2=\\)？', opts:['\\(\\frac{1}{a}\\)','\\(-a\\)','a','a²'], ans:0, exp:'log₃2=1/log₂3=1/a。' },
+  { id:93, stage:'高中', chapter:'指对幂函数', topic:'对数函数及其图象', diff:1, q:'函数\\(y=\\log_2 x\\)的图像必过哪个点？', opts:['\\((0,1)\\)','\\((1,0)\\)','\\((1,2)\\)','\\((2,1)\\)'], ans:1, exp:'对数函数y=logₐx恒过定点(1,0)（因为logₐ1=0）。' },
+  { id:94, stage:'高中', chapter:'指对幂函数', topic:'对数函数及其图象', diff:2, q:'函数\\(y=\\log_{\\frac{1}{2}}x\\)的单调性是？', opts:['在\\((0,+\\infty)\\)递增','在\\((0,+\\infty)\\)递减','在R上递增','不单调'], ans:1, exp:'底数0<1/2<1，所以递减。' },
+  { id:95, stage:'高中', chapter:'指对幂函数', topic:'对数型函数', diff:2, q:'函数\\(f(x)=\\log_2(x^2-1)\\)的定义域是？', opts:['\\((-\\infty,-1)\\cup(1,+\\infty)\\)','\\((-1,1)\\)','\\((1,+\\infty)\\)','\\((-\\infty,-1)\\)'], ans:0, exp:'需x²−1>0→x<−1或x>1。' },
+  { id:96, stage:'高中', chapter:'指对幂函数', topic:'对数型函数', diff:3, q:'函数\\(f(x)=\\ln(x+\\sqrt{x^2+1})\\)的奇偶性是？', opts:['奇函数','偶函数','非奇非偶','无法判断'], ans:0, exp:'定义域R关于原点对称。f(−x)=ln(−x+√(x²+1))=ln(1/(x+√(x²+1)))=−ln(x+√(x²+1))=−f(x)，奇函数。' },
+  { id:97, stage:'高中', chapter:'指对幂函数', topic:'指数对数中的大小比较', diff:2, q:'设a=log₃2, b=log₃(1/2), c=3⁰·¹，则它们的大小顺序是？', opts:['b<a<c','a<b<c','c<a<b','b<c<a'], ans:0, exp:'a=log₃2∈(0,1)；b=log₃(1/2)<0；c=3^0.1>1。故b<a<c。' },
+  { id:98, stage:'高中', chapter:'指对幂函数', topic:'指数对数中的大小比较', diff:3, q:'设a=log₀.₅2, b=log₀.₅3, c=1，则a,b,c的大小关系是？', opts:['a>b>c','b>a>c','c>a>b','c>b>a'], ans:0, exp:'底数0.5<1，对数函数递减。2<3→log₀.₅2>log₀.₅3。又log₀.₅2>log₀.₅0.5=1，log₀.₅3>log₀.₅0.5=1。所以a>b>1=c。' },
+  { id:99, stage:'高中', chapter:'指对幂函数', topic:'指对函数的奇偶性', diff:3, q:'函数\\(f(x)=\\ln\\frac{1-x}{1+x}\\)的奇偶性是？', opts:['奇函数','偶函数','既奇又偶','非奇非偶'], ans:0, exp:'定义域(−1,1)关于原点对称。f(−x)=ln((1+x)/(1−x))=−ln((1−x)/(1+x))=−f(x)。' },
+  { id:100, stage:'高中', chapter:'指对幂函数', topic:'指对函数的奇偶性', diff:2, q:'函数\\(f(x)=e^x+e^{-x}\\)的奇偶性是？', opts:['偶函数','奇函数','非奇非偶','既奇又偶'], ans:0, exp:'f(−x)=e⁻ˣ+eˣ=f(x)，偶函数。' },
+  { id:101, stage:'高中', chapter:'指对幂函数', topic:'幂函数及其性质', diff:1, q:'下列是幂函数的是？', opts:['\\(y=2x^3\\)','\\(y=x^3+1\\)','\\(y=x^{\\frac{1}{2}}\\)','\\(y=3^x\\)'], ans:2, exp:'幂函数形式y=x^α，只有C符合。' },
+  { id:102, stage:'高中', chapter:'指对幂函数', topic:'幂函数及其性质', diff:1, q:'\\(y=x^{-1}\\)的图像不经过哪个象限？', opts:['第一象限','第二象限','第三象限','第二和第四象限'], ans:3, exp:'y=1/x是双曲线，在第一、三象限。' },
+  { id:103, stage:'高中', chapter:'指对幂函数', topic:'幂函数及其性质', diff:2, q:'幂函数\\(y=x^{\\frac{2}{3}}\\)的定义域是？', opts:['\\([0,+\\infty)\\)','\\(\\mathbb{R}\\)','\\((0,+\\infty)\\)','\\(\\mathbb{R}\\setminus\\{0\\}\\)'], ans:1, exp:'\\(y=\\sqrt[3]{x^2}\\)，三次根号下可为任意实数，定义域为R。' },
+  { id:104, stage:'高中', chapter:'函数的应用', topic:'方程的根与函数零点', diff:1, q:'函数\\(f(x)=x^2-4\\)的零点是？', opts:['\\(x=2\\)','\\(x=-2\\)','\\(x=\\pm 2\\)','\\(x=4\\)'], ans:2, exp:'f(x)=0→x²=4→x=±2。' },
+  { id:105, stage:'高中', chapter:'函数的应用', topic:'方程的根与函数零点', diff:2, q:'方程\\(2^x=3-x\\)的根所在区间是？', opts:['\\((0,1)\\)','\\((1,2)\\)','\\((2,3)\\)','\\((0,2)\\)'], ans:0, exp:'令g(x)=2ˣ+x−3。g(0)=1+0−3=−2<0；g(1)=2+1−3=0。根为x=1∈(0,1]。' },
+  { id:106, stage:'高中', chapter:'函数的应用', topic:'零点存在性定理', diff:2, q:'若f(x)在[a,b]上连续且f(a)f(b)<0，则？', opts:['f(x)在(a,b)内有唯一零点','f(x)在(a,b)内至少有一个零点','f(x)在[a,b]上单调','f(x)在(a,b)内无零点'], ans:1, exp:'零点存在性定理：连续函数两端异号，则区间内至少有一个零点。不一定唯一。' },
+  { id:107, stage:'高中', chapter:'函数的应用', topic:'零点存在性定理', diff:3, q:'函数\\(f(x)=\\ln x-\\frac{1}{x}\\)的零点个数为？', opts:['0','1','2','3'], ans:1, exp:'f(x)在(0,+∞)连续。f(1)=−1<0；f(e)=1−1/e>0。f\'(x)=1/x+1/x²>0，单调递增，故只有一个零点。' },
+  { id:108, stage:'高中', chapter:'函数的应用', topic:'零点个数问题', diff:2, q:'函数\\(f(x)=|x^2-4|-1\\)的零点个数为？', opts:['4','2','3','1'], ans:0, exp:'|x²−4|=1→x²−4=±1→x²=5或x²=3→x=±√5和x=±√3，共4个。' },
+  { id:109, stage:'高中', chapter:'函数的应用', topic:'复合函数零点', diff:3, q:'函数\\(f(x)=2^{|x|}-3\\)的零点个数为？', opts:['0','1','2','3'], ans:2, exp:'2^{|x|}=3→|x|=log₂3→x=±log₂3，两个零点。' },
+  { id:110, stage:'高中', chapter:'函数的应用', topic:'二分法', diff:1, q:'用二分法求方程近似解的理论依据是？', opts:['零点存在性定理','中值定理','极限定理','费马定理'], ans:0, exp:'二分法基于零点存在性定理：连续函数两端异号则区间内含零点。' },
+  { id:111, stage:'高中', chapter:'函数的应用', topic:'函数的应用题', diff:3, q:'某商品每件成本10元，售价x元时销量为(100−x)件。售价定为多少时总利润最大？', opts:['55','50','60','45'], ans:0, exp:'利润P=(x−10)(100−x)=−x²+110x−1000=−(x−55)²+2025。x=55时最大。' },
+  { id:112, stage:'高中', chapter:'三角函数', topic:'任意角与弧度制', diff:1, q:'\\(180^\\circ\\)等于多少弧度？', opts:['\\(\\pi\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(\\frac{3\\pi}{2}\\)'], ans:0, exp:'180°=π rad。' },
+  { id:113, stage:'高中', chapter:'三角函数', topic:'任意角与弧度制', diff:1, q:'\\(\\frac{\\pi}{3}\\)等于多少度？', opts:['\\(60^\\circ\\)','\\(30^\\circ\\)','\\(45^\\circ\\)','\\(90^\\circ\\)'], ans:0, exp:'π/3×180°/π=60°。' },
+  { id:114, stage:'高中', chapter:'三角函数', topic:'任意角与弧度制', diff:2, q:'\\(-150^\\circ\\)等于多少弧度？', opts:['\\(-\\frac{5\\pi}{6}\\)','\\(-\\frac{2\\pi}{3}\\)','\\(-\\frac{3\\pi}{4}\\)','\\(-\\frac{5\\pi}{4}\\)'], ans:0, exp:'−150°=−150×π/180=−5π/6。' },
+  { id:115, stage:'高中', chapter:'三角函数', topic:'任意角三角函数', diff:1, q:'\\(\\sin 30^\\circ\\)的值是？', opts:['\\(\\frac{1}{2}\\)','\\(\\frac{\\sqrt{2}}{2}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','1'], ans:0, exp:'特殊角三角函数值。' },
+  { id:116, stage:'高中', chapter:'三角函数', topic:'任意角三角函数', diff:1, q:'\\(\\cos\\frac{\\pi}{4}\\)的值是？', opts:['\\(\\frac{\\sqrt{2}}{2}\\)','\\(\\frac{1}{2}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{1}{3}\\)'], ans:0, exp:'cos45°=√2/2。' },
+  { id:117, stage:'高中', chapter:'三角函数', topic:'任意角三角函数', diff:2, q:'\\(\\tan\\frac{\\pi}{3}\\)的值是？', opts:['\\(\\sqrt{3}\\)','\\(\\frac{\\sqrt{3}}{3}\\)','1','\\(\\frac{\\sqrt{3}}{2}\\)'], ans:0, exp:'tan60°=√3。' },
+  { id:118, stage:'高中', chapter:'三角函数', topic:'同角三角函数基本关系', diff:1, q:'已知\\(\\sin\\alpha=\\frac{3}{5}\\)，α为锐角，则\\(\\cos\\alpha=\\)？', opts:['\\(\\frac{4}{5}\\)','\\(\\frac{3}{4}\\)','\\(-\\frac{4}{5}\\)','\\(\\frac{5}{4}\\)'], ans:0, exp:'sin²α+cos²α=1→cosα=√(1−9/25)=4/5。' },
+  { id:119, stage:'高中', chapter:'三角函数', topic:'同角三角函数基本关系', diff:2, q:'已知\\(\\tan\\alpha=2\\)，则\\(\\frac{\\sin\\alpha+\\cos\\alpha}{\\sin\\alpha-\\cos\\alpha}=\\)？', opts:['3','2','1','−3'], ans:0, exp:'\\(\\frac{\\tan\\alpha+1}{\\tan\\alpha-1}=\\frac{2+1}{2-1}=3\\)。' },
+  { id:120, stage:'高中', chapter:'三角函数', topic:'诱导公式', diff:2, q:'\\(\\sin(\\pi+\\alpha)\\)等于？', opts:['\\(-\\sin\\alpha\\)','\\(\\sin\\alpha\\)','\\(\\cos\\alpha\\)','\\(-\\cos\\alpha\\)'], ans:0, exp:'sin(π+α)=−sinα。' },
+  { id:121, stage:'高中', chapter:'三角函数', topic:'诱导公式', diff:2, q:'\\(\\cos(\\frac{\\pi}{2}-\\alpha)\\)等于？', opts:['\\(\\sin\\alpha\\)','\\(-\\sin\\alpha\\)','\\(\\cos\\alpha\\)','\\(-\\cos\\alpha\\)'], ans:0, exp:'cos(π/2−α)=sinα（余角公式）。' },
+  { id:122, stage:'高中', chapter:'三角函数', topic:'正余弦函数的性质', diff:1, q:'函数\\(y=2\\sin x\\)的最大值是？', opts:['2','1','0','−2'], ans:0, exp:'sinx∈[−1,1]，所以2sinx∈[−2,2]，最大值为2。' },
+  { id:123, stage:'高中', chapter:'三角函数', topic:'正余弦函数的性质', diff:2, q:'函数\\(y=\\sin x\\)的最小正周期是？', opts:['\\(2\\pi\\)','\\(\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(4\\pi\\)'], ans:0, exp:'y=sinx的最小正周期为2π。' },
+  { id:124, stage:'高中', chapter:'三角函数', topic:'正余弦函数的性质', diff:2, q:'函数\\(y=\\cos 2x\\)的最小正周期是？', opts:['\\(\\pi\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{2}\\)','\\(4\\pi\\)'], ans:0, exp:'T=2π/|ω|=2π/2=π。' },
+  { id:125, stage:'高中', chapter:'三角函数', topic:'函数y＝Asin(ωx＋φ)的图象', diff:3, q:'函数\\(y=2\\sin(3x+\\frac{\\pi}{6})\\)的最小正周期是？', opts:['\\(\\frac{2\\pi}{3}\\)','\\(2\\pi\\)','\\(\\frac{\\pi}{3}\\)','\\(\\frac{2}{3}\\)'], ans:0, exp:'T=2π/|ω|=2π/3。' },
+  { id:126, stage:'高中', chapter:'三角函数', topic:'三角函数的平移', diff:2, q:'将\\(y=\\sin x\\)向左平移\\(\\frac{\\pi}{3}\\)得到？', opts:['\\(y=\\sin(x-\\frac{\\pi}{3})\\)','\\(y=\\sin(x+\\frac{\\pi}{3})\\)','\\(y=\\sin x+\\frac{\\pi}{3}\\)','\\(y=\\sin x-\\frac{\\pi}{3}\\)'], ans:1, exp:'左加右减：向左平移π/3→y=sin(x+π/3)。' },
+  { id:127, stage:'高中', chapter:'三角恒等变换', topic:'两角和差公式', diff:2, q:'\\(\\sin 75^\\circ\\)等于？', opts:['\\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{6}-\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{1}{2}\\)'], ans:0, exp:'sin75°=sin(45°+30°)=sin45°cos30°+cos45°sin30°=(√6+√2)/4。' },
+  { id:128, stage:'高中', chapter:'三角恒等变换', topic:'两角和差公式', diff:2, q:'\\(\\cos 15^\\circ\\)等于？', opts:['\\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{6}-\\sqrt{2}}{4}\\)','\\(\\frac{\\sqrt{3}}{2}\\)','\\(\\frac{\\sqrt{2}}{2}\\)'], ans:0, exp:'cos15°=cos(45°−30°)=cos45°cos30°+sin45°sin30°=(√6+√2)/4。' },
+  { id:129, stage:'高中', chapter:'三角恒等变换', topic:'两角和差公式', diff:3, q:'已知sinα=3/5，cosβ=5/13，α,β均为锐角，则sin(α+β)=？', opts:['\\(\\frac{63}{65}\\)','\\(\\frac{33}{65}\\)','\\(\\frac{56}{65}\\)','\\(\\frac{16}{65}\\)'], ans:0, exp:'cosα=4/5，sinβ=12/13。sin(α+β)=sinαcosβ+cosαsinβ=(3/5)(5/13)+(4/5)(12/13)=15/65+48/65=63/65。' },
+  { id:130, stage:'高中', chapter:'三角恒等变换', topic:'二倍角公式', diff:2, q:'若\\(\\sin\\alpha=\\frac{1}{3}\\)，则\\(\\cos 2\\alpha=\\)？', opts:['\\(\\frac{7}{9}\\)','\\(\\frac{8}{9}\\)','\\(\\frac{2}{3}\\)','\\(-\\frac{7}{9}\\)'], ans:0, exp:'cos2α=1−2sin²α=1−2/9=7/9。' },
+  { id:131, stage:'高中', chapter:'三角恒等变换', topic:'二倍角公式', diff:2, q:'\\(\\sin 2\\alpha=2\\sin\\alpha\\cos\\alpha\\)。若sinα=4/5, cosα=3/5，则sin2α=？', opts:['\\(\\frac{24}{25}\\)','\\(\\frac{12}{25}\\)','\\(\\frac{7}{25}\\)','\\(\\frac{8}{25}\\)'], ans:0, exp:'sin2α=2×(4/5)×(3/5)=24/25。' },
+  { id:132, stage:'高中', chapter:'三角恒等变换', topic:'凑角问题', diff:3, q:'已知\\(\\sin(\\alpha+\\beta)=\\frac{3}{5}\\)，\\(\\sin(\\alpha-\\beta)=\\frac{1}{5}\\)，则\\(\\frac{\\tan\\alpha}{\\tan\\beta}=\\)？', opts:['2','\\(\\frac{1}{2}\\)','4','\\(\\frac{3}{5}\\)'], ans:0, exp:'两式分别展开后相加得2sinαcosβ=4/5→sinαcosβ=2/5；相减得2cosαsinβ=2/5→cosαsinβ=1/5。tanα/tanβ=(sinαcosβ)/(cosαsinβ)=2。' },
+  { id:133, stage:'高中', chapter:'三角恒等变换', topic:'辅助角公式', diff:3, q:'\\(\\sqrt{3}\\sin x+\\cos x\\)可化为？', opts:['\\(2\\sin(x+\\frac{\\pi}{6})\\)','\\(2\\sin(x+\\frac{\\pi}{3})\\)','\\(\\sqrt{2}\\sin(x+\\frac{\\pi}{4})\\)','\\(2\\cos(x-\\frac{\\pi}{3})\\)'], ans:0, exp:'\\(\\sqrt{3}\\sin x+\\cos x=\\sqrt{(\\sqrt{3})^2+1^2}\\sin(x+\\varphi)=\\sqrt{4}\\sin(x+\\frac{\\pi}{6})=2\\sin(x+\\frac{\\pi}{6})\\)。其中tanφ=1/√3→φ=π/6。' }
 ];
 
 // ==================== ACHIEVEMENT SYSTEM ====================
@@ -518,6 +584,58 @@ function showAchievements() {
   document.getElementById('achSection').scrollIntoView({behavior:'smooth'});
 }
 
+// ==================== WECHAT LOGIN ====================
+let currentUser = null;
+(function() {
+  const ua = navigator.userAgent;
+  const isWeChat = /MicroMessenger/i.test(ua);
+  const area = document.getElementById('userArea');
+  if (!area) return;
+
+  // Check callback for user info
+  const params = new URLSearchParams(location.search);
+  const userData = params.get('user');
+  if (userData) {
+    try {
+      currentUser = JSON.parse(decodeURIComponent(userData));
+      localStorage.setItem('sishu_user', JSON.stringify(currentUser));
+      // Clean URL
+      history.replaceState(null, '', location.pathname);
+    } catch(e) {}
+  } else {
+    const saved = localStorage.getItem('sishu_user');
+    if (saved) {
+      try { currentUser = JSON.parse(saved); } catch(e) {}
+    }
+  }
+
+  if (currentUser && currentUser.openid) {
+    area.innerHTML = '👤 ' + (currentUser.nickname || '学生');
+  } else if (isWeChat) {
+    area.innerHTML = '<a href="/api/auth/url?redirect=/api/auth/callback-quiz" style="color:#ffd54f;text-decoration:underline;cursor:pointer;">🔐 微信登录</a>';
+  } else {
+    area.innerHTML = '<span style="color:#90caf9;font-size:12px;">非微信浏览器</span>';
+  }
+})();
+
+// ==================== QUIZ UPLOAD ====================
+function uploadQuizResult(quizData) {
+  if (!currentUser || !currentUser.openid) return;
+  fetch('/api/quiz/save', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      openid: currentUser.openid,
+      score: quizData.score,
+      total: quizData.total,
+      accuracy: quizData.accuracy,
+      topics: quizData.topics,
+      difficulty: quizData.difficulty || 'all',
+      answers: quizData.answers
+    })
+  }).catch(e => console.log('Upload failed:', e));
+}
+
 // ==================== APP STATE ====================
 let currentQuiz = [];
 let currentIndex = 0;
@@ -534,6 +652,34 @@ function init() {
   renderHistory();
 }
 const TOPICS = ['全部', ...new Set(QUESTION_BANK.map(q => q.chapter))];
+
+function getFilteredChapters() {
+  let pool = QUESTION_BANK;
+  if (filterStage !== '全部') pool = pool.filter(q => q.stage === filterStage);
+  return ['全部', ...new Set(pool.map(q => q.chapter))];
+}
+
+function updateTopics() {
+  const chs = getFilteredChapters();
+  const c = document.getElementById('topicTags');
+  if (!c) return;
+  let h = '';
+  chs.forEach((ch, i) => {
+    const cls = i === 0 ? 'topic-tag selected' : 'topic-tag';
+    h += '<span class="' + cls + '" data-topic="' + ch + '" onclick="selectTopic(this,\'' + ch + '\')">' + ch + '</span>';
+  });
+  c.innerHTML = h;
+}
+
+function updateAvailable() {
+  let pool = QUESTION_BANK;
+  if (filterStage !== '全部') pool = pool.filter(q => q.stage === filterStage);
+  if (!selectedTopics.includes('全部')) pool = pool.filter(q => selectedTopics.includes(q.chapter));
+  const diff = document.getElementById('diffSelect').value;
+  if (diff !== 'all') pool = pool.filter(q => q.diff === parseInt(diff));
+  const el = document.getElementById('availCount');
+  if (el) el.textContent = '可选题数：' + pool.length;
+}
 
 function renderTopicTags() {
   const container = document.getElementById('topicTags');
@@ -776,6 +922,10 @@ function endQuiz() {
   document.getElementById('historySection').style.display = 'block';
   renderKaTeXIn(document.getElementById('resultArea'));
 
+  // Upload to backend (if logged in via WeChat)
+  const topics = [...new Set(currentQuiz.map(q => q.chapter))].join(',');
+  uploadQuizResult({ score, total, accuracy, topics, difficulty: 'all', answers });
+
   // Save history
   // Update stats
   let stats = getStats();
@@ -927,9 +1077,273 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ==================== START ====================
+// ==================== 错题本 ====================
+function getErrors() {
+  return JSON.parse(localStorage.getItem('sishu_error_book') || '[]');
+}
+function saveErrors(errors) {
+  localStorage.setItem('sishu_error_book', JSON.stringify(errors));
+}
+function addWrongAnswer(q, userAns, correctAns, topic) {
+  let errors = getErrors();
+  // Avoid exact duplicates
+  if (!errors.some(e => e.q === q.q)) {
+    errors.unshift({
+      q: q.q, topic: topic, userAnswer: userAns,
+      correctAnswer: correctAns, explanation: q.exp,
+      diff: q.diff, id: q.id
+    });
+    // Keep max 200 errors
+    if (errors.length > 200) errors = errors.slice(0, 200);
+    saveErrors(errors);
+  }
+  updateErrBadge();
+}
+function toggleErrPanel() {
+  const panel = document.getElementById('errPanel');
+  const overlay = document.getElementById('errOverlay');
+  const isOpen = panel.style.display === 'flex';
+  panel.style.display = isOpen ? 'none' : 'flex';
+  overlay.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) renderErrorBook();
+}
+function renderErrorBook() {
+  let errors = getErrors();
+  const body = document.getElementById('errBody');
+  if (errors.length === 0) {
+    body.innerHTML = '<div class="ep-empty">🎉 太棒了！没有错题</div>';
+    return;
+  }
+  body.innerHTML = errors.map((e, i) => `
+    <div class="err-item">
+      <span class="ei-topic">${e.topic||'未分类'}</span>
+      <div class="ei-q">${e.q}</div>
+      <div class="ei-ans">你的答案：<span class="ei-wrong">${e.userAnswer||'未作答'}</span></div>
+      <div class="ei-ans">正确答案：<span class="ei-right">${e.correctAnswer}</span></div>
+      <div class="ei-exp">💡 ${e.explanation||'无解析'}</div>
+    </div>`).join('');
+  renderKaTeXIn(body);
+}
+function exportErrors() {
+  let errors = getErrors();
+  if (errors.length === 0) { alert('暂无错题'); return; }
+  let text = '📔 我的错题本\n' + '='.repeat(30) + '\n\n';
+  errors.forEach((e, i) => {
+    text += `${i+1}. [${e.topic||'未分类'}] ${e.q}\n`;
+    text += `   我的答案：${e.userAnswer||'未作答'}\n`;
+    text += `   正确答案：${e.correctAnswer}\n`;
+    text += `   解析：${e.explanation||'无'}\n\n`;
+  });
+  navigator.clipboard.writeText(text).then(() => alert('错题已复制到剪贴板！可粘贴到备忘录或打印'));
+}
+function clearErrors() {
+  if (confirm('确定清空所有错题记录吗？此操作不可恢复。')) {
+    saveErrors([]); renderErrorBook(); updateErrBadge();
+  }
+}
+function updateErrBadge() {
+  const n = getErrors().length;
+  const badge = document.getElementById('errBadge');
+  const fab = document.getElementById('errFab');
+  if (badge) badge.textContent = n;
+  if (fab) fab.style.display = n > 0 ? 'flex' : 'none';
+}
+
+// ==================== 分享海报 ====================
+function showPoster(score, total, pct) {
+  const overlay = document.getElementById('posterOverlay');
+  overlay.classList.add('show');
+  const canvas = document.getElementById('posterCanvas');
+  const ctx = canvas.getContext('2d');
+  const w = 360, h = 520;
+
+  // Background
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, '#1a237e');
+  grad.addColorStop(1, '#283593');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // Title
+  ctx.fillStyle = '#ffd54f';
+  ctx.font = 'bold 28px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('思数培优', w/2, 60);
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '16px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.fillText('2026暑假 · 初升高数学衔接', w/2, 90);
+
+  // Score circle
+  const cx = w/2, cy = 190, r = 70;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+  const scoreGrad = ctx.createLinearGradient(0, cy-r, 0, cy+r);
+  scoreGrad.addColorStop(0, '#ffd54f'); scoreGrad.addColorStop(1, '#ff8f00');
+  ctx.fillStyle = scoreGrad; ctx.fill();
+
+  ctx.fillStyle = '#1a237e';
+  ctx.font = 'bold 48px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.fillText((pct||score||0)+'%', cx, cy+6);
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '14px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.fillText('本次正确率', cx, cy+36);
+
+  // Stats row
+  const stats = getStats();
+  const items = [
+    {label:'刷题次数', val:stats.quizzesTaken},
+    {label:'累计答对', val:stats.totalCorrect},
+    {label:'解锁成就', val:getUnlocked().length}
+  ];
+  const sx = 30, sy = 280, sw = (w-60)/3;
+  items.forEach((it,i) => {
+    const x = sx + i*sw;
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = 'bold 22px "Microsoft YaHei","微软雅黑",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(it.val, x+sw/2, sy);
+    ctx.fillStyle = '#90caf9';
+    ctx.font = '12px "Microsoft YaHei","微软雅黑",sans-serif';
+    ctx.fillText(it.label, x+sw/2, sy+26);
+  });
+
+  // Highlight text
+  ctx.fillStyle = '#ffd54f';
+  ctx.font = 'bold 15px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.fillText('✔ 8人小班  ✔ 国奖团队  ✔ 133道题库', w/2, h-80);
+
+  // Footer
+  ctx.fillStyle = '#fff';
+  ctx.font = '13px "Microsoft YaHei","微软雅黑",sans-serif';
+  ctx.fillText('扫码开始刷题', w/2, h-50);
+}
+
+function closePoster() {
+  document.getElementById('posterOverlay').classList.remove('show');
+}
+
+function savePoster() {
+  const canvas = document.getElementById('posterCanvas');
+  const link = document.createElement('a');
+  link.download = '思数培优-刷题成绩.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// ==================== 每日一题 ====================
+function getDailyQuestion() {
+  const today = new Date().toISOString().slice(0,10);
+  const saved = JSON.parse(localStorage.getItem('sishu_daily') || '{}');
+  if (saved.date === today) return saved;
+
+  // Pick question by date hash
+  let hash = 0;
+  for (let i = 0; i < today.length; i++) hash = ((hash<<5)-hash)+today.charCodeAt(i);
+  hash = Math.abs(hash);
+  const pool = QUESTION_BANK; // from quiz.html global
+  const q = pool[hash % pool.length];
+  saved.date = today;
+  saved.q = q;
+  localStorage.setItem('sishu_daily', JSON.stringify(saved));
+  return saved;
+}
+
+function initDaily() {
+  const daily = getDailyQuestion();
+  const card = document.getElementById('dailyCard');
+  if (!card) return;
+  card.style.display = 'block';
+  const q = daily.q;
+  document.getElementById('dailyQ').textContent = q.q;
+  document.getElementById('dailyAnswer').innerHTML = `
+    <div class="da-correct">✅ 正确答案：${q.opts[q.ans]}</div>
+    <div class="da-exp">💡 ${q.exp}</div>
+    <div style="margin-top:8px;">
+      ${q.opts.map((o,i) => `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`).join('')}
+    </div>`;
+  renderKaTeXIn(document.getElementById('dailyAnswer'));
+}
+
+function showDailyAnswer() {
+  const ans = document.getElementById('dailyAnswer');
+  ans.classList.toggle('show');
+}
+
+// ==================== HOOK into existing functions ====================
+// After selectAnswer: save wrong answers
+const _origSelectAnswer = selectAnswer;
+selectAnswer = function(el, si) {
+  _origSelectAnswer(el, si);
+  const q = currentQuiz[currentIndex];
+  const isCorrect = (si === q._correctShuffled);
+  if (!isCorrect) {
+    addWrongAnswer(q, q.opts[q._shuffled[si]], q.opts[q.ans], q.topic||q.chapter);
+  }
+};
+
+// After endQuiz: show share button
+const _origEndQuiz = endQuiz;
+endQuiz = function() {
+  _origEndQuiz();
+  const _score = score, _total = currentQuiz.length;
+  const _pct = Math.round((_score / _total) * 100);
+  setTimeout(() => {
+    const btnArea = document.querySelector('.result-area');
+    if (btnArea) {
+      const shareBtn = document.createElement('button');
+      shareBtn.className = 'btn btn-gold';
+      shareBtn.textContent = '📊 生成海报';
+      shareBtn.onclick = function(){ showPoster(_score, _total, _pct); };
+      shareBtn.style.display = 'inline-flex'; shareBtn.style.margin = '8px 4px';
+      btnArea.appendChild(shareBtn);
+    }
+  }, 100);
+};
+
+// ==================== INIT ====================
 init();
 showAchievements();
+updateErrBadge();
+initDaily();
 </script>
+<!-- 每日一题 -->
+<div class="daily-card" id="dailyCard" onclick="showDailyAnswer()" style="display:none;">
+  <div class="dc-badge">📅 每日一题</div>
+  <div class="dc-q" id="dailyQ"></div>
+  <div class="dc-hint">点击查看答案 →</div>
+  <div class="daily-answer" id="dailyAnswer"></div>
+</div>
+
+<!-- 错题本浮动按钮 -->
+<button class="err-fab" id="errFab" onclick="toggleErrPanel()" title="错题本">
+  📔<span class="badge" id="errBadge">0</span>
+</button>
+
+<!-- 错题本侧边面板 -->
+<div class="err-panel" id="errPanel">
+  <div class="ep-header">
+    <h3>📔 错题本</h3>
+    <button class="ep-close" onclick="toggleErrPanel()">✕</button>
+  </div>
+  <div class="ep-body" id="errBody"></div>
+  <div class="ep-footer">
+    <button style="background:#c62828;color:#fff;" onclick="exportErrors()">📋 复制错题</button>
+    <button style="background:#f5f5f5;color:#757575;" onclick="clearErrors()">🗑 清空</button>
+  </div>
+</div>
+<div class="err-overlay" id="errOverlay" onclick="toggleErrPanel()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.3);z-index:999;"></div>
+
+<!-- 分享海报 -->
+<div class="poster-overlay" id="posterOverlay">
+  <div class="poster-card">
+    <canvas id="posterCanvas" width="360" height="520"></canvas>
+    <div class="poster-actions">
+      <button style="background:#f5f5f5;color:#757575;" onclick="closePoster()">关闭</button>
+      <button style="background:#1a237e;color:#fff;" onclick="savePoster()">💾 保存图片</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
