@@ -3,126 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>思数培优 · 2026暑假初升高数学衔接班</title>
+<title>思数培优 · 2026暑假高中数理化衔接班</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121; line-height:1.7; background:#fafafa; }
-.container { max-width:860px; margin:0 auto; padding:0 16px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Microsoft YaHei','微软雅黑',sans-serif;color:#212121;line-height:1.7;background:#fafafa;overflow-x:hidden;}
+.container{max-width:860px;margin:0 auto;padding:0 16px;}
 
-/* Hero */
-.hero { background:linear-gradient(135deg, #1a237e, #283593); color:#fff; padding:60px 0 50px; text-align:center; }
-.hero .tag { font-size:14px; color:#90caf9; letter-spacing:4px; margin-bottom:8px; }
-.hero h1 { font-size:36px; font-weight:900; margin-bottom:10px; }
-.hero .sub { font-size:16px; color:#ffd54f; font-weight:700; margin-bottom:6px; }
-.hero .desc { font-size:13px; color:#bbdefb; margin-top:10px; }
+/* === Scroll animations === */
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
 
-/* Section */
-.sec { padding:40px 0; }
-.sec h2 { font-size:22px; text-align:center; margin-bottom:6px; color:#1a237e; }
-.sec .subtitle { text-align:center; font-size:13px; color:#9e9e9e; margin-bottom:28px; }
-.sec .section-line { width:50px; height:3px; background:#ffd54f; margin:0 auto 28px; border-radius:2px; }
+/* === Ripple === */
+.ripple{position:relative;overflow:hidden;}
+.ripple::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.4);width:0;height:0;top:50%;left:50%;transform:translate(-50%,-50%);transition:width .6s,height .6s,opacity .6s;}
+.ripple:active::after{width:300px;height:300px;opacity:0;}
 
-/* Cards */
-.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px; }
-.card { background:#fff; border-radius:12px; padding:24px 18px; box-shadow:0 2px 12px rgba(0,0,0,.06); text-align:center; }
-.card .icon { font-size:32px; margin-bottom:10px; }
-.card h4 { font-size:15px; color:#1a237e; margin-bottom:6px; }
-.card p { font-size:13px; color:#757575; }
+/* === Nav === */
+.nav{background:rgba(26,35,126,.97);backdrop-filter:blur(10px);padding:12px 0;position:sticky;top:0;z-index:99;box-shadow:0 2px 20px rgba(0,0,0,.15);}
+.nav .container{display:flex;align-items:center;justify-content:space-between;}
+.nav .logo{color:#fff;font-weight:900;font-size:18px;text-decoration:none;transition:transform .2s;}
+.nav .logo:hover{transform:scale(1.05);}
+.nav .logo span{color:#ffd54f;}
+.nav a{color:#bbdefb;text-decoration:none;font-size:14px;margin-left:20px;transition:all .2s;}
+.nav a:hover{color:#ffd54f;transform:scale(1.05);}
+.nav .btn-quiz{background:#ffd54f;color:#1a237e;padding:6px 16px;border-radius:16px;font-weight:700;display:inline-block;}
+.nav .btn-quiz:hover{background:#ffc107;transform:scale(1.05);box-shadow:0 4px 12px rgba(255,213,79,.4);}
 
-/* Week cards */
-.week-cards { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
-.week-card { border-radius:10px; padding:16px 12px; text-align:center; cursor:pointer; transition:transform .2s,box-shadow .2s; }
-.week-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
-.week-card .badge { display:inline-block; padding:3px 14px; border-radius:12px; font-size:11px; font-weight:700; color:#fff; margin-bottom:8px; }
-.week-card h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
-.week-card p { font-size:11px; color:#757575; line-height:1.6; }
+/* === Hero === */
+.hero{background:linear-gradient(135deg,#0d1129 0%,#1a237e 30%,#283593 70%,#1565c0 100%);color:#fff;padding:80px 0 60px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 70%,rgba(255,213,79,.08) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(66,165,245,.06) 0%,transparent 50%);animation:heroFloat 15s ease-in-out infinite;}
+@keyframes heroFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(-20px,-20px);}}
+.hero .container{position:relative;z-index:1;}
+.hero .tag{font-size:14px;color:#90caf9;letter-spacing:6px;margin-bottom:10px;text-transform:uppercase;}
+.hero h1{font-size:40px;font-weight:900;margin-bottom:12px;background:linear-gradient(135deg,#fff,#ffd54f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero .sub{font-size:18px;color:#ffd54f;font-weight:700;margin-bottom:8px;}
+.hero .desc{font-size:14px;color:#bbdefb;line-height:1.8;margin-top:12px;}
+.hero .hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;}
+.hero .hero-badge{background:rgba(255,255,255,.1);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);padding:8px 20px;border-radius:20px;font-size:13px;color:#fff;transition:transform .2s;}
+.hero .hero-badge:hover{transform:scale(1.08);background:rgba(255,255,255,.18);}
 
-.color-blue { background:#e3f2fd; } .color-blue h4 { color:#1565c0; }
-.color-green { background:#e8f5e9; } .color-green h4 { color:#2e7d32; }
-.color-red { background:#fce4ec; } .color-red h4 { color:#c62828; }
-.color-orange { background:#fff3e0; } .color-orange h4 { color:#e65100; }
-.badge-blue { background:#1565c0; } .badge-green { background:#2e7d32; }
-.badge-red { background:#c62828; } .badge-orange { background:#e65100; }
+/* === Section === */
+.sec{padding:56px 0;}
+.sec h2{font-size:26px;text-align:center;margin-bottom:6px;color:#1a237e;font-weight:900;}
+.sec .subtitle{text-align:center;font-size:14px;color:#9e9e9e;margin-bottom:32px;}
+.section-line{width:50px;height:3px;background:linear-gradient(90deg,#ffd54f,#ff8f00);margin:12px auto 32px;border-radius:2px;}
 
-/* Team */
-.team-cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
-.team-card { background:#fff; border-radius:12px; padding:22px 16px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.06); }
-.team-card .avatar { width:56px; height:56px; border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
-.team-card h4 { font-size:15px; color:#1a237e; margin-bottom:4px; }
-.team-card p { font-size:12px; color:#757575; line-height:1.6; }
+/* === Subject cards (new!) === */
+.subj-section{background:#fff;}
+.subj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.subj-box{background:#fff;border-radius:16px;padding:32px 24px;text-align:center;box-shadow:0 2px 20px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;cursor:pointer;position:relative;overflow:hidden;}
+.subj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;transition:height .3s;}
+.subj-box:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.12);}
+.subj-box:hover::before{height:100%;opacity:.03;}
+.subj-box.math::before{background:#1a237e;}
+.subj-box.physics::before{background:#00695c;}
+.subj-box.chemistry::before{background:#6a1b9a;}
+.subj-box .sj-icon{font-size:52px;margin-bottom:14px;}
+.subj-box .sj-name{font-size:22px;font-weight:900;margin-bottom:6px;}
+.subj-box .sj-meta{font-size:13px;color:#9e9e9e;line-height:1.6;}
+.subj-box .sj-link{display:inline-block;margin-top:14px;padding:8px 24px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+.subj-box.math .sj-link{background:#e8eaf6;color:#1a237e;}
+.subj-box.physics .sj-link{background:#e0f2f1;color:#00695c;}
+.subj-box.chemistry .sj-link{background:#f3e5f5;color:#6a1b9a;}
+.subj-box .sj-link:hover{transform:scale(1.05);}
 
-/* Extra services */
-.extra-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
-.extra-card { border-radius:12px; padding:24px 20px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
-.extra-card h4 { font-size:16px; font-weight:700; margin-bottom:8px; }
-.extra-card p { font-size:13px; color:#757575; line-height:1.8; }
+/* === Cards === */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;}
+.card{background:#fff;border-radius:14px;padding:28px 20px;box-shadow:0 2px 16px rgba(0,0,0,.05);text-align:center;transition:transform .3s,box-shadow .3s;cursor:default;}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1);}
+.card .icon{font-size:36px;margin-bottom:12px;}
+.card h4{font-size:16px;color:#1a237e;margin-bottom:8px;}
+.card p{font-size:13px;color:#757575;line-height:1.7;}
 
-/* Info table */
-.info-box { background:#fff; border-radius:12px; padding:28px 24px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
-.info-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:14px; }
-.info-row:last-child { border:none; }
-.info-row .label { color:#757575; }
-.info-row .value { font-weight:700; color:#212121; }
+/* === Week cards === */
+.week-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.week-card{border-radius:14px;padding:20px 14px;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.week-card::after{content:'点击查看课表 →';position:absolute;bottom:8px;left:50%;transform:translateX(-50%) translateY(20px);font-size:11px;opacity:0;transition:all .3s;}
+.week-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 36px rgba(0,0,0,.12);}
+.week-card:hover::after{opacity:1;transform:translateX(-50%) translateY(0);}
+.week-card .badge{display:inline-block;padding:4px 16px;border-radius:12px;font-size:12px;font-weight:700;color:#fff;margin-bottom:10px;}
+.week-card h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+.week-card p{font-size:12px;color:#757575;line-height:1.6;transition:all .3s;}
+.week-card:hover p{padding-bottom:16px;}
+.color-blue{background:#e3f2fd;}.color-blue h4{color:#1565c0;}
+.color-green{background:#e8f5e9;}.color-green h4{color:#2e7d32;}
+.color-red{background:#fce4ec;}.color-red h4{color:#c62828;}
+.color-orange{background:#fff3e0;}.color-orange h4{color:#e65100;}
+.badge-blue{background:#1565c0;}.badge-green{background:#2e7d32;}
+.badge-red{background:#c62828;}.badge-orange{background:#e65100;}
 
-/* Price */
-.price-box { background:linear-gradient(135deg, #fff8e1, #fff3e0); border:2px solid #ffe082; border-radius:12px; padding:20px 24px; text-align:center; margin-top:16px; }
-.price-box .main-price { font-size:32px; font-weight:900; color:#e65100; }
-.price-box .early { font-size:16px; font-weight:700; color:#c62828; margin:8px 0; }
-.price-box .group { font-size:14px; color:#e65100; font-weight:700; }
+/* === Team === */
+.team-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.team-card{background:#fff;border-radius:14px;padding:28px 18px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1);}
+.team-card .avatar{width:60px;height:60px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;transition:transform .3s;}
+.team-card:hover .avatar{transform:scale(1.1);}
+.team-card h4{font-size:16px;color:#1a237e;margin-bottom:6px;}
+.team-card p{font-size:13px;color:#757575;line-height:1.7;}
 
-/* Schedule table */
-.schedule-table { width:100%; border-collapse:collapse; font-size:12px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.05); }
-.schedule-table th { background:#37474f; color:#fff; padding:10px 8px; font-weight:700; font-size:11px; text-align:center; }
-.schedule-table td { padding:8px; border-bottom:1px solid #f0f0f0; text-align:center; vertical-align:middle; }
-.schedule-table tr:nth-child(even) td { background:#fafafa; }
-.schedule-table .day-tag { display:inline-block; padding:2px 10px; border-radius:10px; color:#fff; font-weight:700; font-size:11px; }
-.schedule-table .topic { font-weight:700; font-size:12px; }
-.schedule-table .am { text-align:left; font-size:11px; color:#555; }
-.schedule-table .pm { text-align:left; font-size:11px; }
-.schedule-table .test-row td { background:#fff3e0!important; }
-.schedule-table .test-tag { display:inline-block; background:#e65100; color:#fff; padding:1px 8px; border-radius:8px; font-size:10px; font-weight:700; margin-left:6px; }
+/* === Extra === */
+.extra-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.extra-card{border-radius:14px;padding:28px 22px;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;cursor:default;}
+.extra-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1);}
+.extra-card h4{font-size:17px;font-weight:700;margin-bottom:10px;}
+.extra-card p{font-size:13px;color:#757575;line-height:1.9;}
 
-.week-title-tr td { background:#f5f5f5!important; font-weight:700; font-size:13px; padding:10px 8px; text-align:left; }
+/* === Schedule table === */
+.schedule-wrap{border-radius:14px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06);}
+.schedule-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;}
+.schedule-table th{background:#263238;color:#fff;padding:12px 8px;font-weight:700;font-size:12px;text-align:center;}
+.schedule-table td{padding:10px 8px;border-bottom:1px solid #f0f0f0;text-align:center;vertical-align:middle;transition:background .2s;}
+.schedule-table tbody tr:hover td{background:#f5f8ff;}
+.schedule-table .day-tag{display:inline-block;padding:3px 12px;border-radius:10px;color:#fff;font-weight:700;font-size:11px;}
+.schedule-table .topic{font-weight:700;font-size:13px;}
+.schedule-table .am{text-align:left;font-size:11px;color:#555;}
+.schedule-table .pm{text-align:left;font-size:11px;}
+.schedule-table .test-row td{background:#fff8e1!important;}
+.schedule-table .test-tag{display:inline-block;background:#e65100;color:#fff;padding:2px 10px;border-radius:8px;font-size:10px;font-weight:700;margin-left:6px;}
+.week-title-tr td{background:#f5f5f5!important;font-weight:700;font-size:14px;padding:12px 10px;text-align:left;scroll-margin-top:60px;}
 
-/* Notice */
-.notice-box { background:#f5f5f5; border-radius:12px; padding:24px; }
-.notice-box h4 { color:#1a237e; font-size:16px; margin-bottom:14px; }
-.notice-box ol { padding-left:20px; }
-.notice-box li { font-size:13px; color:#555; margin-bottom:8px; line-height:1.7; }
+/* === Price === */
+.price-box{background:linear-gradient(135deg,#fff8e1,#fff3e0);border:2px solid #ffe082;border-radius:14px;padding:28px 24px;text-align:center;margin-top:20px;transition:transform .3s;}
+.price-box:hover{transform:scale(1.02);}
+.price-box .main-price{font-size:36px;font-weight:900;color:#e65100;}
+.price-box .early{font-size:17px;font-weight:700;color:#c62828;margin:10px 0;}
+.price-box .group{font-size:15px;color:#e65100;font-weight:700;}
 
-/* Footer */
-.footer { background:#1a237e; color:#fff; text-align:center; padding:36px 16px; margin-top:40px; }
-.footer h3 { font-size:20px; margin-bottom:8px; }
-.footer p { font-size:13px; color:#90caf9; }
-.footer .qr { background:#fff; border-radius:10px; padding:8px; display:inline-block; margin:16px 0; }
-.footer .qr span { color:#9e9e9e; font-size:11px; display:block; width:100px; height:100px; line-height:100px; text-align:center; border:1px dashed #ccc; border-radius:8px; }
+/* === Info === */
+.info-box{background:#fff;border-radius:14px;padding:32px 28px;box-shadow:0 2px 16px rgba(0,0,0,.05);}
+.info-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:15px;}
+.info-row:last-child{border:none;}
+.info-row .label{color:#757575;}
+.info-row .value{font-weight:700;color:#212121;}
 
-/* CTA */
-.cta-bar { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:2px solid #e0e0e0; padding:12px 16px; display:flex; gap:10px; justify-content:center; z-index:100; }
-.cta-btn { padding:12px 32px; border-radius:24px; font-size:15px; font-weight:700; text-decoration:none; display:inline-block; text-align:center; }
-.cta-phone { background:#fff; color:#1a237e; border:2px solid #1a237e; }
-.cta-wx { background:#1a237e; color:#fff; }
+/* === Notice === */
+.notice-box{background:#f5f5f5;border-radius:14px;padding:28px;}
+.notice-box h4{color:#1a237e;font-size:17px;margin-bottom:16px;}
+.notice-box ol{padding-left:22px;}
+.notice-box li{font-size:14px;color:#555;margin-bottom:10px;line-height:1.8;}
 
-@media (max-width:640px) {
-  .hero h1 { font-size:24px; }
-  .cards, .team-cards, .extra-cards { grid-template-columns:1fr; }
-  .week-cards { grid-template-columns:repeat(2, 1fr); }
-  .info-row { flex-direction:column; gap:4px; }
-  .schedule-table { font-size:10px; }
-  .schedule-table th, .schedule-table td { padding:5px 3px; }
-  .cta-bar { flex-direction:column; }
+/* === CTA === */
+.cta-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,0,0,.08);padding:14px 16px;display:flex;gap:10px;justify-content:center;z-index:100;box-shadow:0 -2px 20px rgba(0,0,0,.06);}
+.cta-btn{padding:14px 36px;border-radius:26px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block;text-align:center;transition:all .3s;}
+.cta-btn:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.cta-phone{background:#fff;color:#1a237e;border:2px solid #1a237e;}
+.cta-wx{background:#1a237e;color:#fff;}
+
+/* === Footer === */
+.footer{background:linear-gradient(135deg,#0d1129,#1a237e);color:#fff;text-align:center;padding:48px 16px;margin-top:60px;}
+.footer h3{font-size:22px;margin-bottom:10px;}
+.footer p{font-size:14px;color:#90caf9;line-height:1.8;}
+
+/* === Particles === */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+@media(max-width:640px){
+  .hero h1{font-size:26px;}
+  .hero .sub{font-size:15px;}
+  .cards,.team-cards,.extra-cards,.subj-grid{grid-template-columns:1fr;}
+  .week-cards{grid-template-columns:repeat(2,1fr);}
+  .schedule-table{font-size:10px;}
+  .schedule-table th,.schedule-table td{padding:6px 3px;}
+  .cta-bar{flex-direction:column;}
 }
 </style>
 </head>
 <body>
 
+<canvas class="particles" id="particles"></canvas>
+
 <!-- Nav -->
-<nav class="nav" style="background:#1a237e;padding:12px 0;position:sticky;top:0;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,.15);">
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
-    <a href="index.html" style="color:#fff;font-weight:900;font-size:18px;text-decoration:none;">思<span style="color:#ffd54f;">数</span>培优</a>
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="logo">思<span>数</span>培优</a>
     <div>
-      <a href="index.html" style="color:#ffd54f;text-decoration:none;font-size:14px;margin-left:20px;font-weight:700;">🏠 首页</a>
-      <a href="subjects.html" style="background:#ffd54f;color:#1a237e;padding:6px 16px;border-radius:16px;font-weight:700;text-decoration:none;font-size:14px;margin-left:16px;">📝 刷题练习</a>
+      <a href="index.html" style="color:#ffd54f;font-weight:700;">🏠 首页</a>
+      <a href="subjects.html" class="btn-quiz">📝 刷题练习</a>
     </div>
   </div>
 </nav>
@@ -130,28 +186,61 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="tag">思 数 培 优</div>
-    <h1>2026暑假 · 初升高数学衔接班</h1>
-    <div class="sub">4周攻克高一数学核心基础，开学快人一步</div>
-    <div class="desc">由优秀师范生、国奖大学生与准研究生领衔的数学团队<br>完整知识体系 · 循序渐进 · 不跳跃不脱节</div>
+    <div class="tag">S I S H U  P E I  Y O U</div>
+    <h1>2026暑假 · 高中数理化衔接班</h1>
+    <div class="sub">数学 + 物理 + 化学 — 4周攻克高一核心基础</div>
+    <div class="desc">由优秀师范生、国奖大学生与985硕士领衔的教学团队<br>完整知识体系 · 循序渐进 · 为高中三年打下坚实基础</div>
+    <div class="hero-badges">
+      <span class="hero-badge">📐 数学 · 初高中衔接+必修一</span>
+      <span class="hero-badge">⚛️ 物理 · 力学+运动学</span>
+      <span class="hero-badge">🧪 化学 · 物质的量+反应原理</span>
+    </div>
   </div>
 </section>
 
 <!-- Quiz Banner -->
-<section style="background:#fff3e0;border-bottom:2px solid #ffe082;padding:20px 0;">
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+<section style="background:linear-gradient(135deg,#fff3e0,#fff8e1);padding:24px 0;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
     <div>
-      <span style="font-size:20px;margin-right:8px;">📐</span>
-      <strong style="font-size:16px;color:#e65100;">初升高数学 · 在线刷题</strong>
-      <span style="font-size:13px;color:#757575;margin-left:10px;">基于课程教材题库 · 随时自测查漏补缺</span>
+      <span style="font-size:24px;margin-right:8px;">📝</span>
+      <strong style="font-size:17px;color:#e65100;">高中数理化 · 在线刷题系统</strong>
+      <span style="font-size:13px;color:#757575;margin-left:10px;">153+道精选题目 · 智能错题本 · 每日一题</span>
     </div>
-    <a href="subjects.html" style="background:#e65100;color:#fff;padding:10px 28px;border-radius:20px;font-weight:700;text-decoration:none;font-size:14px;display:inline-block;transition:all .2s;">🚀 开始刷题</a>
+    <a href="subjects.html" class="ripple" style="background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:12px 32px;border-radius:24px;font-weight:700;text-decoration:none;font-size:15px;display:inline-block;transition:all .3s;box-shadow:0 4px 16px rgba(230,81,0,.3);">🚀 开始刷题</a>
+  </div>
+</section>
+
+<!-- 科目速览 -->
+<section class="sec subj-section">
+  <div class="container fade-up">
+    <h2>三大科目 · 全面覆盖</h2>
+    <div class="section-line"></div>
+    <div class="subj-grid">
+      <a href="quiz.html" class="subj-box math" style="text-decoration:none;color:inherit;">
+        <div class="sj-icon">📐</div>
+        <div class="sj-name">数学</div>
+        <div class="sj-meta">153题 · 10个章节<br>初高中衔接 · 必修一</div>
+        <span class="sj-link">开始刷题 →</span>
+      </a>
+      <a href="quiz-physics.html" class="subj-box physics" style="text-decoration:none;color:inherit;">
+        <div class="sj-icon">⚛️</div>
+        <div class="sj-name">物理</div>
+        <div class="sj-meta">力学 · 运动学<br>必修一核心（持续更新）</div>
+        <span class="sj-link">开始刷题 →</span>
+      </a>
+      <a href="quiz-chemistry.html" class="subj-box chemistry" style="text-decoration:none;color:inherit;">
+        <div class="sj-icon">🧪</div>
+        <div class="sj-name">化学</div>
+        <div class="sj-meta">物质的量 · 反应原理<br>必修一核心（持续更新）</div>
+        <span class="sj-link">开始刷题 →</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- 四大优势 -->
 <section class="sec">
-  <div class="container">
+  <div class="container fade-up">
     <h2>为什么选择我们</h2>
     <div class="section-line"></div>
     <div class="cards">
@@ -159,14 +248,14 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
       <div class="card"><div class="icon">✏️</div><h4>讲练面批过关</h4><p>上午精讲+下午练习<br>逐个面批，当日知识<br>当日消化不留死角</p></div>
       <div class="card"><div class="icon">📊</div><h4>小班数据跟踪</h4><p>8人精品小班<br>每周测试+学情分析<br>结课家长汇报会</p></div>
       <div class="card"><div class="icon">🎁</div><h4>报班即享增值</h4><p>志愿填报指导<br>升学规划免费咨询<br>高考亲历者团队答疑</p></div>
-	      <div class="card" style="border:2px solid #ffd54f;"><div class="icon">📝</div><h4>配套在线刷题</h4><p>基于课程教材题库<br>分专题 · 分难度<br><a href="subjects.html" style="color:#e65100;font-weight:700;">随时自测 →</a></p></div>
+      <div class="card" style="border:2px solid #ffd54f;"><div class="icon">📝</div><h4>配套在线刷题</h4><p>数理化三科全覆盖<br>分章节 · 分难度<br><a href="subjects.html" style="color:#e65100;font-weight:700;">随时自测 →</a></p></div>
     </div>
   </div>
 </section>
 
 <!-- 课程速览 -->
 <section class="sec" style="background:#fff;">
-  <div class="container">
+  <div class="container fade-up">
     <h2>4周课程安排速览</h2>
     <div class="section-line"></div>
     <div class="week-cards">
@@ -174,25 +263,21 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
         <span class="badge badge-blue">第1周</span>
         <h4>初中衔接·代数工具箱</h4>
         <p>因式分解 · 韦达定理<br>二次函数 · 不等式<br>只讲高中真正用到的</p>
-        <span style="font-size:11px;color:#1565c0;">点击查看课表 →</span>
       </div>
       <div class="week-card color-green" onclick="document.getElementById('schedule-w2').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-green">第2周</span>
         <h4>集合与函数概念</h4>
         <p>集合运算 · 函数定义<br>定义域 · 值域<br>高中数学第一章</p>
-        <span style="font-size:11px;color:#2e7d32;">点击查看课表 →</span>
       </div>
       <div class="week-card color-red" onclick="document.getElementById('schedule-w3').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-red">第3周</span>
         <h4>函数的基本性质</h4>
         <p>单调性 · 奇偶性<br>幂函数入门<br>函数核心两大性质</p>
-        <span style="font-size:11px;color:#c62828;">点击查看课表 →</span>
       </div>
       <div class="week-card color-orange" onclick="document.getElementById('schedule-w4').scrollIntoView({behavior:'smooth'})">
         <span class="badge badge-orange">第4周</span>
         <h4>初等函数与学法指导</h4>
         <p>指数·对数函数<br>结课测试 · 家长汇报<br>高中数学学习方法</p>
-        <span style="font-size:11px;color:#e65100;">点击查看课表 →</span>
       </div>
     </div>
   </div>
@@ -200,7 +285,7 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 
 <!-- 团队 -->
 <section class="sec">
-  <div class="container">
+  <div class="container fade-up">
     <h2>我们的团队</h2>
     <div class="section-line"></div>
     <div class="team-cards">
@@ -216,7 +301,7 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
       </div>
       <div class="team-card">
         <div class="avatar" style="background:#e8f5e9;color:#2e7d32;">🚀</div>
-        <h4>准研究生</h4>
+        <h4>985硕士</h4>
         <p>保研/考研上岸985名校<br>功底扎实 · 视野开阔</p>
       </div>
     </div>
@@ -225,37 +310,25 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 
 <!-- 增值服务 -->
 <section class="sec" style="background:#fff;">
-  <div class="container">
+  <div class="container fade-up">
     <h2>报班即享 · 免费增值服务</h2>
     <div class="section-line"></div>
     <div class="extra-cards">
-      <div class="extra-card" style="background:#e3f2fd;">
-        <h4 style="color:#1565c0;">📋 志愿填报指导</h4>
-        <p>团队全员高考亲历者，深谙各省录取规则<br>从分数定位 → 院校筛选 → 专业推荐，一站式指导<br>帮你把每一分都用在刀刃上</p>
+      <div class="extra-card" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
+        <h4 style="color:#0d47a1;">📝 在线刷题系统</h4>
+        <p>数理化三科题库 · 分章节练习 · 自动批改 · 错题本 · 每日一题 · 成绩海报</p>
       </div>
-      <div class="extra-card" style="background:#e8f5e9;">
-        <h4 style="color:#2e7d32;">💡 升学规划咨询</h4>
-        <p>大学学习规划 · 考研保研路径 · 竞赛科研经验<br>师范生 + 国奖学霸 + 准研究生多视角答疑<br>不止补数学，更帮你看见未来的路</p>
+      <div class="extra-card" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
+        <h4 style="color:#1b5e20;">📚 配套教材+练习册</h4>
+        <p>精心编制的讲义和习题集 · 覆盖全部考点 · 无需额外购买资料</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 开班信息+费用 -->
-<section class="sec">
-  <div class="container">
-    <h2>开班信息 & 课程费用</h2>
-    <div class="section-line"></div>
-    <div class="info-box">
-      <div class="info-row"><span class="label">开班时间</span><span class="value">2026年7月6日（周一）正式开课</span></div>
-      <div class="info-row"><span class="label">上课时间</span><span class="value">周一至周五  8:30–11:30 / 14:00–17:00</span></div>
-      <div class="info-row"><span class="label">招生对象</span><span class="value">2026年9月入读高一的新生</span></div>
-      <div class="info-row"><span class="label">班级人数</span><span class="value">8人精品小班，招满即止</span></div>
-      <div class="info-row"><span class="label">上课地址</span><span class="value">唐山市 思数培优</span></div>
-      <div class="price-box">
-        <div class="main-price">3,280<span style="font-size:16px;">元/人</span></div>
-        <div class="early">早鸟价 2,580元（6月20日前报名）</div>
-        <div class="group">三人团报 2,280元/人（含教材+练习册）</div>
+      <div class="extra-card" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">
+        <h4 style="color:#880e4f;">💬 课后答疑群</h4>
+        <p>专属微信答疑群 · 老师在线解答 · 不把问题留到第二天</p>
+      </div>
+      <div class="extra-card" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
+        <h4 style="color:#e65100;">🎓 升学规划咨询</h4>
+        <p>高考志愿填报指导 · 高中选科建议 · 大学专业介绍 · 学习规划</p>
       </div>
     </div>
   </div>
@@ -263,16 +336,14 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 
 <!-- 详细课程表 -->
 <section class="sec" style="background:#fff;">
-  <div class="container">
+  <div class="container fade-up">
     <h2>4周课程详细安排</h2>
     <div class="section-line"></div>
-    <div style="overflow-x:auto;">
+    <div class="schedule-wrap">
     <table class="schedule-table">
-      <thead>
-        <tr><th style="width:7%">日期</th><th style="width:9%">课题</th><th style="width:42%">上午·新课精讲（8:30–11:30）</th><th style="width:42%">下午·练习巩固（14:00–17:00）</th></tr>
-      </thead>
+      <thead><tr><th style="width:7%">日期</th><th style="width:9%">课题</th><th style="width:42%">上午·新课精讲（8:30–11:30）</th><th style="width:42%">下午·练习巩固（14:00–17:00）</th></tr></thead>
       <tbody>
-        <tr class="week-title-tr" id="schedule-w1"><td colspan="4" style="color:#0d47a1;">第1周：代数工具回顾（初中衔接·浓缩版）—— 只讲高中真正用到的</td></tr>
+        <tr class="week-title-tr" id="schedule-w1"><td colspan="4" style="color:#0d47a1;">第1周：代数工具回顾（初中衔接·浓缩版）</td></tr>
         <tr><td><span class="day-tag badge-blue">周一</span></td><td class="topic" style="color:#1565c0">因式分解</td><td class="am">提公因式法、公式法、十字相乘法、分组分解法</td><td class="pm">限时训练+逐个面批纠错</td></tr>
         <tr><td><span class="day-tag badge-blue">周二</span></td><td class="topic" style="color:#1565c0">根式与分式</td><td class="am">二次根式化简、分母有理化、分式四则运算</td><td class="pm">根式+分式混合运算强化</td></tr>
         <tr><td><span class="day-tag badge-blue">周三</span></td><td class="topic" style="color:#1565c0">一元二次方程</td><td class="am">根的判别式Δ及分类讨论；韦达定理（根与系数关系）</td><td class="pm">判别式+韦达定理综合专题</td></tr>
@@ -305,112 +376,108 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
   </div>
 </section>
 
-<!-- 报名须知 -->
+<!-- 课程信息 -->
 <section class="sec">
-  <div class="container">
+  <div class="container fade-up">
+    <h2>课程信息</h2>
+    <div class="section-line"></div>
+    <div class="info-box">
+      <div class="info-row"><span class="label">📅 开班日期</span><span class="value">2026年7月15日（周三）</span></div>
+      <div class="info-row"><span class="label">📆 课程周期</span><span class="value">4周（7月15日 - 8月9日）</span></div>
+      <div class="info-row"><span class="label">⏰ 上课时间</span><span class="value">周一至周五 8:30-11:30 / 14:00-17:00</span></div>
+      <div class="info-row"><span class="label">👥 班级规模</span><span class="value">8人精品小班</span></div>
+      <div class="info-row"><span class="label">📍 上课地点</span><span class="value">唐山市（具体地址微信发送定位）</span></div>
+
+      <div class="price-box">
+        <div class="main-price">¥2,580</div>
+        <div style="font-size:15px;color:#757575;text-decoration:line-through;">原价 ¥3,280</div>
+        <div class="early">🎉 早鸟优惠 · 7月10日前报名立省700元</div>
+        <div class="group">👥 三人团报更优惠：2,280元/人（每人省1,000元）</div>
+        <div style="font-size:13px;color:#757575;margin-top:8px;">📌 开课3天内不满意全额退款</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 报名须知 -->
+<section class="sec" style="background:#fff;">
+  <div class="container fade-up">
     <h2>报名须知</h2>
     <div class="section-line"></div>
     <div class="notice-box">
+      <h4>📋 报名流程</h4>
       <ol>
-        <li><strong>报名时间：</strong>即日起至2026年7月4日，满额即止（8人小班，额满不加位）。</li>
-        <li><strong>授课地址：</strong>唐山市 思数培优（XX中学正对面）。</li>
-        <li><strong>咨询方式：</strong>15033952509（微信同号）| 扫码添加微信，领取免费试听名额。</li>
-        <li><strong>优惠说明：</strong>6月20日前报名享早鸟价2,580元/人；三人及以上团报享2,280元/人。</li>
-        <li><strong>费用包含：</strong>全部40课时教学 + 教材《2026版初升高衔接培优》+ 配套练习册。</li>
-        <li><strong>退费保障：</strong>开课后3天内不满意可全额退费，超出按剩余课时比例退费。</li>
-        <li><strong>师资团队：</strong>由优秀师范生、国奖大学生与准研究生领衔，兼具教学经验与学术实力。</li>
+        <li>添加微信 1529945197 或致电 15033952509 咨询</li>
+        <li>确认课程方案和费用，填写学生信息登记表</li>
+        <li>完成缴费（支持微信/支付宝/银行转账）</li>
+        <li>开课前一周发送课前准备材料和学习建议</li>
+        <li>7月15日正式开课，开启高中学习之旅</li>
       </ol>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
-<section class="footer">
-  <h3>名额有限 · 立即扫码咨询</h3>
-  <div class="qr"><img src="qr.png" alt="微信二维码" style="width:120px;height:120px;border-radius:8px;"></div>
-  <p>电话：<a href="javascript:void(0)" onclick="copyText('15033952509')" style="color:#ffd54f;text-decoration:underline;">15033952509</a> &nbsp;|&nbsp; 微信：<a href="javascript:void(0)" onclick="copyText('1529945197')" style="color:#ffd54f;text-decoration:underline;">1529945197</a> &nbsp;|&nbsp; 地址：唐山市XX区XX路XX号3楼</p>
-  <p style="margin-top:10px;font-size:11px;color:#7986cb;">© 2026 思数培优 · 由优秀师范生、国奖大学生与准研究生领衔的数学团队</p>
+<!-- 联系 -->
+<section class="sec">
+  <div class="container fade-up" style="text-align:center;">
+    <h2>联系我们</h2>
+    <div class="section-line"></div>
+    <p style="font-size:18px;font-weight:700;">📞 15033952509（微信同号）</p>
+    <p style="color:#757575;">💬 微信咨询：1529945197</p>
+    <p style="color:#9e9e9e;font-size:13px;margin-top:8px;">每日 9:00 - 21:00 · 全年无休</p>
+  </div>
 </section>
 
-<!-- 底部CTA -->
-<div class="cta-bar">
-  <a href="javascript:void(0)" class="cta-btn cta-phone" onclick="copyText('15033952509')">📞 点击复制电话</a>
-  <a href="javascript:void(0)" class="cta-btn cta-wx" onclick="copyText('1529945197')">💬 点击复制微信</a>
+<!-- Footer -->
+<footer class="footer">
+  <h3>思数培优</h3>
+  <p>由优秀师范生、国奖大学生与985硕士领衔的教学团队<br>专注高中数理化衔接教育 · 8人精品小班</p>
+  <p style="margin-top:16px;font-size:12px;color:#5c6bc0;">© 2026 思数培优 · 河北省唐山市</p>
+</footer>
+
+<!-- CTA -->
+<div class="cta-bar" id="ctaBar">
+  <a href="tel:15033952509" class="cta-btn cta-phone ripple">📞 电话咨询</a>
+  <a href="subjects.html" class="cta-btn cta-wx ripple">📝 在线刷题</a>
 </div>
 
-
-<!-- WeChat JS-SDK & Copy Helper -->
 <script>
-function copyText(text) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() {
-      showToast('已复制：' + text + '，请打开微信搜索添加');
-    }).catch(function() {
-      prompt('请手动复制', text);
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.15});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Hide CTA on scroll near footer
+window.addEventListener('scroll', ()=>{
+  const bar = document.getElementById('ctaBar');
+  const footer = document.querySelector('.footer');
+  if(!footer) return;
+  const rect = footer.getBoundingClientRect();
+  bar.style.display = rect.top < window.innerHeight ? 'none' : 'flex';
+});
+
+// Particle background
+(function(){
+  const canvas = document.getElementById('particles');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<30;i++) particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+1});
+  function animate(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(26,35,126,.06)';ctx.fill();
     });
-  } else {
-    prompt('请手动复制', text);
+    requestAnimationFrame(animate);
   }
-}
-
-function showToast(msg) {
-  var toast = document.createElement('div');
-  toast.textContent = msg;
-  toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.85);color:#fff;padding:16px 28px;border-radius:10px;font-size:15px;z-index:99999;pointer-events:none;animation:fadeInOut 2.5s ease forwards;';
-  document.body.appendChild(toast);
-  setTimeout(function() { toast.remove(); }, 2600);
-}
-
-// Inject fade animation
-var style = document.createElement('style');
-style.textContent = '@keyframes fadeInOut { 0%{opacity:0;transform:translate(-50%,-50%) translateY(10px)} 15%{opacity:1;transform:translate(-50%,-50%) translateY(0)} 70%{opacity:1} 100%{opacity:0} }';
-document.head.appendChild(style);
-
-// WeChat JS-SDK sharing (only activates inside WeChat browser)
-(function() {
-  var isWeChat = /MicroMessenger/i.test(navigator.userAgent);
-  if (!isWeChat) return;
-
-  var s = document.createElement('script');
-  s.src = 'https://res.wx.qq.com/open/js/jweixin-1.6.0.js';
-  s.onload = function() {
-    var pageUrl = location.href.split('#')[0];
-    fetch('https://YOUR-DOMAIN.com//api/wechat/js-config', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({url: pageUrl})
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(cfg) {
-      if (cfg.error) { console.warn('JS-SDK config error:', cfg.error); return; }
-      wx.config({
-        debug: false,
-        appId: cfg.appId,
-        timestamp: cfg.timestamp,
-        nonceStr: cfg.nonceStr,
-        signature: cfg.signature,
-        jsApiList: cfg.jsApiList || ['updateAppMessageShareData', 'updateTimelineShareData']
-      });
-      wx.ready(function() {
-        var shareData = {
-          title: '思数培优 · 2026暑假初升高数学衔接班',
-          desc: '4周攻克高一数学核心基础，开学快人一步！优秀师范生+国奖学霸团队，8人小班招满即止。',
-          link: location.href,
-          imgUrl: location.origin + '/qr.png'
-        };
-        wx.updateAppMessageShareData(shareData);
-        wx.updateTimelineShareData(shareData);
-        // Legacy API (compatible with older WeChat versions)
-        wx.onMenuShareAppMessage(shareData);
-        wx.onMenuShareTimeline(shareData);
-      });
-      wx.error(function(err) { console.warn('WeChat wx.config error:', err); });
-    })
-    .catch(function(e) { console.warn('JS-SDK fetch failed:', e); });
-  };
-  document.head.appendChild(s);
+  animate();
 })();
 </script>
-
 </body>
 </html>
