@@ -235,22 +235,6 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 .lb-info{flex:1}.lb-score{font-weight:900;font-size:16px;color:#1a237e}
 .lb-empty{text-align:center;padding:30px;color:#9e9e9e;font-size:14px;}
 
-.consult-fab{position:fixed;bottom:90px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:26px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,.35);z-index:998;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite;}
-.consult-fab:hover{transform:scale(1.1);}
-@keyframes pulse{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.35);}50%{box-shadow:0 4px 28px rgba(37,211,102,.6);}}
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:10000;display:none;align-items:center;justify-content:center;}
-.modal-overlay.show{display:flex;}
-.modal-box{background:#fff;border-radius:16px;width:90%;max-width:400px;max-height:90vh;overflow-y:auto;}
-.modal-box .mb-head{padding:18px 22px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center;}
-.modal-box .mb-head h3{margin:0;font-size:17px;}
-.modal-box .mb-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
-.modal-box .mb-body{padding:22px;}
-.modal-box label{display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:4px;}
-.modal-box input,.modal-box textarea,.modal-box select{width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;margin-bottom:14px;font-family:inherit;}
-.modal-box input:focus,.modal-box textarea:focus{outline:none;border-color:#1a237e;}
-.modal-box textarea{resize:vertical;min-height:70px;}
-.modal-box .mb-submit{width:100%;padding:12px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;}
-.modal-box .mb-note{font-size:11px;color:#9e9e9e;text-align:center;margin-top:10px;}
 </style>
 </head>
 <body>
@@ -1415,38 +1399,11 @@ initDaily();
 </div>
 
 
-<div class="modal-overlay" id="consultModal">
-  <div class="modal-box">
-    <div class="mb-head"><h3>💬 在线咨询</h3><button class="mb-close" onclick="closeConsult()">✕</button></div>
-    <div class="mb-body">
-      <label>称呼</label><input type="text" id="cName" placeholder="怎么称呼您？">
-      <label>联系方式（手机/微信）</label><input type="text" id="cContact" placeholder="请留下手机号或微信号">
-      <label>学生年级</label><select id="cGrade"><option value="">请选择</option><option>新高一</option><option>新高二</option><option>新高三</option><option>其他</option></select>
-      <label>咨询内容</label><textarea id="cMsg" placeholder="想了解什么？"></textarea>
-      <button class="mb-submit" onclick="submitConsult()">📨 提交咨询</button>
-      <p class="mb-note">我们会在24小时内回复您</p>
-    </div>
-  </div>
-</div>
-<button class="consult-fab" onclick="openConsult()" title="在线咨询">💬</button>
 
 
-<script>
-function openConsult(){document.getElementById('consultModal').classList.add('show');}
-function closeConsult(){document.getElementById('consultModal').classList.remove('show');}
-function submitConsult(){
-  var n=document.getElementById('cName').value.trim();
-  var t=document.getElementById('cContact').value.trim();
-  if(!n||!t){alert('请填写称呼和联系方式');return;}
-  var d={name:n,contact:t,grade:document.getElementById('cGrade').value,msg:document.getElementById('cMsg').value.trim(),date:new Date().toISOString()};
-  var msgs=JSON.parse(localStorage.getItem('sishu_consults')||'[]');
-  msgs.unshift(d);if(msgs.length>200)msgs=msgs.slice(0,200);
-  localStorage.setItem('sishu_consults',JSON.stringify(msgs));
-  alert('✅ 已提交！我们会尽快联系您。');
-  closeConsult();document.getElementById('cName').value='';document.getElementById('cContact').value='';document.getElementById('cMsg').value='';
-}
-</script>
 
-<div class="compliance-footer"><div style="text-align:center;padding:20px;font-size:11px;color:#9e9e9e;border-top:1px solid #f0f0f0;margin-top:20px;"><a href="privacy.html" style="color:#9e9e9e;">隐私政策</a> · <a href="terms.html" style="color:#9e9e9e;">用户协议</a> · <a href="terms.html#退费" style="color:#9e9e9e;">退费政策</a> · 思数培优 © 2026</div></div>
+
+
+
 </body>
 </html>
