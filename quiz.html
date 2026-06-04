@@ -791,7 +791,7 @@ function shuffle(arr) {
 
 // LaTeX cleaner
 function _cleanL(s){if(!s)return'';s=s.replace(/\\[\(\)]/g,'').replace(/\\[\[\]]/g,'').replace(/\$/g,'');
-var m={'\\\\alpha':'α','\\\\beta':'β','\\\\gamma':'γ','\\\\theta':'θ','\\\\pi':'π','\\\\pm':'±','\\\\times':'×','\\\\div':'÷','\\\\cdot':'·','\\\\leq':'≤','\\\\geq':'≥','\\\\neq':'≠','\\\\approx':'≈','\\\\infty':'∞','\\\\to':'→','\\\\Rightarrow':'⇒','\\\\forall':'∀','\\\\exists':'∃','\\\\in':'∈','\\\\subset':'⊂','\\\\cup':'∪','\\\\cap':'∩','\\\\mathbb{R}':'ℝ','\\\\mathbb{N}':'ℕ','\\\\sin':'sin','\\\\cos':'cos','\\\\tan':'tan','\\\\log':'log','\\\\ln':'ln','\\\\sqrt':'√','\\\\frac':'/','\\\\text':'','\\\\displaystyle':'','\\\\left':'','\\\\right':'','\\\\limits':'','\\\\quad':' ','\\\\;':' ','\\\\,':'','\\\\_':'_','\\\\^':'^','\\\\{':'{','\\\\}':'}','\\{':'{','\\}':'}','\\_':'_','\\^':'^'};
+var m={'\\alpha':'α','\\beta':'β','\\gamma':'γ','\\theta':'θ','\\pi':'π','\\pm':'±','\\times':'×','\\div':'÷','\\cdot':'·','\\leq':'≤','\\geq':'≥','\\neq':'≠','\\approx':'≈','\\infty':'∞','\\to':'→','\\Rightarrow':'⇒','\\forall':'∀','\\exists':'∃','\\in':'∈','\\subset':'⊂','\\cup':'∪','\\cap':'∩','\\mathbb{R}':'ℝ','\\mathbb{N}':'ℕ','\\sin':'sin','\\cos':'cos','\\tan':'tan','\\log':'log','\\ln':'ln','\\sqrt':'√','\\frac':'/','\\text':'','\\displaystyle':'','\\left':'','\\right':'','\\limits':'','\\quad':' ','\\;':' ','\\,':'','\\_':'_','\\^':'^','\\{':'{','\\}':'}','\\{':'{','\\}':'}','\\_':'_','\\^':'^'};
 Object.keys(m).sort(function(a,b){return b.length-a.length;}).forEach(function(k){s=s.split(k).join(m[k]);});
 s=s.replace(/\\\\[a-zA-Z]+/g,'');return s;}
 
