@@ -244,6 +244,15 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 .daily-answer.show{display:block;}
 .daily-answer .da-correct{font-size:14px;font-weight:700;color:#2e7d32;margin-bottom:4px;}
 .daily-answer .da-exp{font-size:13px;color:#555;}
+
+.lb-panel{background:#fff;border-radius:14px;padding:24px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.lb-title{font-size:17px;font-weight:900;color:#1a237e;margin-bottom:16px;text-align:center;}
+.lb-row{display:flex;align-items:center;padding:10px 12px;border-bottom:1px solid #f0f0f0;gap:12px;font-size:14px;}
+.lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;}
+.lb-rank.gold{background:#ffd54f;color:#e65100}.lb-rank.silver{background:#e0e0e0;color:#616161}.lb-rank.bronze{background:#ffcc80;color:#e65100}
+.lb-rank.normal{background:#f5f5f5;color:#9e9e9e}
+.lb-info{flex:1}.lb-score{font-weight:900;font-size:16px;color:#1a237e}
+.lb-empty{text-align:center;padding:30px;color:#9e9e9e;font-size:14px;}
 </style>
 </head>
 <body>
@@ -270,6 +279,13 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 </section>
 
 <div class="container">
+
+<div class="container" id="leaderboardWrap" style="display:none;">
+  <div class="lb-panel">
+    <div class="lb-title">🏆 排行榜 <span style="font-size:12px;color:#9e9e9e;">（本地设备）</span></div>
+    <div id="leaderboardList"></div>
+  </div>
+</div>
 
 <!-- Controls -->
 <div class="controls" id="controls">
@@ -772,6 +788,12 @@ function shuffle(arr) {
   return arr;
 }
 
+// LaTeX cleaner
+function _cleanL(s){if(!s)return'';s=s.replace(/\[()]/g,'').replace(/\[\[\]]/g,'').replace(/\$/g,'');
+var m={'\alpha':'α','\beta':'β','\gamma':'γ','\theta':'θ','\pi':'π','\pm':'±','\times':'×','\div':'÷','\cdot':'·','\leq':'≤','\geq':'≥','\neq':'≠','\approx':'≈','\infty':'∞','\to':'→','\Rightarrow':'⇒','\forall':'∀','\exists':'∃','\in':'∈','\subset':'⊂','\cup':'∪','\cap':'∩','\mathbb{R}':'ℝ','\mathbb{N}':'ℕ','\sin':'sin','\cos':'cos','\tan':'tan','\log':'log','\ln':'ln','\sqrt':'√','\frac':'/','\text':'','\displaystyle':'','\left':'','\right':'','\limits':'','\quad':' ','\;':' ','\,':'','\_':'_','\^':'^','\{':'{','\}':'}'};
+Object.keys(m).sort(function(a,b){return b.length-a.length;}).forEach(function(k){s=s.split(k).join(m[k]);});
+s=s.replace(/\[a-zA-Z]+/g,'');return s;}
+
 function renderQuestion() {
   if (currentIndex >= currentQuiz.length) {
     endQuiz();
@@ -794,20 +816,20 @@ function renderQuestion() {
       <span class="q-num">第 ${currentIndex+1}/${currentQuiz.length} 题</span>
       <span class="q-topic ${diffClass}">${q.topic} · ${diffLabel}</span>
     </div>
-    <div class="q-text">${q.q}</div>
+    <div class="q-text">${_cleanL(q.q)}</div>
     <div class="options">`;
 
   shuffledOpts.forEach((oi, si) => {
     html += `<div class="option" data-index="${si}" onclick="selectAnswer(this, ${si})">
       <span class="opt-letter">${letters[si]}</span>
-      <span class="opt-text">${q.opts[oi]}</span>
+      <span class="opt-text">${_cleanL(q.opts[oi])}</span>
     </div>`;
   });
 
   html += `</div>
     <div class="explanation" id="explanation">
       <h4>💡 解析</h4>
-      <p>${q.exp}</p>
+      <p>${_cleanL(q.exp)}</p>
     </div>
     <div style="margin-top:18px;text-align:center;">
       <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" style="display:none;">
@@ -847,8 +869,8 @@ function selectAnswer(el, si) {
   answers.push({
     question: q.q,
     topic: q.topic,
-    userAnswer: q.opts[q._shuffled[si]],
-    correctAnswer: q.opts[q.ans],
+    userAnswer: _cleanL(q.opts[q._shuffled[si]]),
+    correctAnswer: _cleanL(q.opts[q.ans]),
     isCorrect: isCorrect,
     explanation: q.exp
   });
@@ -1042,6 +1064,24 @@ function renderHistory() {
   });
   container.innerHTML = html;
 }
+
+function renderLeaderboard(){
+  var h=JSON.parse(localStorage.getItem('sishu_quiz_history')||'[]');
+  var wrap=document.getElementById('leaderboardWrap');
+  var list=document.getElementById('leaderboardList');
+  if(!wrap||!list)return;
+  if(h.length===0){list.innerHTML='<div class="lb-empty">暂无刷题记录</div>';wrap.style.display='block';return;}
+  wrap.style.display='block';
+  var sorted=h.slice().sort(function(a,b){return b.pct-a.pct||b.score-a.score;});
+  var ranks=['gold','silver','bronze'];
+  var rankIcons=['🥇','🥈','🥉'];
+  list.innerHTML=sorted.slice(0,20).map(function(r,i){
+    var rc=i<3?ranks[i]:'normal';
+    var ri=i<3?rankIcons[i]:(i+1);
+    return '<div class="lb-row"><div class="lb-rank '+rc+'">'+ri+'</div><div class="lb-info"><strong>'+r.date+'</strong> · '+r.score+'/'+r.total+'题</div><div class="lb-score">'+r.pct+'%</div></div>';
+  }).join('');
+}
+setTimeout(renderLeaderboard,500);
 
 // ==================== KATEX ====================
 function renderKaTeXIn(el) {

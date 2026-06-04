@@ -73,6 +73,7 @@ window.startQuiz=function(){
 function renderQuestion(){
   if(currentIndex>=currentQuiz.length){endQuiz();return;}
   const q=currentQuiz[currentIndex];
+  const cq=cleanLatex(q.q),ce=cleanLatex(q.exp),co=q.opts.map(o=>cleanLatex(o));
   const qShuffled=shuffle([0,1,2,3]);
   q._shuffled=qShuffled;
   q._correctShuffled=qShuffled.indexOf(q.ans);
@@ -83,12 +84,12 @@ function renderQuestion(){
   html+=`<span class="q-topic ${diffCls[q.diff]||'easy'}">${diffLabels[q.diff]||''}</span>`;
   html+=`<span class="q-topic easy" style="background:#e8e5ff;color:#1a237e;">${q.chapter||''}</span>`;
   html+=`<span class="q-topic easy" style="background:#fce4ec;color:#c62828;">${q.topic||''}</span>`;
-  html+=`</div><div class="q-text">${q.q}</div><div class="options">`;
+  html+=`</div><div class="q-text">${cq}</div><div class="options">`;
   qShuffled.forEach((oi,si)=>{
     html+=`<div class="option" data-index="${si}" onclick="window._selAnswer(this,${si})">
-      <span class="opt-letter">${LETTERS[si]}</span><span class="opt-text">${q.opts[oi]}</span></div>`;
+      <span class="opt-letter">${LETTERS[si]}</span><span class="opt-text">${co[oi]}</span></div>`;
   });
-  html+=`</div><div class="explanation" id="explanation"><h4>💡 解析</h4><p>${q.exp}</p></div>
+  html+=`</div><div class="explanation" id="explanation"><h4>💡 解析</h4><p>${ce}</p></div>
     <div style="margin-top:18px;text-align:center;">
     <button class="btn btn-primary" id="btnNext" onclick="window._nextQ()" style="display:none;">
     ${currentIndex<currentQuiz.length-1?'下一题 →':'查看成绩 🎯'}</button></div></div>`;
@@ -107,8 +108,8 @@ window._selAnswer=function(el,si){
   el.classList.add('selected');
   document.getElementById('explanation').classList.add('show');
   document.getElementById('btnNext').style.display='inline-flex';
-  if(isCorrect){score++;currentStreak++;}else{currentStreak=0;addWrongAnswer(q,q.opts[q._shuffled[si]],q.opts[q.ans],q.topic);}
-  answers.push({question:q.q,topic:q.topic,userAnswer:q.opts[q._shuffled[si]],correctAnswer:q.opts[q.ans],isCorrect,explanation:q.exp});
+  if(isCorrect){score++;currentStreak++;}else{currentStreak=0;addWrongAnswer(q,co[q._shuffled[si]],co[q.ans],q.topic);}
+  answers.push({question:cq,topic:q.topic,userAnswer:co[q._shuffled[si]],correctAnswer:co[q.ans],isCorrect,explanation:ce});
   quizActive=false;
   updateStats();
 };
@@ -363,7 +364,22 @@ window._submitPhoto=function(){
   e.target.value='';
 };
 
-// ===== KEYBOARD =====
+// ===== KEYBOARD & LEADERBOARD =====
+setTimeout(()=>{
+  const h=JSON.parse(localStorage.getItem('sishu_quiz_history')||'[]');
+  const c=document.getElementById('historyList');
+  if(!c||h.length===0)return;
+  const sb=h.slice().sort((a,b)=>b.pct-a.pct||b.score-a.score);
+  const ranks=['gold','silver','bronze'],icons=['🥇','🥈','🥉'];
+  const lb=document.createElement('div');
+  lb.innerHTML='<h3 style=\"margin-top:20px;\">🏆 排行榜</h3><div style=\"background:#fff;border-radius:12px;padding:16px;margin-top:8px;\">'+
+    sb.slice(0,15).map((r,i)=>{
+      const rc=i<3?ranks[i]:'normal',ri=i<3?icons[i]:i+1;
+      return `<div style=\"display:flex;align-items:center;padding:8px 12px;border-bottom:1px solid #f0f0f0;gap:10px;font-size:14px;\"><span style=\"font-weight:900;font-size:16px;min-width:28px;\">${ri}</span><span style=\"flex:1;\">${r.date} · ${r.subject||''}</span><span style=\"font-weight:900;color:#1a237e;\">${r.score}/${r.total} (${r.pct}%)</span></div>`;
+    }).join('')+'</div>';
+  c.parentElement.appendChild(lb);
+},600);
+
 document.addEventListener('keydown',e=>{
   if(!quizActive)return;
   const map={a:0,b:1,c:2,d:3,A:0,B:1,C:2,D:3,1:0,2:1,3:2,4:3};
