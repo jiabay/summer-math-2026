@@ -220,6 +220,7 @@ body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; color:#212121
 .daily-card .dc-badge{display:inline-block;padding:3px 12px;border-radius:10px;background:#2e7d32;color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;}
 .daily-card .dc-q{font-size:15px;font-weight:600;color:#1b5e20;margin-bottom:8px;line-height:1.7;}
 .daily-card .dc-hint{font-size:12px;color:#757575;}
+.daily-opts{margin:8px 0;padding:10px 14px;background:rgba(255,255,255,.5);border-radius:8px;}
 .daily-answer{padding:16px 24px;background:#f1f8e9;border-radius:0 0 14px 14px;margin-top:-4px;display:none;}
 .daily-answer.show{display:block;}
 .daily-answer .da-correct{font-size:14px;font-weight:700;color:#2e7d32;margin-bottom:4px;}
@@ -1312,17 +1313,20 @@ function initDaily() {
   card.className = 'daily-card';
   card.id = 'dailyCard';
   card.onclick = showDailyAnswer;
-  card.innerHTML = `<div class="dc-badge">📅 每日一题</div><div class="dc-q">${cq}</div><div class="dc-hint">点击查看答案 →</div>
-    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div>
-    <div style="margin-top:8px;">${co.map(function(o,i){return `<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${'ABCD'[i]}. ${o}</div>`;}).join('')}</div></div>`;
+  card.innerHTML = `<div class="dc-badge">📅 每日一题</div><div class="dc-q">${cq}</div>
+    <div class="daily-opts">${co.map(function(o,i){return `<div style="font-size:13px;color:#555;padding:3px 0;">${'ABCD'[i]}. ${o}</div>`;}).join('')}</div>
+    <div class="dc-hint" style="margin-top:8px;">👇 点击查看正确答案</div>
+    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${'ABCD'[q.ans]}. ${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div></div>`;
   container.insertBefore(card, container.firstChild);
 }
 
 function showDailyAnswer() {
-  const card = document.getElementById('dailyCard');
+  var card = document.getElementById('dailyCard');
   if (!card) return;
-  const ans = card.querySelector('.daily-answer');
+  var ans = card.querySelector('.daily-answer');
   if (ans) ans.classList.toggle('show');
+  var hint = card.querySelector('.dc-hint');
+  if (hint) hint.style.display = ans.classList.contains('show') ? 'none' : 'block';
 }
 
 // ==================== HOOK into existing functions ====================

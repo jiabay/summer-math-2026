@@ -323,11 +323,12 @@ function initDaily(){
   if(!container)return;
   const old=document.getElementById('dailyCard');if(old)old.remove();
   const card=document.createElement('div');card.className='daily-card';card.id='dailyCard';
-  card.onclick=()=>{const a=card.querySelector('.daily-answer');a&&a.classList.toggle('show');};
+  card.onclick=()=>{const a=card.querySelector('.daily-answer');a&&a.classList.toggle('show');const h=card.querySelector('.dc-hint');if(h)h.style.display=a.classList.contains('show')?'none':'block';};
   const cq=cleanLatex(q.q), co=q.opts.map(o=>cleanLatex(o)), ce=cleanLatex(q.exp);
-  card.innerHTML=`<div class="dc-badge">📅 每日一题 · ${SUBJECT}</div><div class="dc-q">${cq}</div><div class="dc-hint">点击查看答案 →</div>
-    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div>
-    <div style="margin-top:8px;">${co.map((o,i)=>`<div style="font-size:13px;color:${i===q.ans?'#2e7d32':'#666'};padding:2px 0;">${LETTERS[i]}. ${o}</div>`).join('')}</div></div>`;
+  card.innerHTML=`<div class="dc-badge">📅 每日一题 · ${SUBJECT}</div><div class="dc-q">${cq}</div>
+    <div class="daily-opts">${co.map((o,i)=>`<div style="font-size:13px;color:#555;padding:3px 0;">${LETTERS[i]}. ${o}</div>`).join('')}</div>
+    <div class="dc-hint" style="margin-top:8px;">👇 点击查看正确答案</div>
+    <div class="daily-answer"><div class="da-correct">✅ 正确答案：${LETTERS[q.ans]}. ${co[q.ans]}</div><div class="da-exp">💡 ${ce}</div></div>`;
   container.insertBefore(card,container.firstChild);
 }
 
