@@ -665,8 +665,20 @@ let quizStartTime = null;
 
 // ==================== INIT ====================
 function init() {
+  // Stage tags
+  var stages = ['全部','初中','高中'];
+  var st = document.getElementById('stageTags');
+  if(st) st.innerHTML = stages.map(function(s,i){var cls=i===0?'topic-tag selected':'topic-tag';return '<span class=\"'+cls+'\" onclick=\"selectStage(this,\\''+s+'\\')\">'+(s==='全部'?'📚 全部':s)+'</span>';}).join('');
   renderTopicTags();
   renderHistory();
+}
+function selectStage(el,s){
+  filterStage = s;
+  document.querySelectorAll('#stageTags .topic-tag').forEach(function(t){t.classList.remove('selected');});
+  el.classList.add('selected');
+  selectedTopics=['全部'];
+  updateTopics();
+  updateAvailable();
 }
 const TOPICS = ['全部', ...new Set(QUESTION_BANK.map(q => q.chapter))];
 
