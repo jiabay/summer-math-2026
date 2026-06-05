@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><style>
+@page{size:A4;margin:0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei','微软雅黑',sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* ===== PROFESSIONAL EDUCATION STYLE ===== */
+/* Colors: Trust blue #1a56db + Warm accent #ffd54f + Clean white */
+
+.front{width:210mm;height:297mm;background:#fff;position:relative}
+
+/* Top bar */
+.topbar{background:#1a237e;padding:8px 40px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:9px}
+.topbar span{opacity:.7}
+
+/* Header */
+.hd{padding:22px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #f0f4f8}
+.hd .brand{display:flex;align-items:center;gap:10px}
+.hd .brand .icon{width:42px;height:42px;background:linear-gradient(135deg,#1a237e,#1a237e);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:900}
+.hd .brand .name{font-size:20px;font-weight:800;color:#1a237e;letter-spacing:2px}
+.hd .brand .name em{color:#1a237e;font-style:normal}
+.hd .hd-info{text-align:right;font-size:10px;color:#64748b;line-height:1.6}
+
+/* Hero banner */
+.hero-banner{background:linear-gradient(135deg,#e8eaf6 0%,#c5cae9 50%,#e8eaf6 100%);padding:28px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+.hb-left .badge{display:inline-block;background:#1a237e;color:#fff;padding:5px 14px;border-radius:4px;font-size:11px;font-weight:700;margin-bottom:12px;letter-spacing:1px}
+.hb-left h1{font-size:30px;font-weight:800;color:#1a237e;line-height:1.25;margin-bottom:8px}
+.hb-left h1 .blue{color:#1a237e}
+.hb-left .subtitle{font-size:13px;color:#64748b;line-height:1.6}
+.hb-right{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.hb-right .highlight-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hr-item{text-align:center;padding:8px}
+.hr-item .num{font-size:28px;font-weight:800;color:#1a237e}
+.hr-item .label{font-size:10px;color:#64748b;margin-top:2px}
+
+/* Why Us - 3 columns */
+.why-section{padding:18px 40px}
+.why-section h2{font-size:16px;font-weight:700;color:#1a237e;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.why-section h2::after{content:'';flex:1;height:1px;background:#e2e8f0}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.why-card{background:#fafafa;border:1px solid #e2e8f0;border-radius:10px;padding:16px;text-align:center}
+.why-card .wc-icon{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.why-card h4{font-size:13px;font-weight:700;color:#1a237e;margin-bottom:4px}
+.why-card p{font-size:9px;color:#64748b;line-height:1.5}
+
+/* Course grid */
+.course-section{padding:10px 40px}
+.course-section h2{font-size:16px;font-weight:700;color:#1a237e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.course-section h2::after{content:'';flex:1;height:1px;background:#e2e8f0}
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cg-card{border:1px solid #e2e8f0;border-radius:10px;padding:14px;display:flex;align-items:flex-start;gap:10px}
+.cg-card .cg-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.cg-card.math .cg-icon{background:#c5cae9;color:#1a237e}
+.cg-card.physics .cg-icon{background:#d1fae5;color:#2e7d32}
+.cg-card.chemistry .cg-icon{background:#fce7f3;color:#db2777}
+.cg-info h4{font-size:12px;font-weight:700;color:#1a237e;margin-bottom:2px}
+.cg-info p{font-size:9px;color:#64748b;line-height:1.4}
+
+/* Price table */
+.price-section{padding:10px 40px}
+.price-table{width:100%;border-collapse:collapse;font-size:10px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.price-table th{background:#f5f5f5;padding:10px;text-align:center;font-weight:700;color:#475569;font-size:10px}
+.price-table th.highlight{background:#1a237e;color:#fff;font-size:12px}
+.price-table td{padding:8px;text-align:center;border-top:1px solid #e2e8f0;font-size:11px}
+.price-table .price{font-size:24px;font-weight:800;color:#1a237e}
+.price-table .price small{font-size:12px;font-weight:400;color:#64748b}
+.price-table .tag{display:inline-block;background:#fff8e1;color:#e65100;padding:2px 10px;border-radius:10px;font-size:9px;font-weight:700}
+
+/* Bottom bar */
+.foot-bar{background:#fafafa;border-top:1px solid #e2e8f0;padding:8px 40px;display:flex;justify-content:space-between;font-size:8px;color:#94a3b8}
+
+/* ===== BACK ===== */
+.back{width:210mm;height:297mm;background:#fff;padding:14mm 16mm}
+.btop{display:flex;justify-content:space-between;align-items:center;margin-bottom:4mm}
+.btop h2{font-size:18px;font-weight:800;color:#1a237e}
+.btop .btime{background:#e8eaf6;padding:6px 16px;border-radius:6px;font-size:10px;color:#1a237e;font-weight:700}
+
+table{width:100%;border-collapse:collapse;font-size:7px;margin-bottom:4mm}
+th{background:#1a237e;color:#fff;padding:5px 3px;font-size:7.5px;font-weight:600}
+td{padding:4px 3px;border-bottom:1px solid #f5f5f5;text-align:center}
+.wk td{background:#fafafa;font-weight:700;font-size:8.5px;text-align:left;color:#1a237e;border-left:3px solid #1a237e}
+.dt{display:inline-block;padding:1px 6px;border-radius:3px;color:#fff;font-size:6.5px;font-weight:700;letter-spacing:.5px}
+.d1{background:#1a237e}.d2{background:#1a237e}.d3{background:#ffd54f}.d4{background:#1a237e}
+.tp{font-weight:700;font-size:7.5px}.am,.pm{font-size:7px;text-align:left;color:#475569}
+.tr td{background:#fff8e1!important}
+.tt{display:inline-block;background:#ffd54f;color:#fff;padding:0 4px;border-radius:3px;font-size:6px;font-weight:700}
+
+.bgrid{display:grid;grid-template-columns:1.8fr 1fr;gap:4mm}
+.icard{border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px}
+.icard h3{font-size:12px;font-weight:700;margin-bottom:5px;color:#1a237e}
+.irow{display:flex;justify-content:space-between;font-size:8.5px;padding:3px 0;border-bottom:1px solid #fafafa}
+.ilabel{color:#94a3b8}.ival{font-weight:700;color:#1a237e}
+
+.pcard{background:#1a237e;border-radius:10px;padding:12px;text-align:center;color:#fff}
+.pcard .big{font-size:28px;font-weight:800;line-height:1}.pcard .per{font-size:9px;margin:3px 0;opacity:.9}
+.pcard .sub{font-size:8px;opacity:.7}
+.qra{text-align:center;margin-top:3mm;display:flex;justify-content:center;gap:8px;align-items:flex-end}
+.qra .qr-wrap{text-align:center}
+
+.ctable{width:100%;border-collapse:collapse;font-size:7px;margin-top:3mm}
+.ctable th{background:#1a237e;color:#fff;padding:3px;font-size:7px;font-weight:600}
+.ctable th.hl{background:#1a237e;font-weight:700}
+.ctable td{padding:3px;border-bottom:1px solid #f5f5f5;text-align:center}
+.ck{color:#2e7d32;font-weight:700}.cx{color:#cbd5e1}
+
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body>
+<div class="front">
+  <div class="topbar">
+    <span>优秀师范生 + 国奖学霸 + 准研究生团队</span>
+    <span>唐山面授 · 8人小班 · 3天无忧退费</span>
+  </div>
+
+  <div class="hd">
+    <div class="brand">
+      <div class="icon">思</div>
+      <div class="name">思<em>数</em>培优</div>
+    </div>
+    <div class="hd-info">
+      2026暑假 · 高中数理化衔接班<br>7月13日开课 · 共40课时
+    </div>
+  </div>
+
+  <div class="hero-banner">
+    <div class="hb-left">
+      <div class="badge">2026 暑 假 招 生</div>
+      <h1>高一<span class="blue">先修</span>，<br>从暑假开始领先</h1>
+      <div class="subtitle">4周系统课程 · 数学/物理/化学全覆盖<br>初中衔接不脱节 · 高中新课提前学</div>
+    </div>
+    <div class="hb-right">
+      <div class="highlight-row">
+        <div class="hr-item"><div class="num">8<small style="font-size:14px">人</small></div><div class="label">精品小班</div></div>
+        <div class="hr-item"><div class="num">40<small style="font-size:14px">课时</small></div><div class="label">系统训练</div></div>
+        <div class="hr-item"><div class="num">3科</div><div class="label">数理化</div></div>
+        <div class="hr-item"><div class="num">3天</div><div class="label">无忧退费</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <h2>为什么选择我们</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="wc-icon">👨‍🏫</div><h4>专业师资</h4><p>重点师范院校毕业<br>国家奖学金获得者<br>准研究生教学团队</p></div>
+      <div class="why-card"><div class="wc-icon">📚</div><h4>配套教材</h4><p>精编讲义+练习册<br>涵盖全部考点<br>无需额外购买资料</p></div>
+      <div class="why-card"><div class="wc-icon">✏️</div><h4>面批过关</h4><p>上午精讲新课<br>下午逐一过关<br>当日知识不留死角</p></div>
+      <div class="why-card"><div class="wc-icon">💻</div><h4>智能刷题</h4><p>153+在线题库<br>自动批改+解析<br>错题本+每日一题</p></div>
+      <div class="why-card"><div class="wc-icon">💬</div><h4>全程答疑</h4><p>专属微信群<br>课后即时解答<br>问题绝不过夜</p></div>
+      <div class="why-card"><div class="wc-icon">🤖</div><h4>AI学情分析</h4><p>智能刷题系统<br>自动分析知识薄弱点<br>生成个性学习报告</p></div>
+      <div class="why-card"><div class="wc-icon">🔒</div><h4>退费保障</h4><p>开课3天内<br>不满意全额退款<br>零风险报名</p></div>
+    </div>
+  </div>
+
+  <div class="course-section">
+    <h2>课程内容</h2>
+    <div class="course-grid">
+      <div class="cg-card math"><div class="cg-icon">📐</div><div class="cg-info"><h4>数学</h4><p>因式分解·韦达定理·不等式<br>集合·函数·三角函数·必修一</p></div></div>
+      <div class="cg-card physics"><div class="cg-icon">⚛️</div><div class="cg-info"><h4>物理</h4><p>运动学·匀变速直线运动<br>牛顿定律·曲线运动</p></div></div>
+      <div class="cg-card chemistry"><div class="cg-icon">🧪</div><div class="cg-info"><h4>化学</h4><p>物质的量·离子反应<br>氧化还原·金属/非金属</p></div></div>
+    </div>
+  </div>
+
+  <div class="price-section">
+    <table class="price-table">
+      <thead><tr><th>班型</th><th class="highlight">早鸟班（推荐）</th><th>团报班</th></tr></thead>
+      <tbody>
+        <tr><td>价格</td><td><span class="price">¥2,580</span><small>/人</small></td><td><span class="price">¥2,280</span><small>/人</small></td></tr>
+        <tr><td>单价</td><td><span class="tag">≈ 64.5 元/课时</span></td><td><span class="tag">≈ 57 元/课时</span></td></tr>
+        <tr><td>截止</td><td style="color:#dc2626;font-weight:700">7月8日前</td><td>开课前均可</td></tr>
+        <tr><td>原价</td><td colspan="2" style="color:#94a3b8;text-decoration:line-through">¥3,280/人</td></tr>
+        <tr><td>课时</td><td colspan="2">40课时（4周×5天×上午+下午各1节）</td></tr>
+        <tr><td>含</td><td colspan="2" style="color:#2e7d32">✓ 精编教材 ✓ 练习册 ✓ 在线刷题系统 ✓ 答疑群 ✓ 升学规划</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot-bar">
+    <span>📍 唐山面授 · 具体地址在线咨询</span>
+    <span>🌐 jiabay.github.io/summer-math-2026</span>
+    <span>📱 扫码在线刷题</span>
+  </div>
+</div>
+
+<!-- ===== BACK ===== -->
+<div class="back">
+  <div class="btop">
+    <h2>📅 4周课程详细安排</h2>
+    <div class="btime">共40课时 · 周一至周五 · 上午8:30-11:30 · 下午14:00-17:00</div>
+  </div>
+  <table><thead><tr><th>日期</th><th>课题</th><th>上午·新课精讲</th><th>下午·练习巩固</th></tr></thead><tbody>
+    <tr class="wk"><td colspan="4">第1周：代数工具回顾（初中衔接·浓缩版）—— 只讲高中真正用到的</td></tr>
+    <tr><td><span class="dt d1">周一</span></td><td class="tp">因式分解</td><td class="am">提公因式法、公式法、十字相乘法、分组分解法</td><td class="pm">限时训练+逐个面批纠错</td></tr>
+    <tr><td><span class="dt d1">周二</span></td><td class="tp">根式与分式</td><td class="am">二次根式化简、分母有理化、分式四则运算</td><td class="pm">根式+分式混合运算强化</td></tr>
+    <tr><td><span class="dt d1">周三</span></td><td class="tp">一元二次方程</td><td class="am">根的判别式Δ及分类讨论；韦达定理（根与系数关系）</td><td class="pm">判别式+韦达定理综合专题</td></tr>
+    <tr><td><span class="dt d1">周四</span></td><td class="tp">二次函数</td><td class="am">图像与性质；闭区间上的最值（三类情形）</td><td class="pm">图像+最值分类训练</td></tr>
+    <tr class="tr"><td><span class="dt d1">周五</span></td><td class="tp">不等式</td><td class="am">一元二次不等式（图像法）；分式/高次不等式（穿根法）</td><td class="pm" style="color:#e65100;font-weight:700">周测(一) + 讲评<span class="tt">TEST</span></td></tr>
+
+    <tr class="wk"><td colspan="4">第2周：集合与函数概念（高中新课·第一章）</td></tr>
+    <tr><td><span class="dt d2">周一</span></td><td class="tp">集合(一)</td><td class="am">元素、集合、空集；列举法、描述法、常用数集记号</td><td class="pm">集合概念辨析+表示法练习</td></tr>
+    <tr><td><span class="dt d2">周二</span></td><td class="tp">集合(二)</td><td class="am">子集、真子集、相等；∩、∪、补集；Venn图</td><td class="pm">集合交并补运算综合训练</td></tr>
+    <tr><td><span class="dt d2">周三</span></td><td class="tp">函数概念</td><td class="am">映射与函数定义；f(x)符号理解；三种表示法及其互化</td><td class="pm">函数概念辨析+图像绘制</td></tr>
+    <tr><td><span class="dt d2">周四</span></td><td class="tp">定义域</td><td class="am">具体函数定义域(分式/根式型)；复合函数定义域</td><td class="pm">定义域求法专题训练</td></tr>
+    <tr class="tr"><td><span class="dt d2">周五</span></td><td class="tp">值域</td><td class="am">观察法、配方法、换元法、图像法求值域</td><td class="pm" style="color:#e65100;font-weight:700">周测(二) + 讲评<span class="tt">TEST</span></td></tr>
+
+    <tr class="wk"><td colspan="4">第3周：函数的基本性质（高中新课·核心）</td></tr>
+    <tr><td><span class="dt d3">周一</span></td><td class="tp">单调性(一)</td><td class="am">增/减函数的严格定义；定义法证明函数单调性</td><td class="pm">定义法证明单调性专项训练</td></tr>
+    <tr><td><span class="dt d3">周二</span></td><td class="tp">单调性(二)</td><td class="am">单调区间求法；复合函数单调性（同增异减法则）</td><td class="pm">单调区间+复合函数训练</td></tr>
+    <tr><td><span class="dt d3">周三</span></td><td class="tp">奇偶性</td><td class="am">奇/偶函数的定义与判定；图像对称性</td><td class="pm">奇偶性判定+对称性练习</td></tr>
+    <tr><td><span class="dt d3">周四</span></td><td class="tp">性质综合</td><td class="am">单调性+奇偶性综合应用；利用性质解不等式</td><td class="pm">函数双性质综合训练</td></tr>
+    <tr class="tr"><td><span class="dt d3">周五</span></td><td class="tp">幂函数</td><td class="am">y=xⁿ(n=1,2,3,½,-1)的图像与性质</td><td class="pm" style="color:#e65100;font-weight:700">阶段测试 + 讲评<span class="tt">TEST</span></td></tr>
+
+    <tr class="wk"><td colspan="4">第4周：初等函数与学法指导（高中新课·收官）</td></tr>
+    <tr><td><span class="dt d4">周一</span></td><td class="tp">指数函数</td><td class="am">n次方根与分数指数幂；y=aˣ的图像与性质</td><td class="pm">指数幂运算+指数函数练习</td></tr>
+    <tr><td><span class="dt d4">周二</span></td><td class="tp">对数运算</td><td class="am">对数定义、对数恒等式；积/商/幂的运算性质</td><td class="pm">对数运算专项训练</td></tr>
+    <tr><td><span class="dt d4">周三</span></td><td class="tp">对数函数</td><td class="am">y=logₐx图像与性质；指对互化</td><td class="pm">对数函数图像与性质训练</td></tr>
+    <tr><td><span class="dt d4">周四</span></td><td class="tp">综合+总复习</td><td class="am">指对比较大小；简单指对方程与不等式；四周串讲</td><td class="pm">指对函数+综合训练</td></tr>
+    <tr class="tr"><td><span class="dt d4">周五</span></td><td class="tp">结课</td><td class="am">初高中数学本质区别；学法指导+暑假自学建议</td><td class="pm" style="color:#e65100;font-weight:700">结课测试(60分钟)+家长汇报<span class="tt">TEST</span></td></tr>
+  </tbody></table>
+
+  <div class="bgrid">
+    <div class="icard">
+      <h3>📋 课程信息</h3>
+      <div class="irow"><span class="ilabel">开班日期</span><span class="ival">2026年7月13日（周三）</span></div>
+      <div class="irow"><span class="ilabel">课程周期</span><span class="ival">4周（7月13日 - 8月7日）</span></div>
+      <div class="irow"><span class="ilabel">总课时</span><span class="ival">40课时（4周×5天×上午+下午）</span></div>
+      <div class="irow"><span class="ilabel">上课时间</span><span class="ival">周一至周五 8:30-11:30 / 14:00-17:00</span></div>
+      <div class="irow"><span class="ilabel">班级规模</span><span class="ival">8人精品小班（满额即止）</span></div>
+      <div class="irow"><span class="ilabel">教材配套</span><span class="ival">精编讲义+练习册（费用已包含）</span></div>
+      <div class="irow"><span class="ilabel">增值服务</span><span class="ival">在线刷题 · 答疑群 · 升学规划</span></div>
+      <div class="irow"><span class="ilabel">退费保障</span><span class="ival" style="color:#1a237e">开课3天内不满意全额退款</span></div>
+    </div>
+    <div>
+      <div class="pcard">
+        <div style="font-size:8px;opacity:.8">早鸟优惠 · 7月8日前报名</div>
+        <div class="big">¥2,580</div>
+        <div class="per">≈ 64.5元/课时（含教材）</div>
+        <div style="font-size:8px;opacity:.5;text-decoration:line-through">原价 ¥3,280/人</div>
+        <div class="sub" style="margin-top:4px">👥 三人团报 ¥2,280/人 ≈57元/课时</div>
+      </div>
+      <div class="qra"><div class="qr-wrap"><img src="qr-code.jpg" style="width:60px;height:60px;border-radius:8px"><div style="font-size:7px;color:#666;margin-top:2px">扫码刷题</div></div><div class="qr-wrap"><img src="qr-wechat.jpg" style="width:60px;height:60px;border-radius:8px"><div style="font-size:7px;color:#666;margin-top:2px">微信咨询</div></div></div>
+    </div>
+  </div>
+
+  <table class="ctable"><thead><tr><th>对比项</th><th class="hl">思数培优</th><th>普通培训班</th><th>自学/网课</th></tr></thead><tbody>
+    <tr><td>班级规模</td><td class="ck">8人小班</td><td>20-50人</td><td class="cx">—</td></tr>
+    <tr><td>师资力量</td><td class="ck">重点师范+国奖+研0</td><td>兼职/流动性大</td><td>录播视频</td></tr>
+    <tr><td>作业批改</td><td class="ck">逐个面批·当日过关</td><td>统一对答案</td><td class="cx">—</td></tr>
+    <tr><td>配套教材</td><td class="ck">精编讲义+练习册</td><td>通用教辅</td><td>电子资料</td></tr>
+    <tr><td>刷题系统</td><td class="ck">153+在线题库</td><td class="cx">—</td><td class="cx">—</td></tr>
+    <tr><td>课后答疑</td><td class="ck">专属群即时解答</td><td>仅限课上</td><td class="cx">—</td></tr>
+    <tr><td>退费保障</td><td class="ck">3天无条件全额退</td><td>一般不可退</td><td class="cx">—</td></tr>
+    <tr><td>课时单价</td><td class="ck">≈64.5元/课时</td><td>≈80-120元</td><td>≈30-50元</td></tr>
+  </tbody></table>
+</div>
+</body></html>
