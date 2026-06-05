@@ -805,7 +805,7 @@ function shuffle(arr) {
 }
 
 // LaTeX cleaner
-function _cleanL(s){if(!s)return;return s.replace(/\\(/g,"").replace(/\\)/g,"").replace(/\\[/g,"").replace(/\\]/g,"").replace(/$/g,"").replace(/\[a-zA-Z]+/g,"").replace(/\\/g,"");}
+function _cleanL(s){if(!s)return"";s=s.replace(/\\(/g,"").replace(/\\)/g,"").replace(/\\[/g,"").replace(/\\]/g,"").replace(/\/g,"").replace(/\$ /g," ").replace(/[\]+/g," ");return s;}
 function renderQuestion() {
   if (currentIndex >= currentQuiz.length) {
     endQuiz();
@@ -1301,7 +1301,7 @@ function getDailyQuestion() {
   return saved;
 }
 
-function cleanDailylLatex(s){if(!s)return;return s.replace(/\\(/g,"").replace(/\\)/g,"").replace(/\\[/g,"").replace(/\\]/g,"").replace(/$/g,"").replace(/\[a-zA-Z]+/g,"").replace(/\\/g,"");}
+function cleanDailylLatex(s){if(!s)return"";s=s.replace(/\\(/g,"").replace(/\\)/g,"").replace(/\\[/g,"").replace(/\\]/g,"").replace(/\/g,"").replace(/\$ /g," ").replace(/[\]+/g," ");return s;}
 function initDaily() {
   var daily = getDailyQuestion();
   var q = daily.q;
