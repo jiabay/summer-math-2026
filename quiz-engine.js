@@ -13,11 +13,62 @@ let currentQuiz=[], currentIndex=0, score=0, answers=[], timerInterval, timerSec
 // ===== UTILS =====
 function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
 
+// ===== WECHAT LOGIN CHECK =====
+function getWxUser(){
+  try{return JSON.parse(localStorage.getItem('wx_user'));}catch(e){return null;}
+}
+function isWxLoggedIn(){
+  var u = getWxUser();
+  return u && u.openid;
+}
+function showLoginOverlay(){
+  var overlay = document.getElementById('loginOverlay');
+  if (overlay) overlay.style.display = 'flex';
+}
+function hideLoginOverlay(){
+  var overlay = document.getElementById('loginOverlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+// ===== BACKEND API =====
+var API_BASE = 'https://shrine-playhouse-container.ngrok-free.dev';
+function apiCall(method, path, data){
+  var user = getWxUser();
+  if (!user || !user.openid) return Promise.reject('not logged in');
+  var url = API_BASE + path + '?openid=' + encodeURIComponent(user.openid);
+  var opts = {method: method, headers:{'Content-Type':'application/json'}};
+  if (method === 'POST' && data) opts.body = JSON.stringify(data);
+  return fetch(url, opts).then(function(r){return r.json();}).catch(function(){return {};});
+}
+function syncToBackend(type, data){
+  if (!isWxLoggedIn()) return;
+  if (type === 'quiz') apiCall('POST', '/api/quiz/save', data);
+  if (type === 'achievements') apiCall('POST', '/api/quiz/achievements', data);
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelector('.subj-name')&&(document.querySelector('.subj-name').textContent=SUBJECT);
   const root=document.documentElement;
   root.style.setProperty('--primary',SUBJECT_COLOR);
+
+  // Check login
+  if (!isWxLoggedIn()) {
+    showLoginOverlay();
+  } else {
+    hideLoginOverlay();
+    // Load data from backend
+    apiCall('GET', '/api/quiz/achievements').then(function(d){
+      if (d && d.stats) {
+        localStorage.setItem('sishu_ach_stats', JSON.stringify(d.stats));
+        localStorage.setItem('sishu_ach_unlocked', JSON.stringify(d.unlocked||[]));
+      }
+    });
+    apiCall('GET', '/api/quiz/history?limit=50').then(function(d){
+      if (d && d.history) localStorage.setItem('sishu_quiz_history', JSON.stringify(d.history));
+    });
+  }
+
   document.getElementById('stageTags').innerHTML=['全部',...STAGES].map(s=>`<span class="topic-tag" data-s="${s}" onclick="window._selStage('${s}')">${s==='全部'?'📚 全部':s}</span>`).join('');
   document.getElementById('topicTags').innerHTML=['全部',...CHAPTERS].map(c=>`<span class="topic-tag" data-c="${c}" onclick="window._selChapter('${c}')">${c==='全部'?'📚 全部':c}</span>`).join('');
   window._selStage('全部');
