@@ -125,14 +125,18 @@ script.onerror=function(){tryCDN(idx+1);};document.head.appendChild(script);}try
 
 
 <script>
-// 微信登录
+// 微信登录 - 检测环境 + 提示
 (function(){
+  var ua = navigator.userAgent.toLowerCase();
+  var isWechat = ua.indexOf('micromessenger') !== -1;
+  
   var user = localStorage.getItem('wx_user');
   if (user) {
     try { user = JSON.parse(user); } catch(e) { user = null; }
   }
+  
   if (user && user.openid) {
-    // 已登录，显示用户信息
+    // 已登录
     var nav = document.querySelector('.nav .container div:last-child');
     if (nav && !document.getElementById('wxUser')) {
       var span = document.createElement('span');
@@ -142,26 +146,39 @@ script.onerror=function(){tryCDN(idx+1);};document.head.appendChild(script);}try
       nav.appendChild(span);
     }
   } else {
-    // 检查URL中是否有user参数（OAuth回调）
+    // 检查OAuth回调
     var params = new URLSearchParams(location.search);
     var userParam = params.get('user');
     if (userParam) {
       try {
         var u = JSON.parse(decodeURIComponent(userParam));
         localStorage.setItem('wx_user', JSON.stringify(u));
-        // 清除URL参数
         history.replaceState({}, '', location.pathname);
         location.reload();
       } catch(e) {}
     } else {
-      // 未登录，添加登录按钮
       var nav2 = document.querySelector('.nav .container div:last-child');
       if (nav2 && !document.getElementById('wxLogin')) {
         var btn = document.createElement('a');
         btn.id = 'wxLogin';
-        btn.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3563096d4c2b1b30&redirect_uri=https%3A%2F%2Fshrine-playhouse-container.ngrok-free.dev%2Fapi%2Fauth%2Fcallback-quiz&response_type=code&scope=snsapi_userinfo&state=' + location.href + '#wechat_redirect';
-        btn.style.cssText = 'font-size:12px;color:#81c784;margin-left:12px;text-decoration:none';
-        btn.textContent = '🔐 微信登录';
+        if (isWechat) {
+          btn.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3563096d4c2b1b30&redirect_uri=https%3A%2F%2Fshrine-playhouse-container.ngrok-free.dev%2Fapi%2Fauth%2Fcallback-quiz&response_type=code&scope=snsapi_userinfo&state=' + location.href + '#wechat_redirect';
+          btn.style.cssText = 'font-size:12px;color:#81c784;margin-left:12px;text-decoration:none;animation:pulse 2s infinite';
+          btn.textContent = '🔐 微信一键登录';
+        } else {
+          btn.href = '#';
+          btn.onclick = function(e){ e.preventDefault();
+            alert('📱 请在微信中打开此页面
+
+方法：
+1. 复制本页链接
+2. 发送到微信「文件传输助手」
+3. 在微信中点开链接
+4. 点击右上角「微信登录」');
+          };
+          btn.style.cssText = 'font-size:12px;color:#ff8f00;margin-left:12px;text-decoration:none';
+          btn.textContent = '📱 请在微信中打开';
+        }
         nav2.appendChild(btn);
       }
     }
