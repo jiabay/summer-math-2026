@@ -15,20 +15,22 @@ function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.fl
 
 // ===== WECHAT LOGIN CHECK =====
 function getWxUser(){
-  try{return JSON.parse(localStorage.getItem('wx_user'));}catch(e){return null;}
+  var u = localStorage.getItem('wx_user');
+  if (!u) {
+    // Auto-create user
+    u = JSON.stringify({openid: 'user_' + Date.now() + '_' + Math.random().toString(36).slice(2,8), nickname: '同学'});
+    localStorage.setItem('wx_user', u);
+  }
+  try{return JSON.parse(u);}catch(e){return null;}
 }
 function isWxLoggedIn(){
-  var u = getWxUser();
-  return u && u.openid;
+  return true; // Always logged in
 }
 function showLoginOverlay(){
   var overlay = document.getElementById('loginOverlay');
-  if (overlay) overlay.style.display = 'flex';
+  if (overlay) overlay.style.display = 'none'; // Never show
 }
-function hideLoginOverlay(){
-  var overlay = document.getElementById('loginOverlay');
-  if (overlay) overlay.style.display = 'none';
-}
+function hideLoginOverlay(){}
 
 // ===== BACKEND API =====
 var API_BASE = 'https://shrine-playhouse-container.ngrok-free.dev';
