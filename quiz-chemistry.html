@@ -119,5 +119,51 @@ script.onerror=function(){tryCDN(idx+1);};document.head.appendChild(script);}try
 
 
 
+
+<script>
+// 微信登录
+(function(){
+  var user = localStorage.getItem('wx_user');
+  if (user) {
+    try { user = JSON.parse(user); } catch(e) { user = null; }
+  }
+  if (user && user.openid) {
+    // 已登录，显示用户信息
+    var nav = document.querySelector('.nav .container div:last-child');
+    if (nav && !document.getElementById('wxUser')) {
+      var span = document.createElement('span');
+      span.id = 'wxUser';
+      span.style.cssText = 'font-size:12px;color:#ffd54f;margin-left:12px';
+      span.textContent = '👤 ' + (user.nickname || '已登录');
+      nav.appendChild(span);
+    }
+  } else {
+    // 检查URL中是否有user参数（OAuth回调）
+    var params = new URLSearchParams(location.search);
+    var userParam = params.get('user');
+    if (userParam) {
+      try {
+        var u = JSON.parse(decodeURIComponent(userParam));
+        localStorage.setItem('wx_user', JSON.stringify(u));
+        // 清除URL参数
+        history.replaceState({}, '', location.pathname);
+        location.reload();
+      } catch(e) {}
+    } else {
+      // 未登录，添加登录按钮
+      var nav2 = document.querySelector('.nav .container div:last-child');
+      if (nav2 && !document.getElementById('wxLogin')) {
+        var btn = document.createElement('a');
+        btn.id = 'wxLogin';
+        btn.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3563096d4c2b1b30&redirect_uri=https%3A%2F%2Fshrine-playhouse-container.ngrok-free.dev%2Fapi%2Fauth%2Fcallback-quiz&response_type=code&scope=snsapi_userinfo&state=' + location.href + '#wechat_redirect';
+        btn.style.cssText = 'font-size:12px;color:#81c784;margin-left:12px;text-decoration:none';
+        btn.textContent = '🔐 微信登录';
+        nav2.appendChild(btn);
+      }
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
