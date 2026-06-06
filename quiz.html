@@ -115,31 +115,7 @@ script.onerror=function(){tryCDN(idx+1);};document.head.appendChild(script);}try
 <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none;" onchange="_handlePhoto(event)">
 
 
-<div id="loginOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:16px;padding:40px 30px;text-align:center;max-width:360px;width:90%;">
-    <div style="font-size:60px;margin-bottom:16px;">🔐</div>
-    <h2 style="color:#1a237e;margin-bottom:8px;">后刷题</h2>
-    <p style="color:#999;font-size:13px;margin-bottom:20px;line-height:1.6;">登录后您的刷题记录、错题本、<br>成就徽章将自动保存</p>
-    <a id="Overlay" href="#" style="display:inline-block;background:#07c160;color:#fff;padding:14px 40px;border-radius:26px;font-size:16px;font-weight:700;text-decoration:none;">💚 微信一键登录</a>
-    <p style="font-size:11px;color:#bbb;margin-top:12px;">请在微信中打开此页面</p>
-  </div>
-</div>
-<script>
-(function(){
-  var ua = navigator.userAgent.toLowerCase();
-  var isWechat = ua.indexOf('micromessenger') !== -1;
-  var link = document.getElementById('Overlay');
-  if (link) {
-    if (isWechat) {
-      link.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3563096d4c2b1b30&redirect_uri=https%3A%2F%2Fshrine-playhouse-container.ngrok-free.dev%2Fapi%2Fauth%2Fcallback-quiz&response_type=code&scope=snsapi_userinfo&state=' + location.href + '#wechat_redirect';
-    } else {
-      link.href = '#'; link.onclick = function(e){ e.preventDefault(); alert('请复制链接到微信中打开'); };
-    }
-  }
-})();
-</script>
 
-<script src="questions-math.js"></script>
 <script src="quiz-engine.js"></script>
 
 
